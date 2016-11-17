@@ -25,7 +25,9 @@ SECRET_KEY = '+5n0sfv&-9a9%5-5tqq4(ev4qrny=r^-d#$&h+ds70_f-k+85!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    u'wine-helper.herokuapp.com'
+]
 
 
 # Application definition
