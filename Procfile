@@ -1,1 +1,1 @@
-web: gunicorn yomamabot/wsgi.py
+web: python manage.py runserver
