@@ -7,25 +7,28 @@ from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
+# https://github.com/geeknam/messengerbot
+from messengerbot import MessengerClient, messages, attachments, templates, elements
+
 #  ------------------------ Fill this with your page access token! -------------------------------
 PAGE_ACCESS_TOKEN = "EAAYU6e7AspIBAHvYtRp44RebfWQGlVRUNTTIpqmd27i6nSHCW61noR7yDOrpGlzaRaRO2NreAXful5OlodZAy7xB9Y6SftRW9YfYl4aQ0MPD2HLa3Ey2k6hvfVfEVxuHIMmAkgJ9gnrbdFuVbXr6wMFQzPUteYmk0x5heegZDZD"
 VERIFY_TOKEN = "verify_me"
 
-jokes = { 'stupid': ["""Yo' Mama is so stupid, she needs a recipe to make ice cubes.""",
-                     """Yo' Mama is so stupid, she thinks DNA is the National Dyslexics Association."""],
-         'fat':      ["""Yo' Mama is so fat, when she goes to a restaurant, instead of a menu, she gets an estimate.""",
-                      """ Yo' Mama is so fat, when the cops see her on a street corner, they yell, "Hey you guys, break it up!" """],
-         'dumb': ["""Yo' Mama is so dumb, when God was giving out brains, she thought they were milkshakes and asked for extra thick.""",
-                  """Yo' Mama is so dumb, she locked her keys inside her motorcycle."""] }
+# Initializing client
+messenger = MessengerClient(access_token=PAGE_ACCESS_TOKEN)
 
 # This function should be outside the BotsView class
 def post_facebook_message(fbid, recevied_message):
-    post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=' + PAGE_ACCESS_TOKEN
-    response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":recevied_message}})
-    status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
-    pprint(status.json())
+    # post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=' + PAGE_ACCESS_TOKEN
+    # response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":recevied_message}})
+    # status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
+    # pprint(status.json())
 
-# Create your views here.
+    recipient = messages.Recipient(recipient_id=fbid)
+    message = messages.Message(text='Hello world')
+    request = messages.MessageRequest(recipient, message)
+    messenger.send(request)
+
 class YoMamaBotView(generic.View):
 
     def get(self, request, *args, **kwargs):
