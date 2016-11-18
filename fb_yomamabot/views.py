@@ -79,6 +79,9 @@ class YoMamaBotView(generic.View):
                     # Print the message to the terminal
                     pprint(message)
                     post_facebook_message(message['sender']['id'], message['message']['text'])
+            for message in entry['messaging_postbacks']:
+                if 'postback' in message:
+                    post_facebook_message(message['sender']['id'], message['postback']['payload'])
         return HttpResponse()
 
 class HelloView(generic.View):
