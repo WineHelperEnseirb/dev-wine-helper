@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
 #  ------------------------ Fill this with your page access token! -------------------------------
-PAGE_ACCESS_TOKEN = "EAAYU6e7AspIBAOeiW55147fhZAgcchl3lJ45gb4xHlEvp8kdJyQoOb6ZCWGZCmEfhlaXom1bXuteol8XROjHtOLYdBJPZBbYO3GW1pqYkg8qb8ZCNWXHNkCTSbBR9oMIjz2Y6lmM3TNUcQesZAAZACQn741ZCAEHApuAHWG0OjnhFQZDZD"
+PAGE_ACCESS_TOKEN = "EAAYU6e7AspIBAHvYtRp44RebfWQGlVRUNTTIpqmd27i6nSHCW61noR7yDOrpGlzaRaRO2NreAXful5OlodZAy7xB9Y6SftRW9YfYl4aQ0MPD2HLa3Ey2k6hvfVfEVxuHIMmAkgJ9gnrbdFuVbXr6wMFQzPUteYmk0x5heegZDZD"
 VERIFY_TOKEN = "verify_me"
 
 jokes = { 'stupid': ["""Yo' Mama is so stupid, she needs a recipe to make ice cubes.""",
