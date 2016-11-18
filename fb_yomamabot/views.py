@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 import json, requests, random, re
@@ -34,12 +35,12 @@ def post_facebook_message(fbid, received_message):
         payload='Blanc'
     )
     white_button = elements.PostbackButton(
-        title='Rosé',
-        payload='Rosé'
+        title='Rose',
+        payload='Rose'
     )
     rose_button =
     template = templates.ButtonTemplate(
-        text='Bonjour, quelle couleur de vin désirez-vous ?',
+        text='Bonjour, quelle couleur de vin desirez-vous ?',
         buttons=[
             red_button, white_button, rose_button
         ]
