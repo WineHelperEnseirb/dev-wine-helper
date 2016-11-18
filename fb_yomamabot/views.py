@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import json, requests, random, re, sys, os
+import json, requests, random, re, sys
 from pprint import pprint
 
 from django.views import generic
@@ -66,7 +66,7 @@ class YoMamaBotView(generic.View):
         # Converts the text payload into a python dictionary
         incoming_message = json.loads(self.request.body.decode('utf-8'))
 
-        my_file = os.open("tmp.log", "w")
+        my_file = open("tmp.log", "w")
         my_file.write(incoming_message)
 
         # Facebook recommends going through every entry since they might send
