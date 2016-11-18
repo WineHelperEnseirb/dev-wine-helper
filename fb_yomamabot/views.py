@@ -17,13 +17,28 @@ VERIFY_TOKEN = "verify_me"
 messenger = MessengerClient(access_token=PAGE_ACCESS_TOKEN)
 
 # This function should be outside the BotsView class
-def post_facebook_message(fbid, recevied_message):
+def post_facebook_message(fbid, received_message):
     # post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=' + PAGE_ACCESS_TOKEN
     # response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":recevied_message}})
     # status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
     # pprint(status.json())
     recipient = messages.Recipient(recipient_id=fbid)
-    message = messages.Message(text='Hello world')
+    red_button = elements.WebUrlButton(
+        title='Rouge',
+        url='#'
+    )
+    white_button = elements.WebUrlButton(
+        title='Blanc',
+        url='#'
+    )
+    template = templates.ButtonTemplate(
+        text='Bonjour, quelle couleur de vin désiez-vous ?',
+        buttons=[
+            red_button, white_button
+        ]
+    )
+    attachment = attachments.TemplateAttachment(template=template)
+    message = messages.Message(attachment=attachment)
     request = messages.MessageRequest(recipient, message)
     messenger.send(request)
 
