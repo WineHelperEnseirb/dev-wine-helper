@@ -34,11 +34,10 @@ def post_facebook_message(fbid, received_message):
         title='Blanc',
         payload='Blanc'
     )
-    white_button = elements.PostbackButton(
+    rose_button = elements.PostbackButton(
         title='Rose',
         payload='Rose'
     )
-    rose_button =
     template = templates.ButtonTemplate(
         text='Bonjour, quelle couleur de vin desirez-vous ?',
         buttons=[
