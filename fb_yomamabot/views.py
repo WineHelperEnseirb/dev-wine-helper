@@ -45,7 +45,8 @@ def post_facebook_message(fbid, received_message):
         ]
     )
     attachment = attachments.TemplateAttachment(template=template)
-    message = messages.Message(attachment=attachment)
+    # message = messages.Message(attachment=attachment)
+    message = messages.Message(text=received_message)
     request = messages.MessageRequest(recipient, message)
     messenger.send(request)
 
