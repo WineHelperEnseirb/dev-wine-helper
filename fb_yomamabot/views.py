@@ -25,6 +25,35 @@ def post_facebook_message(fbid, received_message):
     # response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":recevied_message}})
     # status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
     # pprint(status.json())
+    if (received_message == "Bonjour"):
+        recipient = messages.Recipient(recipient_id=fbid)
+        red_button = elements.PostbackButton(
+            title='Rouge',
+            payload='Rouge'
+        )
+        white_button = elements.PostbackButton(
+            title='Blanc',
+            payload='Blanc'
+        )
+        rose_button = elements.PostbackButton(
+            title='Rose',
+            payload='Rose'
+        )
+        template = templates.ButtonTemplate(
+            text='Bonjour, quelle couleur de vin desirez-vous ?',
+            buttons=[
+                red_button, white_button, rose_button
+            ]
+        )
+        attachment = attachments.TemplateAttachment(template=template)
+        message = messages.Message(attachment=attachment)
+        request = messages.MessageRequest(recipient, message)
+        messenger.send(request)
+    else:
+        wine_answer(fbid, received_message)
+
+
+def wine_answer(fbid, received_message):
     recipient = messages.Recipient(recipient_id=fbid)
     red_button = elements.PostbackButton(
         title='Rouge',
@@ -48,6 +77,7 @@ def post_facebook_message(fbid, received_message):
     message = messages.Message(attachment=attachment)
     request = messages.MessageRequest(recipient, message)
     messenger.send(request)
+
 
 class YoMamaBotView(generic.View):
 
@@ -75,9 +105,7 @@ class YoMamaBotView(generic.View):
                 if 'message' in message:
                     # Print the message to the terminal
                     pprint(message)
-                    post_facebook_message(message['sender']['id'], str(incoming_message))
-                else:
-                    post_facebook_message(message['sender']['id'], str(incoming_message))
+                    post_facebook_message(message['sender']['id'], message['message']['text'])
             if 'messaging_postbacks' in entry:
                 for message in entry['messaging_postbacks']:
                     if 'postback' in message:
