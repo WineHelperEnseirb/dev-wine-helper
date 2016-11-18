@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import json, requests, random, re
 from pprint import pprint
 
