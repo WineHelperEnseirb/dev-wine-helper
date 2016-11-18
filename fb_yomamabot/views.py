@@ -66,9 +66,6 @@ class YoMamaBotView(generic.View):
         # Converts the text payload into a python dictionary
         incoming_message = json.loads(self.request.body.decode('utf-8'))
 
-        my_file = open("tmp.log", "w")
-        my_file.write(str(incoming_message))
-
         # Facebook recommends going through every entry since they might send
         # multiple messages in a single call during high load
         for entry in incoming_message['entry']:
@@ -78,7 +75,7 @@ class YoMamaBotView(generic.View):
                 if 'message' in message:
                     # Print the message to the terminal
                     pprint(message)
-                    post_facebook_message(message['sender']['id'], message['message']['text'])
+                    post_facebook_message(message['sender']['id'], str(incoming_message))
             if 'messaging_postbacks' in entry:
                 for message in entry['messaging_postbacks']:
                     if 'postback' in message:
