@@ -23,18 +23,23 @@ def post_facebook_message(fbid, received_message):
     # status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
     # pprint(status.json())
     recipient = messages.Recipient(recipient_id=fbid)
-    red_button = elements.WebUrlButton(
+    red_button = elements.PostbackButton(
         title='Rouge',
-        url='#'
+        payload='Rouge'
     )
-    white_button = elements.WebUrlButton(
+    white_button = elements.PostbackButton(
         title='Blanc',
-        url='#'
+        payload='Blanc'
     )
+    white_button = elements.PostbackButton(
+        title='Rosé',
+        payload='Rosé'
+    )
+    rose_button =
     template = templates.ButtonTemplate(
-        text='Bonjour, quelle couleur de vin désiez-vous ?',
+        text='Bonjour, quelle couleur de vin désirez-vous ?',
         buttons=[
-            red_button, white_button
+            red_button, white_button, rose_button
         ]
     )
     attachment = attachments.TemplateAttachment(template=template)
