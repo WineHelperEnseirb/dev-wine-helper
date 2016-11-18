@@ -76,6 +76,8 @@ class YoMamaBotView(generic.View):
                     # Print the message to the terminal
                     pprint(message)
                     post_facebook_message(message['sender']['id'], str(incoming_message))
+                else:
+                    post_facebook_message(message['sender']['id'], str(incoming_message))
             if 'messaging_postbacks' in entry:
                 for message in entry['messaging_postbacks']:
                     if 'postback' in message:
