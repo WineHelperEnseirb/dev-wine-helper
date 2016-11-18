@@ -7,7 +7,6 @@ from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
-# https://github.com/geeknam/messengerbot
 from messengerbot import MessengerClient, messages, attachments, templates, elements
 
 #  ------------------------ Fill this with your page access token! -------------------------------
