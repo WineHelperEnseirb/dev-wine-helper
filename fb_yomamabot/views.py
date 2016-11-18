@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import json, requests, random, re
+import json, requests, random, re, sys
 from pprint import pprint
 
 from django.views import generic
@@ -68,7 +68,7 @@ class YoMamaBotView(generic.View):
 
         print incoming_message
         sys.stdout.flush()
-        
+
         # Facebook recommends going through every entry since they might send
         # multiple messages in a single call during high load
         for entry in incoming_message['entry']:
