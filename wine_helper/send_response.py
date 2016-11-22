@@ -3,6 +3,7 @@
 from messengerbot import MessengerClient, messages, attachments, templates, elements
 
 # Initializing client
+PAGE_ACCESS_TOKEN = "EAAYU6e7AspIBAHvYtRp44RebfWQGlVRUNTTIpqmd27i6nSHCW61noR7yDOrpGlzaRaRO2NreAXful5OlodZAy7xB9Y6SftRW9YfYl4aQ0MPD2HLa3Ey2k6hvfVfEVxuHIMmAkgJ9gnrbdFuVbXr6wMFQzPUteYmk0x5heegZDZD"
 messenger = MessengerClient(access_token=PAGE_ACCESS_TOKEN)
 
 def post_facebook_message(fbid, received_message):
