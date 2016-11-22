@@ -25,7 +25,7 @@ VERIFY_TOKEN = "verify_me" # TODO: change token
 messenger = MessengerClient(access_token=PAGE_ACCESS_TOKEN)
 
 def post_facebook_message(fbid, received_message):
-    # Warning: "hard-coded" filters. It should be delegate to Wit.ai
+    # Warning: "hard-coded" filters. It should be delegated to Wit.ai
     if (received_message == "Bonjour"):
         handle_welcome(fbid, received_message)
     elif received_message == "Rouge" or received_message == "Blanc" or received_message == "Rose":
@@ -111,7 +111,7 @@ class FacebookCallbackView(generic.View):
                 if 'message' in message:
                     pprint(message)
                     post_facebook_message(message['sender']['id'], message['message']['text'])
-                if 'postback' in entry:
+                if 'postback' in message:
                     pprint(message)
                     post_facebook_message(message['sender']['id'], message['postback']['payload'])
         return HttpResponse()
