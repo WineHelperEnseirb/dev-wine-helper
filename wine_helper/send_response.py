@@ -7,7 +7,7 @@ PAGE_ACCESS_TOKEN = "EAAYU6e7AspIBAHvYtRp44RebfWQGlVRUNTTIpqmd27i6nSHCW61noR7yDO
 messenger = MessengerClient(access_token=PAGE_ACCESS_TOKEN)
 
 def post_facebook_message(fbid, received_message):
-    handle_data(fbid, json.loads("{\"type\":\"button\",\"text\":\"Quel vin?\",\"options\": [{\"text\":\"Rouge\",\"payload\":\"Rouge\"},{{\"text\":\"Blanc\",\"payload\":\"Blanc\"}}]}"))
+    handle_button(fbid, json.loads("{\"type\":\"button\",\"text\":\"Quel vin?\",\"options\": [{\"text\":\"Rouge\",\"payload\":\"Rouge\"},{{\"text\":\"Blanc\",\"payload\":\"Blanc\"}}]}"))
 
 
 def handle_text(fbid, data):
