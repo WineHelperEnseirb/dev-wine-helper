@@ -100,6 +100,7 @@ class FacebookCallbackView(generic.View):
         incoming_message = json.loads(request.body.decode('utf-8'))
 
         pp = pprint.PrettyPrinter(indent=4)
+        pprint("My debug")
         pp.pprint(incoming_message)
 
         # Facebook recommends going through every entry since they might send
