@@ -109,12 +109,9 @@ class FacebookCallbackView(generic.View):
                 # Check to make sure the received call is a message call
                 # This might be delivery, optin, postback for other events
                 if 'message' in message:
-                    # Print the message to the terminal
                     pprint(message)
                     post_facebook_message(message['sender']['id'], message['message']['text'])
-            # It seems that this condition is never true
-            if 'messaging_postbacks' in entry:
-                for message in entry['messaging_postbacks']:
-                    if 'postback' in message:
-                        post_facebook_message(message['sender']['id'], message['postback']['payload'])
+                if 'postback' in entry:
+                    pprint(message)
+                    post_facebook_message(message['sender']['id'], message['postback']['payload'])
         return HttpResponse()
