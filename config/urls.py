@@ -1,4 +1,4 @@
-"""yomamabot URL Configuration
+"""Wine Helper URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.10/topics/http/urls/
@@ -18,5 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^fb_yomamabot/', include('fb_yomamabot.urls')),
+    # FIXME change this to `r'^wine_helper/'` ?
+    url(r'^fb_yomamabot/', include('wine_helper.urls')),
 ]

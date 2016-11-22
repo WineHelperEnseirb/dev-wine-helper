@@ -1,1 +1,1 @@
-web: gunicorn yomamabot.wsgi
+web: gunicorn config.wsgi:application
