@@ -29,6 +29,7 @@ def handle_text(fbid, data):
 
 def handle_button(fbid, data):
     recipient = messages.Recipient(recipient_id=fbid)
+    data = json.loads(data)
     text = data["text"]
     button_list = []
     for option in data["options"]:
