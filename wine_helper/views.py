@@ -7,8 +7,6 @@ from pprint import pprint
 
 # Vendors
 import requests
-# https://github.com/geeknam/messengerbot
-from messengerbot import MessengerClient, messages, attachments, templates, elements
 
 # Django
 from django.views import generic
@@ -16,54 +14,13 @@ from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
+import send_response as sr
 
 #  ------------------------ Fill this with your page access token! -------------------------------
 PAGE_ACCESS_TOKEN = "EAAYU6e7AspIBAHvYtRp44RebfWQGlVRUNTTIpqmd27i6nSHCW61noR7yDOrpGlzaRaRO2NreAXful5OlodZAy7xB9Y6SftRW9YfYl4aQ0MPD2HLa3Ey2k6hvfVfEVxuHIMmAkgJ9gnrbdFuVbXr6wMFQzPUteYmk0x5heegZDZD"
 VERIFY_TOKEN = "verify_me" # TODO: change token
 
-# Initializing client
-messenger = MessengerClient(access_token=PAGE_ACCESS_TOKEN)
 
-def post_facebook_message(fbid, received_message):
-    # Warning: "hard-coded" filters. It should be delegated to Wit.ai
-    if (received_message == "Bonjour"):
-        handle_welcome(fbid, received_message)
-    elif received_message == "Rouge" or received_message == "Blanc" or received_message == "Rose":
-        handle_color(fbid, received_message)
-
-
-def handle_welcome(fbid, received_message):
-    recipient = messages.Recipient(recipient_id=fbid)
-    red_button = elements.PostbackButton(
-        title='Rouge',
-        payload='Rouge'
-    )
-    white_button = elements.PostbackButton(
-        title='Blanc',
-        payload='Blanc'
-    )
-    rose_button = elements.PostbackButton(
-        title='Rose',
-        payload='Rose'
-    )
-    template = templates.ButtonTemplate(
-        text='Bonjour, quelle couleur de vin desirez-vous ?',
-        buttons=[
-            red_button, white_button, rose_button
-        ]
-    )
-    attachment = attachments.TemplateAttachment(template=template)
-    message = messages.Message(attachment=attachment)
-    request = messages.MessageRequest(recipient, message)
-    messenger.send(request)
-
-# TODO: change the function, call API
-def handle_color(fbid, received_message):
-    recipient = messages.Recipient(recipient_id=fbid)
-
-    message = messages.Message(text=received_message)
-    request = messages.MessageRequest(recipient, message)
-    messenger.send(request)
 
 
 class FacebookCallbackView(generic.View):
@@ -110,8 +67,8 @@ class FacebookCallbackView(generic.View):
                 # This might be delivery, optin, postback for other events
                 if 'message' in message:
                     pprint(message)
-                    post_facebook_message(message['sender']['id'], message['message']['text'])
+                    sr.post_facebook_message(message['sender']['id'], message['message']['text'])
                 if 'postback' in message:
                     pprint(message)
-                    post_facebook_message(message['sender']['id'], message['postback']['payload'])
+                    sr.post_facebook_message(message['sender']['id'], message['postback']['payload'])
         return HttpResponse()
