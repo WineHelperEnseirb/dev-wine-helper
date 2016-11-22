@@ -9,7 +9,19 @@ PAGE_ACCESS_TOKEN = "EAAYU6e7AspIBAHvYtRp44RebfWQGlVRUNTTIpqmd27i6nSHCW61noR7yDO
 messenger = MessengerClient(access_token=PAGE_ACCESS_TOKEN)
 
 def post_facebook_message(fbid, received_message):
-    handle_button(fbid, json.loads("{\"type\":\"button\",\"text\":\"Quel vin?\",\"options\": [{\"text\":\"Rouge\",\"payload\":\"Rouge\"},{{\"text\":\"Blanc\",\"payload\":\"Blanc\"}}]}"))
+    fake_data = {}
+    fake_data["type"] = "button"
+    fake_data["text"] = "Quel vin ?"
+    fake_data["options"] = []
+    fake_button1 = {}
+    fake_button1["text"] = "Rouge"
+    fake_button1["payload"] = "rouge"
+    fake_button2 = {}
+    fake_button2["text"] = "Blanc"
+    fake_button2["payload"] = "blanc"
+    fake_data["options"].append(fake_button1)
+    fake_data["options"].append(fake_button2)
+    handle_button(fbid, json.dumps(fake_data))
 
 
 def handle_text(fbid, data):
