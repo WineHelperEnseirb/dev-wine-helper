@@ -16,7 +16,7 @@ from django.utils.decorators import method_decorator
 
 import send_response as sr
 
-#  ------------------------ Fill this with your page access token! -------------------------------
+#  ------------------------ Tokens -------------------------------
 PAGE_ACCESS_TOKEN = "EAAYU6e7AspIBAHvYtRp44RebfWQGlVRUNTTIpqmd27i6nSHCW61noR7yDOrpGlzaRaRO2NreAXful5OlodZAy7xB9Y6SftRW9YfYl4aQ0MPD2HLa3Ey2k6hvfVfEVxuHIMmAkgJ9gnrbdFuVbXr6wMFQzPUteYmk0x5heegZDZD"
 VERIFY_TOKEN = "verify_me" # TODO: change token
 
@@ -56,19 +56,20 @@ class FacebookCallbackView(generic.View):
         # Converts the text payload into a python dictionary
         incoming_message = json.loads(request.body.decode('utf-8'))
 
-        pprint("My debug")
-        pprint(json.dumps(incoming_message))
-
         # Facebook recommends going through every entry since they might send
         # multiple messages in a single call during high load
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
-                # Check to make sure the received call is a message call
-                # This might be delivery, optin, postback for other events
+                sender_id = None
+                received_message = None
+
+                if 'sender' in message:
+                    sender_id = message['sender']['id']
                 if 'message' in message:
-                    pprint(message)
-                    sr.post_facebook_message(message['sender']['id'], message['message']['text'])
+                    received_message = message['message']['text']
                 if 'postback' in message:
-                    pprint(message)
-                    sr.post_facebook_message(message['sender']['id'], message['postback']['payload'])
+                    received_message = message['postback']['payload']
+
+                if sender_id is not None and received_message is not None:
+                    sr.post_facebook_message(sender_id, received_message)
         return HttpResponse()

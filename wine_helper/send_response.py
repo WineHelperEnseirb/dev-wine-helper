@@ -8,6 +8,7 @@ from messengerbot import MessengerClient, messages, attachments, templates, elem
 PAGE_ACCESS_TOKEN = "EAAYU6e7AspIBAHvYtRp44RebfWQGlVRUNTTIpqmd27i6nSHCW61noR7yDOrpGlzaRaRO2NreAXful5OlodZAy7xB9Y6SftRW9YfYl4aQ0MPD2HLa3Ey2k6hvfVfEVxuHIMmAkgJ9gnrbdFuVbXr6wMFQzPUteYmk0x5heegZDZD"
 messenger = MessengerClient(access_token=PAGE_ACCESS_TOKEN)
 
+# TODO: change this function
 def post_facebook_message(fbid, received_message):
     fake_data = {}
     fake_data["type"] = "button"
@@ -27,6 +28,7 @@ def post_facebook_message(fbid, received_message):
 def handle_text(fbid, data):
     "TO DO"
 
+# TODO: write description for this function
 def handle_button(fbid, data):
     recipient = messages.Recipient(recipient_id=fbid)
     data = json.loads(data)
