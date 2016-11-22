@@ -28,7 +28,7 @@ def post_facebook_message(fbid, received_message):
 def handle_text(fbid, data):
     "TO DO"
 
-# TODO: write description for this function
+# TODO: write description for this function
 def handle_button(fbid, data):
     recipient = messages.Recipient(recipient_id=fbid)
     data = json.loads(data)
