@@ -14,8 +14,8 @@ messenger = MessengerClient(access_token=PAGE_ACCESS_TOKEN)
 def send_facebook_message(fbid, data):
     recipient = messages.Recipient(recipient_id=fbid)
     new_data = json.loads(data)
-    if (True):
-        ""
+    if (new_data["type"] == "text"):
+
 def post_facebook_message(fbid, received_message):
     fake_data = {}
     fake_data["type"] = "button"
@@ -33,6 +33,7 @@ def post_facebook_message(fbid, received_message):
     fake_data_api = {}
     fake_data_api["type"] = "text"
     fake_data_api["api_call"] = True
+    fake_criteria1 = {}
     fake_criteria1["name"] =  "color"
     fake_criteria1["value"] =  "rouge"
     fake_data_api["criteria"].append(fake_criteria1)
