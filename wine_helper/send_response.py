@@ -12,6 +12,8 @@ messenger = MessengerClient(access_token=PAGE_ACCESS_TOKEN)
 
 # TODO: change this function
 def send_facebook_message(fbid, data):
+    recipient = messages.Recipient(recipient_id=fbid)
+    new_data = json.loads(data)
     if (True):
         ""
 def post_facebook_message(fbid, received_message):
@@ -27,11 +29,14 @@ def post_facebook_message(fbid, received_message):
     fake_button2["payload"] = "blanc"
     fake_data["options"].append(fake_button1)
     fake_data["options"].append(fake_button2)
-    fake_data_text = {}
-    fake_data_text["type"] = "text"
-    fake_data_text["api_call"] = False
-    fake_data_text["text"] = "Bonjour petit robot"
-    handle_text(fbid, json.dumps(fake_data_text))
+
+    fake_data_api = {}
+    fake_data_api["type"] = "text"
+    fake_data_api["api_call"] = True
+    fake_criteria1["name"] =  "color"
+    fake_criteria1["value"] =  "rouge"
+    fake_data_api["criteria"].append(fake_criteria1)
+    handle_text(fbid, json.dumps(fake_data_api))
 
 
 def handle_text(fbid, data):
