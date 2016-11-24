@@ -11,7 +11,7 @@ PAGE_ACCESS_TOKEN = "EAAYU6e7AspIBAHvYtRp44RebfWQGlVRUNTTIpqmd27i6nSHCW61noR7yDO
 messenger = MessengerClient(access_token=PAGE_ACCESS_TOKEN)
 
 # TODO: change this function
-def send_facebook_message(fbid, received_message):
+def send_facebook_message(fbid, data):
     if (True):
         ""
 def post_facebook_message(fbid, received_message):
@@ -29,7 +29,7 @@ def post_facebook_message(fbid, received_message):
     fake_data["options"].append(fake_button2)
     fake_data_text = {}
     fake_data_text["type"] = "text"
-    fake_data_text["api_call"] = "False"
+    fake_data_text["api_call"] = False
     fake_data_text["text"] = "Bonjour petit robot"
     handle_text(fbid, json.dumps(fake_data_text))
 
