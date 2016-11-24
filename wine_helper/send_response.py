@@ -11,6 +11,9 @@ PAGE_ACCESS_TOKEN = "EAAYU6e7AspIBAHvYtRp44RebfWQGlVRUNTTIpqmd27i6nSHCW61noR7yDO
 messenger = MessengerClient(access_token=PAGE_ACCESS_TOKEN)
 
 # TODO: change this function
+def send_facebook_message(fbid, received_message):
+    if (True):
+        ""
 def post_facebook_message(fbid, received_message):
     fake_data = {}
     fake_data["type"] = "button"
@@ -47,7 +50,7 @@ def handle_text(fbid, data):
         text = ""
 
         for wine in wine_list:
-            text += "Nom: " + wine.get_name() + ", Appellation: " + wine.get_appellation() + ", Année: " + wine.get_vintage() + "\n"
+            text += "Nom: " + wine.get_name() + ", Appellation: " + wine.get_appellation() + ", Annee: " + wine.get_vintage() + "\n"
         message = messages.Message(text=text)
         request = messages.MessageRequest(recipient, message)
         messenger.send(request)
