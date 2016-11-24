@@ -18,7 +18,7 @@ import send_response as sr
 
 #  ------------------------ Tokens -------------------------------
 PAGE_ACCESS_TOKEN = "EAAYU6e7AspIBAHvYtRp44RebfWQGlVRUNTTIpqmd27i6nSHCW61noR7yDOrpGlzaRaRO2NreAXful5OlodZAy7xB9Y6SftRW9YfYl4aQ0MPD2HLa3Ey2k6hvfVfEVxuHIMmAkgJ9gnrbdFuVbXr6wMFQzPUteYmk0x5heegZDZD"
-VERIFY_TOKEN = "verify_me" # TODO: change token
+VERIFY_TOKEN = "b2ac128f9d0c4ba8fdfad7b37eb66b8f2e86d09a75c6720a43" # TODO: change token
 
 
 
