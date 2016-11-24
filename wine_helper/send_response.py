@@ -37,6 +37,7 @@ def post_facebook_message(fbid, received_message):
     fake_criteria1 = {}
     fake_criteria1["name"] =  "color"
     fake_criteria1["value"] =  "rouge"
+    fake_data_api["criteria"] = []
     fake_data_api["criteria"].append(fake_criteria1)
     handle_text(fbid, json.dumps(fake_data_api))
 
