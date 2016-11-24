@@ -1,4 +1,6 @@
 import json
+import api_tools as api
+import Criteria as C
 
 # Vendors
 # https://github.com/geeknam/messengerbot
@@ -22,11 +24,33 @@ def post_facebook_message(fbid, received_message):
     fake_button2["payload"] = "blanc"
     fake_data["options"].append(fake_button1)
     fake_data["options"].append(fake_button2)
-    handle_button(fbid, json.dumps(fake_data))
+    fake_data_text = {}
+    fake_data_text["type"] = "text"
+    fake_data_text["api_call"] = "False"
+    fake_data_text["text"] = "Bonjour petit robot"
+    handle_text(fbid, json.dumps(fake_data_text))
 
 
 def handle_text(fbid, data):
-    "TO DO"
+    recipient = messages.Recipient(recipient_id=fbid)
+    data = json.loads(data)
+    if (data["api_call"] == False):
+        message = messages.Message(text=data["text"])
+        request = messages.MessageRequest(recipient, message)
+        messenger.send(request)
+    else:
+        criteria = data["criteria"]
+        criteria_list = []
+        for criterium in criteria:
+            criteria_list.append(C.Criteria(criterium["name"],criterium["value"]))
+        wine_list = api.get_wines_by_criteria(criteria)
+        text = ""
+
+        for wine in wine_list:
+            text += "Nom: " + wine.get_name() + ", Appellation: " + wine.get_appellation() + ", Année: " + wine.get_vintage() + "\n"
+        message = messages.Message(text=text)
+        request = messages.MessageRequest(recipient, message)
+        messenger.send(request)
 
 # TODO: write description for this function
 def handle_button(fbid, data):
