@@ -15,6 +15,7 @@ def send_facebook_message(fbid, data):
     recipient = messages.Recipient(recipient_id=fbid)
     new_data = json.loads(data)
     if (new_data["type"] == "text"):
+        "true"
 
 def post_facebook_message(fbid, received_message):
     fake_data = {}
