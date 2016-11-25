@@ -62,9 +62,9 @@ def handle_text(fbid, data):
             text += "\n"
 
         pprint(wine_list)
-        
+
         if not text:
-            text = 'Oups, une erreur est survenue.'
+            text = 'Aucun vin de correspond à votre recherche'
 
         message = messages.Message(text=text)
         request = messages.MessageRequest(recipient, message)
