@@ -19,6 +19,10 @@ messenger = MessengerClient(access_token=PAGE_ACCESS_TOKEN)
 # TODO: change this function
 def send_facebook_message(fbid, data):
     recipient = messages.Recipient(recipient_id=fbid)
+    pprint("TYPE DATA")
+    pprint(type(data))
+    pprint("TYPE json.loads(data)")
+    pprint(type(json.loads(data)))
     new_data = json.loads(data).decode('utf-8')
     if (new_data["type"] == "text"):
         handle_text(fbid, new_data)
