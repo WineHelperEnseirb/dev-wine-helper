@@ -93,7 +93,7 @@ def handle_button(fbid, data):
 def handle_error(fbid):
     """
     Sends an error message to messenger
-    """"
+    """
     recipient = messages.Recipient(recipient_id=fbid)
     message = messages.Message("Oups, une erreur est survenue.")
     request = messages.MessageRequest(recipient, message)
