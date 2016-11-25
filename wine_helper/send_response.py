@@ -63,7 +63,7 @@ def handle_text(fbid, data):
 
         if not text:
             text = 'Oups, une erreur est survenue.'
-            
+
         message = messages.Message(text=text)
         request = messages.MessageRequest(recipient, message)
         messenger.send(request)
@@ -99,6 +99,6 @@ def handle_error(fbid):
     Sends an error message to messenger
     """
     recipient = messages.Recipient(recipient_id=fbid)
-    message = messages.Message(text='Oups, une erreur est survenue.'')
+    message = messages.Message(text='Oups, une erreur est survenue.')
     request = messages.MessageRequest(recipient, message)
     messenger.send(request)
