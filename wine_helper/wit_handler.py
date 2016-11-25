@@ -60,7 +60,7 @@ def getForecast(request):
     maxprice = first_entity_value(entities, 'wit_maxprice')
     currency = first_entity_value(entities, 'wit_currency')
 
-    if entities:
+    if entities and 'intent' in entities:
         if entities['intent']:
             if entities['intent'][0]['value'] == "adjective":
                 context['missingAdjective'] = True
