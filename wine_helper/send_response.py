@@ -62,7 +62,10 @@ def handle_text(fbid, data):
         text = ""
 
         for wine in wine_list:
-            text += "Nom: " + wine.get_name() + ", Appellation: " + wine.get_appellation() + ", Annee: " + wine.get_vintage() + "\n"
+            text += "Nom: " + wine.get_name()
+             text += ", Appellation: " + wine.get_appellation()
+             text += ", Annee: " + wine.get_vintage()
+             text += "\n"
         message = messages.Message(text=text)
         request = messages.MessageRequest(recipient, message)
         messenger.send(request)
