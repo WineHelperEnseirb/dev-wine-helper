@@ -23,7 +23,7 @@ def send_facebook_message(fbid, data):
     pprint(type(data))
     pprint("DATA")
     pprint(data)
-    if (new_data["type"] == "text"):
+    if (data["type"] == "text"):
         handle_text(fbid, data)
     else:
         handle_button(fbid, data)
