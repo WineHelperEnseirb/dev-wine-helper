@@ -43,10 +43,6 @@ def handle_text(fbid, data):
     """
     recipient = messages.Recipient(recipient_id=fbid)
     if (data["api_call"] == False):
-        pprint("[DEBUG] text type")
-        pprint(type(data["text"]))
-        pprint("[DEBUG] text")
-        pprint(data["text"])
         message = messages.Message(text=data["text"])
         request = messages.MessageRequest(recipient, message)
         messenger.send(request)
@@ -64,6 +60,12 @@ def handle_text(fbid, data):
             text += "," + wine.get_appellation()
             text += "," + wine.get_vintage()
             text += "\n"
+
+        pprint("[DEBUG] text type")
+        pprint(text)
+        pprint("[DEBUG] text")
+        pprint(text)
+
         message = messages.Message(text=text)
         request = messages.MessageRequest(recipient, message)
         messenger.send(request)
