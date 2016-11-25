@@ -22,14 +22,19 @@ def send_facebook_message(fbid, data):
     Calls the right function according to the data type
     """
     recipient = messages.Recipient(recipient_id=fbid)
-    pprint("TYPE DATA")
+
+    pprint("[DEBUG] TYPE DATA")
     pprint(type(data))
-    pprint("DATA")
+    pprint("[DEBUG] DATA")
     pprint(data)
-    if (data["type"] == "text"):
-        handle_text(fbid, data)
-    else:
-        handle_button(fbid, data)
+
+    if 'type' in data:
+        if (data["type"] == "text"):
+            handle_text(fbid, data)
+        elif (data["type"] == "button"):
+            handle_button(fbid, data)
+        else:
+            handle_error(fbid)
 
 
 def handle_text(fbid, data):
@@ -81,5 +86,15 @@ def handle_button(fbid, data):
     )
     attachment = attachments.TemplateAttachment(template=template)
     message = messages.Message(attachment=attachment)
+    request = messages.MessageRequest(recipient, message)
+    messenger.send(request)
+
+
+def handle_error(fbid):
+    """
+    Sends an error message to messenger
+    """"
+    recipient = messages.Recipient(recipient_id=fbid)
+    message = messages.Message("Oups, une erreur est survenue.")
     request = messages.MessageRequest(recipient, message)
     messenger.send(request)
