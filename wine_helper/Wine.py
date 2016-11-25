@@ -26,7 +26,7 @@ class Wine:
         return self.global_score
 
     def __str__(self):
-        return "bonjour"
+        return self.name + " (" + self.appellation + ")"
 
     def __repr__(self):
         return self.appellation
