@@ -43,6 +43,10 @@ def handle_text(fbid, data):
     """
     recipient = messages.Recipient(recipient_id=fbid)
     if (data["api_call"] == False):
+        pprint("[DEBUG] text type")
+        pprint(type(data["text"]))
+        pprint("[DEBUG] text")
+        pprint(data["text"])
         message = messages.Message(text=data["text"])
         request = messages.MessageRequest(recipient, message)
         messenger.send(request)
