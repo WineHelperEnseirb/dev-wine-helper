@@ -51,6 +51,9 @@ def post_facebook_message(fbid, received_message):
 
 
 def handle_text(fbid, data):
+    """
+    Handles the sending to messenger of a text message
+    """
     recipient = messages.Recipient(recipient_id=fbid)
     data = json.loads(data)
     if (data["api_call"] == False):
@@ -75,8 +78,11 @@ def handle_text(fbid, data):
         request = messages.MessageRequest(recipient, message)
         messenger.send(request)
 
-# TODO: write description for this function
+
 def handle_button(fbid, data):
+    """
+    Handles the sending to messenger of a button template of postback buttons
+    """
     recipient = messages.Recipient(recipient_id=fbid)
     data = json.loads(data)
     text = data["text"]

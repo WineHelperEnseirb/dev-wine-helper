@@ -75,5 +75,5 @@ class FacebookCallbackView(generic.View):
                     pprint("[DEBUG] RECEIVED MESSAGE " + received_message.decode('utf-8'))
                     json_answer = wit.treatment(received_message.decode('utf-8'))
                     pprint("[DEBUG] JSON ANSWER " + json_answer)
-                    sr.send_response(sender_id, json_answer)
+                    sr.send_facebook_message(sender_id, json_answer)
         return HttpResponse()
