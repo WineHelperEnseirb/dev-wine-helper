@@ -1,5 +1,5 @@
 import json
-import pprint
+from pprint import pprint
 import api_tools as api
 import Criteria as C
 
