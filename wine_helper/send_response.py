@@ -57,9 +57,7 @@ def handle_text(fbid, data):
         criteria_list = []
         for criterium in criteria:
             criteria_list.append(C.Criteria(criterium["name"],criterium["value"]))
-            pprint("\n")
             pprint(criterium)
-            pprint("\n")
             pprint(criteria_list)
         wine_list = api.get_wines_by_criteria(criteria)
         text = ""
