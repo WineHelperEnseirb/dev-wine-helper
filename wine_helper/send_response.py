@@ -18,7 +18,7 @@ def send_facebook_message(fbid, data):
     if (new_data["type"] == "text"):
         handle_text(fbid, data)
     else:
-        handle_button(fbid, data):
+        handle_button(fbid, data)
 
 def post_facebook_message(fbid, received_message):
     fake_data = {}
