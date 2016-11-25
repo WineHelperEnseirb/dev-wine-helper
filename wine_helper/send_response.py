@@ -19,11 +19,11 @@ messenger = MessengerClient(access_token=PAGE_ACCESS_TOKEN)
 # TODO: change this function
 def send_facebook_message(fbid, data):
     recipient = messages.Recipient(recipient_id=fbid)
-    new_data = json.loads(data)
+    new_data = json.loads(data).decode('utf-8')
     if (new_data["type"] == "text"):
-        handle_text(fbid, data)
+        handle_text(fbid, new_data)
     else:
-        handle_button(fbid, data)
+        handle_button(fbid, new_data)
 
 def post_facebook_message(fbid, received_message):
     fake_data = {}
@@ -55,7 +55,6 @@ def handle_text(fbid, data):
     Handles the sending to messenger of a text message
     """
     recipient = messages.Recipient(recipient_id=fbid)
-    data = json.loads(data)
     if (data["api_call"] == False):
         message = messages.Message(text=data["text"])
         request = messages.MessageRequest(recipient, message)
@@ -84,7 +83,6 @@ def handle_button(fbid, data):
     Handles the sending to messenger of a button template of postback buttons
     """
     recipient = messages.Recipient(recipient_id=fbid)
-    data = json.loads(data)
     text = data["text"]
     button_list = []
     for option in data["options"]:
