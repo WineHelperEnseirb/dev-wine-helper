@@ -16,8 +16,11 @@ from Criteria import Criteria
 PAGE_ACCESS_TOKEN = "EAAYU6e7AspIBAHvYtRp44RebfWQGlVRUNTTIpqmd27i6nSHCW61noR7yDOrpGlzaRaRO2NreAXful5OlodZAy7xB9Y6SftRW9YfYl4aQ0MPD2HLa3Ey2k6hvfVfEVxuHIMmAkgJ9gnrbdFuVbXr6wMFQzPUteYmk0x5heegZDZD"
 messenger = MessengerClient(access_token=PAGE_ACCESS_TOKEN)
 
-# TODO: change this function
+
 def send_facebook_message(fbid, data):
+    """
+    Calls the right function according to the data type
+    """
     recipient = messages.Recipient(recipient_id=fbid)
     pprint("TYPE DATA")
     pprint(type(data))
@@ -27,30 +30,6 @@ def send_facebook_message(fbid, data):
         handle_text(fbid, data)
     else:
         handle_button(fbid, data)
-
-def post_facebook_message(fbid, received_message):
-    fake_data = {}
-    fake_data["type"] = "button"
-    fake_data["text"] = "Quel vin ?"
-    fake_data["options"] = []
-    fake_button1 = {}
-    fake_button1["text"] = "Rouge"
-    fake_button1["payload"] = "rouge"
-    fake_button2 = {}
-    fake_button2["text"] = "Blanc"
-    fake_button2["payload"] = "blanc"
-    fake_data["options"].append(fake_button1)
-    fake_data["options"].append(fake_button2)
-
-    fake_data_api = {}
-    fake_data_api["type"] = "text"
-    fake_data_api["api_call"] = True
-    fake_criteria1 = {}
-    fake_criteria1["name"] =  "color"
-    fake_criteria1["value"] =  "rouge"
-    fake_data_api["criteria"] = []
-    fake_data_api["criteria"].append(fake_criteria1)
-    handle_text(fbid, json.dumps(fake_data_api))
 
 
 def handle_text(fbid, data):
