@@ -8,22 +8,22 @@ class Wine:
         self.global_score = global_score
 
     def get_appellation(self):
-        return appellation
+        return self.appellation
 
     def get_name(self):
-        return name
+        return self.name
 
     def get_vintage(self):
-        return vintage
+        return self.vintage
 
     def get_color(self):
-        return color
+        return self.color
 
     def get_price(self):
-        return price
+        return self.price
 
     def get_global_score(self):
-        return global_score
+        return self.global_score
 
     def __str__(self):
         return "bonjour"
