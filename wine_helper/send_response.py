@@ -1,7 +1,7 @@
 import json
 from pprint import pprint
 import api_tools as api
-import Criteria as C
+from Criteria import Criteria
 
 # Vendors
 # https://github.com/geeknam/messengerbot
@@ -56,7 +56,7 @@ def handle_text(fbid, data):
         criteria = data["criteria"]
         criteria_list = []
         for criterium in criteria:
-            crit = C.Criteria(criterium['name'],criterium['value'])
+            crit = Criteria(criterium["name"],criterium["value"])
             criteria_list.append(crit)
             pprint(crit.get_name() + ", " + crit.get_value())
             pprint(criteria_list)
