@@ -25,9 +25,3 @@ def get_wines_by_criteria(criteria):
                             wine['price'],wine['global_score'])
         wine_list.append(wine_object)
     return wine_list
-
-
-criteria = []
-criteria.append(C.Criteria("color", "rouge"))
-
-print(get_wines_by_criteria(criteria))
