@@ -24,7 +24,6 @@ def get_wines_by_criteria(criteria):
     url += query
 
     response = re.get(url)
-    print(response.encoding)
     data = response.json()
     wine_list = []
     for wine in data:

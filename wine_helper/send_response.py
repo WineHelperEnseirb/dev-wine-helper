@@ -61,6 +61,8 @@ def handle_text(fbid, data):
             text += "," + wine.get_vintage()
             text += "\n"
 
+        pprint(wine_list)
+        
         if not text:
             text = 'Oups, une erreur est survenue.'
 
