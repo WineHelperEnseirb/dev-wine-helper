@@ -61,11 +61,9 @@ def handle_text(fbid, data):
             text += "," + wine.get_vintage()
             text += "\n"
 
-        pprint("[DEBUG] text type")
-        pprint(text)
-        pprint("[DEBUG] text")
-        pprint(text)
-
+        if not text:
+            text = 'Oups, une erreur est survenue.'
+            
         message = messages.Message(text=text)
         request = messages.MessageRequest(recipient, message)
         messenger.send(request)
@@ -101,6 +99,6 @@ def handle_error(fbid):
     Sends an error message to messenger
     """
     recipient = messages.Recipient(recipient_id=fbid)
-    message = messages.Message("Oups, une erreur est survenue.")
+    message = messages.Message(text='Oups, une erreur est survenue.'')
     request = messages.MessageRequest(recipient, message)
     messenger.send(request)
