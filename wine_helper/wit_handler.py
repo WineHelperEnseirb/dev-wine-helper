@@ -73,17 +73,17 @@ def getForecast(request):
                 # vin rouge
                 rouge = {}
                 rouge['text'] = 'Rouge'
-                rouge['playload'] = 'Rouge'
+                rouge['payload'] = 'Rouge'
                 context['options'].append(rouge)
                 # vin rose
                 rose = {}
                 rose['text'] = 'Rose'
-                rose['playload'] = 'Rose'
+                rose['payload'] = 'Rose'
                 context['options'].append(rose)
                 # vin blanc
                 blanc = {}
                 blanc['text'] = 'Blanc'
-                blanc['playload'] = 'Blanc'
+                blanc['payload'] = 'Blanc'
                 context['options'].append(blanc)
                 if context.get('missingAdjective') is not None:
                     del context['missingAdjective']
