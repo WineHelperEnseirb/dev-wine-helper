@@ -1,4 +1,5 @@
 import json
+import pprint
 import api_tools as api
 import Criteria as C
 
@@ -15,7 +16,9 @@ def send_facebook_message(fbid, data):
     recipient = messages.Recipient(recipient_id=fbid)
     new_data = json.loads(data)
     if (new_data["type"] == "text"):
-        "true"
+        handle_text(fbid, data)
+    else:
+        handle_button(fbid, data):
 
 def post_facebook_message(fbid, received_message):
     fake_data = {}
