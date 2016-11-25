@@ -21,13 +21,12 @@ def send_facebook_message(fbid, data):
     recipient = messages.Recipient(recipient_id=fbid)
     pprint("TYPE DATA")
     pprint(type(data))
-    pprint("TYPE json.loads(data)")
-    pprint(type(json.loads(data)))
-    new_data = json.loads(data).decode('utf-8')
+    pprint("DATA")
+    pprint(data)
     if (new_data["type"] == "text"):
-        handle_text(fbid, new_data)
+        handle_text(fbid, data)
     else:
-        handle_button(fbid, new_data)
+        handle_button(fbid, data)
 
 def post_facebook_message(fbid, received_message):
     fake_data = {}
