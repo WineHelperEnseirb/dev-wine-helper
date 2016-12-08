@@ -50,7 +50,7 @@ def handle_text(fbid, data):
         for criterion in criteria:
             crit = Criteria(criterion["name"], criterion["value"])
             criteria_list.append(crit)
-        wine_list = api.get_wines_by_criteria(criteria_list)
+        wine_list = api.get_wines_by_criteria(criteria_list, RESULTS_LIMIT)
         text = ""
 
         for wine in wine_list:
