@@ -56,21 +56,24 @@ def handle_text(fbid, data):
         #pprint(criteria_list)
         wine_list = api.get_wines_by_criteria(criteria_list, RESULTS_LIMIT)
         text = "Voici les meilleurs vins présentants les critères recherchés :\n".decode('utf-8')
+        res = ""
 
         for wine in wine_list:
-            text += "- "
-            text += wine.get_name().decode('utf-8')
-            text += ", " + wine.get_appellation().decode('utf-8')
-            text += " (" + str(wine.get_vintage()) + ")"
-            text += ", " + wine.get_color()['fr'].decode('utf-8')
-            text += ", " + wine.get_taste()['fr'].decode('utf-8')
-            text += ", " + str(wine.get_price()) + " euros"
-            text += "\n"
+            res += "- "
+            res += wine.get_name().decode('utf-8')
+            res += ", " + wine.get_appellation().decode('utf-8')
+            res += " (" + str(wine.get_vintage()) + ")"
+            res += ", " + wine.get_color()['fr'].decode('utf-8')
+            res += ", " + wine.get_taste()['fr'].decode('utf-8')
+            res += ", " + str(wine.get_price()) + " euros"
+            res += "\n"
 
         pprint(wine_list)
 
-        if not text:
-            text = 'Aucun vin ne correspond à votre recherche'
+        if not res:
+            res = "Aucun vin ne correspond à votre recherche"
+
+        text += res
 
         message = messages.Message(text=text)
         request = messages.MessageRequest(recipient, message)
