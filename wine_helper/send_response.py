@@ -71,7 +71,7 @@ def handle_text(fbid, data):
         pprint(wine_list)
 
         if not res:
-            res = "Aucun vin ne correspond à votre recherche"
+            res = "Aucun vin ne correspond à votre recherche".decode('utf-8')
 
         text += res
 
