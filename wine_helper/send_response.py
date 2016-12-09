@@ -47,13 +47,13 @@ def handle_text(fbid, data):
     else:
         criteria = data["criteria"]
         pprint("[DEBUG] WIT CRITERIA")
-        pprint(criteria)
+        #pprint(criteria)
         criteria_list = []
         for criterion in criteria:
             crit = Criteria(criterion["name"], criterion["value"])
             criteria_list.append(crit)
         pprint("[DEBUG] BUILT CRITERIA")
-        pprint(criteria_list)
+        #pprint(criteria_list)
         wine_list = api.get_wines_by_criteria(criteria_list, RESULTS_LIMIT)
         text = "Voici les meilleurs vins présentants les critères recherchés :\n".decode('utf-8')
 
