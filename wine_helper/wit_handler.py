@@ -102,6 +102,12 @@ def getForecast(request):
             context['criteria'].append(color_criterion)
             if context.get('missingAdjective') is not None:
                 del context['missingAdjective']
+        else:
+            context['type'] = 'text'
+            context['text'] = 'Je n\'ai pas compris ce que vous voulez dire'
+            context['api_call'] = False
+            if context.get('missingAdjective') is not None:
+                del context['missingAdjective']
 
 
         #if minprice and maxprice and currency:
