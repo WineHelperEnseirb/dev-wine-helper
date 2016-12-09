@@ -91,8 +91,7 @@ def getForecast(request):
                 context['options'].append(blanc)
                 if context.get('missingAdjective') is not None:
                     del context['missingAdjective']
-
-        if color is not None:
+        elif color is not None:
             context['type'] = 'text'
             context['api_call'] = True
             context['criteria'] = []
