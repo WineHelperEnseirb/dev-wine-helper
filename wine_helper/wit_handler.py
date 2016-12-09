@@ -58,6 +58,8 @@ def getForecast(request):
     preTreatment(context)
 
     color = first_entity_value(entities, 'wit_color')
+    pprint("[DEBUG] wit color")
+    pprint(color)
     minprice = first_entity_value(entities, 'wit_minprice')
     maxprice = first_entity_value(entities, 'wit_maxprice')
     currency = first_entity_value(entities, 'wit_currency')
