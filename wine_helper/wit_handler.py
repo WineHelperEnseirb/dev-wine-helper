@@ -92,6 +92,7 @@ def getForecast(request):
                 if context.get('missingAdjective') is not None:
                     del context['missingAdjective']
         elif color is not None:
+            pprint("[DEBUG] color ok")
             context['type'] = 'text'
             context['api_call'] = True
             context['criteria'] = []
