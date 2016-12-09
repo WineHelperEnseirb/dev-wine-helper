@@ -56,6 +56,8 @@ def getAnswer(request):
 
     preTreatment(context)
 
+    context['answer'] = ''
+
     # Unused variables
     color = first_entity_value(entities, 'wit_color')
     pprint("[DEBUG] wit color")
