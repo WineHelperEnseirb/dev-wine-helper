@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import requests as re
+from pprint import pprint
+
 import Wine as W
 import Criteria as C
 
