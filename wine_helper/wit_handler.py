@@ -24,8 +24,6 @@ def wines():
 
 def send(request, response):
     data = request['context']
-    if data.get('missingAdjective') is not None:
-        del data['missingAdjective']
     json_data = json.dumps(data)
     print('Sending to server...', json_data)
 
@@ -45,10 +43,8 @@ def first_entity_value(entities, entity):
 
 
 def preTreatment(context):
-    if context.get('forecast') is not None:
-        del context['forecast']
-    if context.get('missingAdjective') is not None:
-        del context['missingAdjective']
+    if context.get('answer') is not None:
+        del context['answer']
 
 
 
@@ -83,8 +79,8 @@ def getAnswer(request):
         elif 'intent' in entities and entities['intent']:
             if entities['intent'][0]['value'] == "adjective":
                 context['missingAdjective'] = True
-                if context.get('forecast') is not None:
-                    del context['forecast']
+                if context.get('answer') is not None:
+                    del context['answer']
             elif entities['intent'][0]['value'] == "greetings":
                 context['type'] = 'button'
                 context['text'] = 'Quel vin souhaitez-vous ?'
@@ -120,7 +116,7 @@ def getAnswer(request):
                del context['missingAdjective']
 
         #if minprice and maxprice and currency:
-            #addToForecast(context,"entre " + minprice + " et " + maxprice + " " + currency)
+            #addToanswer(context,"entre " + minprice + " et " + maxprice + " " + currency)
     else:
        context['type'] = 'text'
        context['text'] = 'Je n\'ai pas compris ce que vous voulez dire'
