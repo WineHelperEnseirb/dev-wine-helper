@@ -59,7 +59,7 @@ def handle_text(fbid, data):
             text += "," + wine.get_appellation().decode('utf-8')
             text += " (" + str(wine.get_vintage()) + ")"
             text += ", score : " + str(wine.get_global_score())
-            text += ", " + str(wine.get_price()) + "€"
+            text += ", " + str(wine.get_price()) + " euros"
             text += "\n"
 
         pprint(wine_list)
