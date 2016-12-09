@@ -9,6 +9,9 @@ import json
 from wit import Wit
 from pprint import pprint
 
+# /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
+# TODO: clean file (remove unused code, add comments, etc.)
+# /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ 
 
 
 def wines():
@@ -57,6 +60,7 @@ def getForecast(request):
 
     preTreatment(context)
 
+    # Unused variables
     color = first_entity_value(entities, 'wit_color')
     pprint("[DEBUG] wit color")
     pprint(color)
