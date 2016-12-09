@@ -51,7 +51,7 @@ def handle_text(fbid, data):
             crit = Criteria(criterion["name"], criterion["value"])
             criteria_list.append(crit)
         wine_list = api.get_wines_by_criteria(criteria_list, RESULTS_LIMIT)
-        text = "Voici les meilleurs vins présentants les critères recherchés :\n"
+        text = "Voici les meilleurs vins présentants les critères recherchés :\n".decode('utf-8')
 
         for wine in wine_list:
             text += "- "
