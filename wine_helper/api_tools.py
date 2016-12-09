@@ -18,7 +18,7 @@ def get_wines_by_criteria(criteria, limit=0):
     """
     url = API_BASE_URL
     # setting limit
-    query = "?limit= {0}".format(limit)
+    query = "?limit={0}&".format(limit)
     # setting criteria
     for criterion in criteria:
         # TODO: remove last &
