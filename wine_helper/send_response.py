@@ -56,9 +56,10 @@ def handle_text(fbid, data):
         for wine in wine_list:
             text += "- "
             text += wine.get_name().decode('utf-8')
-            text += "," + wine.get_appellation().decode('utf-8')
+            text += ", " + wine.get_appellation().decode('utf-8')
             text += " (" + str(wine.get_vintage()) + ")"
-            text += ", score : " + str(wine.get_global_score())
+            text += ", " + wine.get_color()['fr']
+            text += ", " + wine.get_taste()['fr']
             text += ", " + str(wine.get_price()) + " euros"
             text += "\n"
 
