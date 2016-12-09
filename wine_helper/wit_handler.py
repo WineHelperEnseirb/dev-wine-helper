@@ -11,7 +11,7 @@ from pprint import pprint
 
 # /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 # TODO: clean file (remove unused code, add comments, etc.)
-# /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ 
+# /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 
 
 def wines():
@@ -53,7 +53,7 @@ def preTreatment(context):
 
 
 
-def getForecast(request):
+def getAnswer(request):
     context = request['context']
     entities = request['entities']
     print request
@@ -136,7 +136,7 @@ def getForecast(request):
 
 actions = {
     'send': send,
-    'getForecast': getForecast
+    'getAnswer': getAnswer
 }
 
 
