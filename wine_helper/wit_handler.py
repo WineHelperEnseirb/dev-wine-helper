@@ -70,6 +70,17 @@ def getForecast(request):
                 context['missingAdjective'] = True
                 if context.get('forecast') is not None:
                     del context['forecast']
+                if color is not None:
+                    pprint("[DEBUG] color ok")
+                    context['type'] = 'text'
+                    context['api_call'] = True
+                    context['criteria'] = []
+                    color_criterion = {}
+                    color_criterion['name'] = 'color.fr'
+                    color_criterion['value'] = color
+                    context['criteria'].append(color_criterion)
+                    if context.get('missingAdjective') is not None:
+                        del context['missingAdjective']
             elif entities['intent'][0]['value'] == "greetings":
                 context['type'] = 'button'
                 context['text'] = 'Quel vin souhaitez-vous ?'
@@ -89,17 +100,6 @@ def getForecast(request):
                 blanc['text'] = "blanc"
                 blanc['payload'] = "blanc"
                 context['options'].append(blanc)
-                if context.get('missingAdjective') is not None:
-                    del context['missingAdjective']
-            elif color is not None:
-                pprint("[DEBUG] color ok")
-                context['type'] = 'text'
-                context['api_call'] = True
-                context['criteria'] = []
-                color_criterion = {}
-                color_criterion['name'] = 'color.fr'
-                color_criterion['value'] = color
-                context['criteria'].append(color_criterion)
                 if context.get('missingAdjective') is not None:
                     del context['missingAdjective']
             else:
