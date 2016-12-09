@@ -70,7 +70,7 @@ def getForecast(request):
                 context['missingAdjective'] = True
                 if context.get('forecast') is not None:
                     del context['forecast']
-            if entities['intent'][0]['value'] == "greetings":
+            elif entities['intent'][0]['value'] == "greetings":
                 context['type'] = 'button'
                 context['text'] = 'Quel vin souhaitez-vous ?'
                 context['options'] = []
@@ -91,24 +91,29 @@ def getForecast(request):
                 context['options'].append(blanc)
                 if context.get('missingAdjective') is not None:
                     del context['missingAdjective']
-        elif color is not None:
-            pprint("[DEBUG] color ok")
-            context['type'] = 'text'
-            context['api_call'] = True
-            context['criteria'] = []
-            color_criterion = {}
-            color_criterion['name'] = 'color.fr'
-            color_criterion['value'] = color
-            context['criteria'].append(color_criterion)
-            if context.get('missingAdjective') is not None:
-                del context['missingAdjective']
+            elif color is not None:
+                pprint("[DEBUG] color ok")
+                context['type'] = 'text'
+                context['api_call'] = True
+                context['criteria'] = []
+                color_criterion = {}
+                color_criterion['name'] = 'color.fr'
+                color_criterion['value'] = color
+                context['criteria'].append(color_criterion)
+                if context.get('missingAdjective') is not None:
+                    del context['missingAdjective']
+            else:
+               context['type'] = 'text'
+               context['text'] = 'Je n\'ai pas compris ce que vous voulez dire'
+               context['api_call'] = False
+               if context.get('missingAdjective') is not None:
+                   del context['missingAdjective']
         else:
-            context['type'] = 'text'
-            context['text'] = 'Je n\'ai pas compris ce que vous voulez dire'
-            context['api_call'] = False
-            if context.get('missingAdjective') is not None:
-                del context['missingAdjective']
-
+           context['type'] = 'text'
+           context['text'] = 'Je n\'ai pas compris ce que vous voulez dire'
+           context['api_call'] = False
+           if context.get('missingAdjective') is not None:
+               del context['missingAdjective']
 
         #if minprice and maxprice and currency:
             #addToForecast(context,"entre " + minprice + " et " + maxprice + " " + currency)
