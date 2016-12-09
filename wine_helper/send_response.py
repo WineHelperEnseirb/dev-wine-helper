@@ -46,10 +46,10 @@ def handle_text(fbid, data):
         messenger.send(request)
     else:
         criteria = data["criteria"]
-        pprint("[DEBUG] WIT CRITERIA")
-        #pprint(criteria)
+        pprint("[DEBUG] WIT CRITERIA")
         criteria_list = []
         for criterion in criteria:
+            pprint(criterion)
             crit = Criteria(criterion["name"], criterion["value"])
             criteria_list.append(crit)
         pprint("[DEBUG] BUILT CRITERIA")
