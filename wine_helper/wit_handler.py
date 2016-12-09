@@ -74,11 +74,8 @@ def getAnswer(request):
             color_criterion['name'] = 'color.fr'
             color_criterion['value'] = entities['wit_color'][0]['value']
             context['criteria'].append(color_criterion)
-            if context.get('missingAdjective') is not None:
-                del context['missingAdjective']
         elif 'intent' in entities and entities['intent']:
             if entities['intent'][0]['value'] == "adjective":
-                context['missingAdjective'] = True
                 if context.get('answer') is not None:
                     del context['answer']
             elif entities['intent'][0]['value'] == "greetings":
@@ -100,20 +97,14 @@ def getAnswer(request):
                 blanc['text'] = "blanc"
                 blanc['payload'] = "blanc"
                 context['options'].append(blanc)
-                if context.get('missingAdjective') is not None:
-                    del context['missingAdjective']
             else:
                context['type'] = 'text'
                context['text'] = 'Je n\'ai pas compris ce que vous voulez dire'
                context['api_call'] = False
-               if context.get('missingAdjective') is not None:
-                   del context['missingAdjective']
         else:
            context['type'] = 'text'
            context['text'] = 'Je n\'ai pas compris ce que vous voulez dire'
            context['api_call'] = False
-           if context.get('missingAdjective') is not None:
-               del context['missingAdjective']
 
         #if minprice and maxprice and currency:
             #addToanswer(context,"entre " + minprice + " et " + maxprice + " " + currency)
@@ -121,8 +112,6 @@ def getAnswer(request):
        context['type'] = 'text'
        context['text'] = 'Je n\'ai pas compris ce que vous voulez dire'
        context['api_call'] = False
-       if context.get('missingAdjective') is not None:
-           del context['missingAdjective']
     return context
 
 
