@@ -29,7 +29,8 @@ ROOT_URLCONF = 'config.urls'
 WSGI_APPLICATION = 'config.wsgi.application'
 
 ALLOWED_HOSTS = [
-    u'wine-helper.herokuapp.com'
+    u'wine-helper.herokuapp.com',
+    u'127.0.0.1' 
 ]
 
 
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -71,6 +73,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 
 # Database
@@ -117,3 +120,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+SLACK_CLIENT_ID = "91470583841.106761744966"
+SLACK_CLIENT_SECRET = "0d7f801bb33f474241123a60e7416963"
+
+
+#PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+#STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+
