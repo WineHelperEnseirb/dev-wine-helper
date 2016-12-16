@@ -29,8 +29,7 @@ ROOT_URLCONF = 'config.urls'
 WSGI_APPLICATION = 'config.wsgi.application'
 
 ALLOWED_HOSTS = [
-    u'wine-helper.herokuapp.com',
-    u'127.0.0.1' 
+    u'wine-helper.herokuapp.com', 
 ]
 
 
