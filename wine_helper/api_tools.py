@@ -60,4 +60,4 @@ def build_wine_list (data,limit):
         criteria_list.append(crit)
     pprint("[DEBUG] BUILT CRITERIA")
     #pprint(criteria_list)
-    return get_wines_by_criteria(criteria_list, limit)
+    return api.get_wines_by_criteria(criteria_list, limit)
