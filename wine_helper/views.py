@@ -71,7 +71,8 @@ class FacebookCallbackView(generic.View):
 
                 if sender_id is not None and received_message is not None:
                     json_answer = wit.treatment(received_message.encode('utf-8'))
-                    sr.send_facebook_message(sender_id, json_answer)
+                    # Send message temporarly disabled
+                    # sr.send_facebook_message(sender_id, json_answer)
         return HttpResponse()
 
 
