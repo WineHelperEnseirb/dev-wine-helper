@@ -8,6 +8,6 @@ urlpatterns = [
         view=FacebookCallbackView.as_view(),
         name='facebook_callback'
         ),
-    url(r'^$', views.index),
-    url(r'^slack/oauth/$', views.slack_oauth),
+    # url(r'^$', views.index),
+    # url(r'^slack/oauth/$', views.slack_oauth),
 ]
