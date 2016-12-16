@@ -11,7 +11,7 @@ from pprint import pprint
 
 # /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 # TODO: clean file (remove unused code, add comments, etc.)
-# /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ 
+# /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 
 
 def wines():
@@ -24,8 +24,6 @@ def wines():
 
 def send(request, response):
     data = request['context']
-    if data.get('missingAdjective') is not None:
-        del data['missingAdjective']
     json_data = json.dumps(data)
     print('Sending to server...', json_data)
 
@@ -45,20 +43,20 @@ def first_entity_value(entities, entity):
 
 
 def preTreatment(context):
-    if context.get('forecast') is not None:
-        del context['forecast']
-    if context.get('missingAdjective') is not None:
-        del context['missingAdjective']
+    if context.get('answer') is not None:
+        del context['answer']
 
 
 
 
-def getForecast(request):
+def getAnswer(request):
     context = request['context']
     entities = request['entities']
     print request
 
     preTreatment(context)
+
+    context['answer'] = ''
 
     # Unused variables
     color = first_entity_value(entities, 'wit_color')
@@ -78,13 +76,10 @@ def getForecast(request):
             color_criterion['name'] = 'color.fr'
             color_criterion['value'] = entities['wit_color'][0]['value']
             context['criteria'].append(color_criterion)
-            if context.get('missingAdjective') is not None:
-                del context['missingAdjective']
         elif 'intent' in entities and entities['intent']:
             if entities['intent'][0]['value'] == "adjective":
-                context['missingAdjective'] = True
-                if context.get('forecast') is not None:
-                    del context['forecast']
+                if context.get('answer') is not None:
+                    del context['answer']
             elif entities['intent'][0]['value'] == "greetings":
                 context['type'] = 'button'
                 context['text'] = 'Quel vin souhaitez-vous ?'
@@ -104,29 +99,21 @@ def getForecast(request):
                 blanc['text'] = "blanc"
                 blanc['payload'] = "blanc"
                 context['options'].append(blanc)
-                if context.get('missingAdjective') is not None:
-                    del context['missingAdjective']
             else:
                context['type'] = 'text'
                context['text'] = 'Je n\'ai pas compris ce que vous voulez dire'
                context['api_call'] = False
-               if context.get('missingAdjective') is not None:
-                   del context['missingAdjective']
         else:
            context['type'] = 'text'
            context['text'] = 'Je n\'ai pas compris ce que vous voulez dire'
            context['api_call'] = False
-           if context.get('missingAdjective') is not None:
-               del context['missingAdjective']
 
         #if minprice and maxprice and currency:
-            #addToForecast(context,"entre " + minprice + " et " + maxprice + " " + currency)
+            #addToanswer(context,"entre " + minprice + " et " + maxprice + " " + currency)
     else:
        context['type'] = 'text'
        context['text'] = 'Je n\'ai pas compris ce que vous voulez dire'
        context['api_call'] = False
-       if context.get('missingAdjective') is not None:
-           del context['missingAdjective']
     return context
 
 
@@ -136,7 +123,7 @@ def getForecast(request):
 
 actions = {
     'send': send,
-    'getForecast': getForecast
+    'getAnswer': getAnswer
 }
 
 
