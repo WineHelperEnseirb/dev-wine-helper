@@ -38,6 +38,7 @@ class FacebookCallbackView(generic.View):
         """
         Handles server verification performed by Facebook
         """
+        pprint("[DEBUG][GET]")
         token = request.GET.get('hub.verify_token')
         challenge = request.GET.get('hub.challenge')
         if token == os.getenv('FB_VERIFY_TOKEN'):
@@ -52,6 +53,7 @@ class FacebookCallbackView(generic.View):
         """
         Handles Facebook messages
         """
+        pprint("[DEBUG][POST]")
         # Converts the text payload into a python dictionary
         incoming_message = json.loads(request.body.decode('utf-8'))
 
