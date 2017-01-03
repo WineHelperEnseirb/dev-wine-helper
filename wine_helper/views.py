@@ -14,10 +14,7 @@ from django.views import generic
 from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from django.shortcuts import render
-from django.conf import settings
 
-from .models import Team
 import send_response as sr
 import wit_handler as wit
 
@@ -76,29 +73,3 @@ class FacebookCallbackView(generic.View):
                     json_answer = wit.treatment(received_message.encode('utf-8'))
                     sr.send_facebook_message(sender_id, json_answer)
         return HttpResponse()
-
-
-#Slack Bot below
-# def index(request):
-#     client_id = settings.SLACK_CLIENT_ID
-#     return render(request, 'landing.html', {'client_id': client_id})
-
-
-# def slack_oauth(request):
-#     code = request.GET['code']
-#     params = {
-#         'code': code,
-#         'client_id': settings.SLACK_CLIENT_ID,
-#         "client_secret": settings.SLACK_CLIENT_SECRET
-#     }
-#     url = 'https://slack.com/api/oauth.access'
-#     json_response = requests.get(url, params=params)
-#     #json_response = requests.get(url)
-#     data = json.loads(json_response.text)
-#     Team.objects.get_or_create(
-#         name=data['team_name'],
-#         team_id=data['team_id'],
-#         bot_user_id=data['bot']['bot_user_id'],
-#         bot_access_token=data['bot']['bot_access_token']
-#     )
-#     return HttpResponse('Bot ajouté à votre Slack!')

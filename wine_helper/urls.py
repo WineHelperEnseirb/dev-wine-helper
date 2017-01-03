@@ -1,6 +1,5 @@
 from django.conf.urls import include, url
 from .views import FacebookCallbackView
-from . import views
 
 urlpatterns = [
     url(
@@ -8,6 +7,4 @@ urlpatterns = [
         view=FacebookCallbackView.as_view(),
         name='facebook_callback'
         ),
-    # url(r'^$', views.index),
-    # url(r'^slack/oauth/$', views.slack_oauth),
 ]
