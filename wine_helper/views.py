@@ -71,5 +71,6 @@ class FacebookCallbackView(generic.View):
                 if sender_id is not None and received_message is not None:
                     pprint(received_message)
                     json_answer = wit.treatment(received_message.encode('utf-8'))
+                    pprint(json_answer)
                     sr.send_facebook_message(sender_id, json_answer)
         return HttpResponse()
