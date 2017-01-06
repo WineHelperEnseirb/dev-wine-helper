@@ -34,6 +34,17 @@ def send_facebook_message(fbid, data):
         else:
             handle_error(fbid)
 
+def send_facebook_message2 (fbid, data):
+    """
+    Calls the right function according to the data type
+    """
+
+    if 'criterion' in data and data['criterion'] != {}:
+        store_criterion(data['criterion'])
+    if 'api_call' in data and data['api_call'] == True:
+        handle_api_call(fbid)
+    if 'response' in data and data['response'] != []:
+        handle_response(fbid,data['response'])
 
 def handle_text(fbid, data):
     """
