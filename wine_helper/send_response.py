@@ -45,8 +45,6 @@ def send_facebook_message2 (fbid, data):
         handle_api_call(fbid)
     if 'response' in data and data['response'] != []:
         handle_response(fbid,data['response'])
-    else:
-        pprint("ERROR: The data sent by wit does not respect the good format!")
 
 def handle_text(fbid, data):
     """
