@@ -50,6 +50,7 @@ def send_facebook_message(fbid, data):
         elif data["action"] == 'reset':
             reset_search(fbid)
     if 'response' in data and data["response"]:
+        pprint("if response ok")
         handle_response(fbid, data["response"])
 
 
@@ -71,12 +72,17 @@ def handle_response(fbid, data):
     """
     TODO
     """
+    pprint("handle_response ok")
     if 'type' in data:
+        pprint("type in data ok")
         if data["type"] == "text":
+            pprint("type text ok")
             handle_text(fbid, data)
         elif data["type"] == "button":
+            pprint("type button ok")
             handle_button(fbid, data)
         else:
+            pprint("type else ok")
             handle_error(fbid)
 
 
