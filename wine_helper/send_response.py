@@ -51,7 +51,8 @@ def send_facebook_message(fbid, data):
             reset_search(fbid)
     if 'response' in data and data["response"]:
         pprint("if response ok")
-        handle_response(fbid, data["response"])
+        for items in data["response"]:
+            handle_response(fbid, data["response"])
 
 
 def store_criterion(fbid, data):
@@ -73,6 +74,7 @@ def handle_response(fbid, data):
     TODO
     """
     pprint("handle_response ok")
+    pprint(data)
     if 'type' in data:
         pprint("type in data ok")
         if data["type"] == "text":
