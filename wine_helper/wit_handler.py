@@ -130,7 +130,7 @@ def proposeColor(request):
 
 
 actions = {
-    'getAnswer:': getAnswer,
+    'getAnswer': getAnswer,
     'send': send,
     'getColor': getColor,
     'getPrice': getPrice,
