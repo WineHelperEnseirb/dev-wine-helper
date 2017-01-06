@@ -75,7 +75,7 @@ def getAnswer(request):
             context['type'] = 'text'
             context['api_call'] = True
             context['criterion'] = {}
-            context['criterion']['name'] = 'color'
+            context['criterion']['name'] = 'color.fr'
             context['criterion']['value'] = color
 
     else:
