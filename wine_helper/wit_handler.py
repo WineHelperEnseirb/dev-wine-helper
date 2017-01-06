@@ -11,8 +11,6 @@ def send(request, response):
     print('Sending to server...', json_data)
 
 
-def 
-
 def first_entity_value(entities, entity):
     if entity not in entities:
         return None
