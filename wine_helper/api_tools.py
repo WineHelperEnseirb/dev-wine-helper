@@ -55,7 +55,7 @@ def build_wine_list (data, limit):
     criterion = data["criterion"]
     pprint("[DEBUG] WIT CRITERION")
     criteria_list = []
-    crit = C.Criteria(criterion["name"], criterion["value"])
+    crit = C.Criteria(criterion["name"], criterion["value"].encode('utf-8'))
     criteria_list.append(crit)
     pprint("[DEBUG] BUILT CRITERION")
     #pprint(criteria_list)
