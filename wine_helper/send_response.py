@@ -71,8 +71,8 @@ def handle_response(fbid, data):
     if 'type' in data:
         if data["type"] == "text":
             handle_text(fbid, data)
-        elif data["type"] == "button"
-            handle_button(fbid, data):
+        elif data["type"] == "button":
+            handle_button(fbid, data)
         else:
             handle_error(fbid)
 
