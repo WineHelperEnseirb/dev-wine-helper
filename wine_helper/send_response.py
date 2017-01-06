@@ -39,6 +39,9 @@ def send_facebook_message(fbid, data):
     """
     Calls the right function according to the data type
     """
+    pprint("DEBUG send_facebook_message")
+    pprint(data)
+
     if 'criterion' in data and data["criterion"] != {}:
         store_criterion(fbid, data["criterion"])
     if 'action' in data:
@@ -46,7 +49,7 @@ def send_facebook_message(fbid, data):
             handle_api_call(fbid)
         elif data["action"] == 'reset':
             reset_search(fbid)
-    if 'response' in data and data["response"] != []:
+    if 'response' in data and data["response"]:
         handle_response(fbid, data["response"])
 
 
