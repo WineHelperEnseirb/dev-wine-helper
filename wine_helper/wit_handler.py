@@ -69,6 +69,31 @@ def askColor(request):
 
     return context
 
+
+def askPrice(request):
+    context = request['context']
+    entities = request['entities']
+    print request
+
+    #recuperation de la couleur du vin
+    color = first_entity_value(entities, 'wit_color')
+
+    #creation de la reponse de type bouton et ajout des boutons
+    context['response'] = []
+    question = {}
+    question['type'] = 'text'
+    question['text'] = 'Quel prix de vin? (exemple : "entre 10 et 20 euros"'
+    
+    context['criteria'] = []
+    criterion = {}
+    criterion['name'] = 'value'
+    criterion['value'] = color
+
+    context['criteria'].append(criterion)
+    context['response'].append(question)
+
+    return context
+
 def getAnswer(request):
     context = request['context']
     entities = request['entities']
