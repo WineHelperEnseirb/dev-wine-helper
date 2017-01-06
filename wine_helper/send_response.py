@@ -56,7 +56,7 @@ def store_criterion(fbid, data):
     """
     pprint("criterion")
 
-    
+
 def reset_search(fbid):
     """
     TODO
@@ -69,10 +69,10 @@ def handle_response(fbid, data):
     TODO
     """
     if 'type' in data:
-        if data["type"] == "text"
+        if data["type"] == "text":
             handle_text(fbid, data)
         elif data["type"] == "button"
-            handle_button(fbid, data)
+            handle_button(fbid, data):
         else:
             handle_error(fbid)
 
