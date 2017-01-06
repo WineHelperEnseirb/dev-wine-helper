@@ -20,21 +20,6 @@ RESULTS_LIMIT = 3
 messenger = MessengerClient(access_token=os.getenv('FB_PAGE_TOKEN'))
 
 
-#def send_facebook_message(fbid, data):
-#    """
-#    Calls the right function according to the data type
-#    """
-#    recipient = messages.Recipient(recipient_id=fbid)
-#
-#    if 'type' in data:
-#        if (data["type"] == "text"):
-#            handle_text(fbid, data)
-#        elif (data["type"] == "button"):
-#            handle_button(fbid, data)
-#        else:
-#            handle_error(fbid)
-
-
 def send_facebook_message(fbid, data):
     """
     Calls the right function according to the data type
@@ -50,7 +35,6 @@ def send_facebook_message(fbid, data):
         elif data["action"] == 'reset':
             reset_search(fbid)
     if 'response' in data and data["response"]:
-        pprint("if response ok")
         for item in data["response"]:
             handle_response(fbid, item)
 
@@ -59,21 +43,21 @@ def store_criterion(fbid, data):
     """
     TODO
     """
-    pprint("criterion")
+    pprint("[DEBUG] store_criterion")
 
 
 def reset_search(fbid):
     """
     TODO
     """
-    pprint("RESET")
+    pprint("[DEBUG] reset_search")
 
 
 def handle_response(fbid, data):
     """
     TODO
     """
-    pprint("handle_response ok")
+    pprint("[DEBUG] handle_response")
     pprint(data)
     if 'type' in data:
         pprint("type in data ok")
@@ -93,6 +77,7 @@ def handle_text(fbid, data):
     """
     Handles the sending to messenger of a text message
     """
+    pprint("[DEBUG] handle_text")
     recipient = messages.Recipient(recipient_id=fbid)
     message = messages.Message(text=data["text"])
     request = messages.MessageRequest(recipient, message)
