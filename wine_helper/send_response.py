@@ -45,8 +45,7 @@ def handle_text(fbid, data):
         request = messages.MessageRequest(recipient, message)
         messenger.send(request)
     else:
-
-        wine_list = api.build_wine_list(data,RESULTS_LIMIT)
+        wine_list = api.build_wine_list(data, RESULTS_LIMIT)
         text = "Voici les meilleurs vins présentants les critères recherchés :\n".decode('utf-8')
         res = ""
 
