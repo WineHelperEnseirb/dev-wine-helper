@@ -11,7 +11,7 @@ def send(request, response):
     print('Sending to server...', json_data)
 
 
-
+def 
 
 def first_entity_value(entities, entity):
     if entity not in entities:
@@ -20,8 +20,6 @@ def first_entity_value(entities, entity):
     if not val:
         return None
     return val['value'] if isinstance(val, dict) else val
-
-
 
 def getColor(request):
     context = request['context']
@@ -47,8 +45,6 @@ def getAnswer(request):
     context = request['context']
     entities = request['entities']
     print request
-
-    context['answer'] = ''
 
     greetings = first_entity_value(entities, 'wit_greetings')
     color = first_entity_value(entities, 'wit_color')
@@ -147,7 +143,3 @@ def treatment(request):
     context1 = client.run_actions(session_id, request, context0)
     #client.interactive()
     return context1
-
-
-print treatment("apero")
-print treatment("rouge")
