@@ -20,66 +20,98 @@ RESULTS_LIMIT = 3
 messenger = MessengerClient(access_token=os.getenv('FB_PAGE_TOKEN'))
 
 
+#def send_facebook_message(fbid, data):
+#    """
+#    Calls the right function according to the data type
+#    """
+#    recipient = messages.Recipient(recipient_id=fbid)
+#
+#    if 'type' in data:
+#        if (data["type"] == "text"):
+#            handle_text(fbid, data)
+#        elif (data["type"] == "button"):
+#            handle_button(fbid, data)
+#        else:
+#            handle_error(fbid)
+
+
 def send_facebook_message(fbid, data):
     """
     Calls the right function according to the data type
     """
-    recipient = messages.Recipient(recipient_id=fbid)
+    if 'criterion' in data and data["criterion"] != {}:
+        store_criterion(fbid, data["criterion"])
+    if 'action' in data:
+        if data["action"] == 'api_call':
+            handle_api_call(fbid)
+        elif data["action"] == 'reset':
+            reset_search(fbid)
+    if 'response' in data and data["response"] != []:
+        handle_response(fbid, data["response"])
 
+
+def store_criterion(fbid, data):
+    """
+    TODO
+    """
+    pprint("criterion")
+
+    
+def reset_search(fbid):
+    """
+    TODO
+    """
+    pprint("RESET")
+
+
+def handle_response(fbid, data):
+    """
+    TODO
+    """
     if 'type' in data:
-        if (data["type"] == "text"):
+        if data["type"] == "text"
             handle_text(fbid, data)
-        elif (data["type"] == "button"):
+        elif data["type"] == "button"
             handle_button(fbid, data)
         else:
             handle_error(fbid)
 
-def send_facebook_message2 (fbid, data):
-    """
-    Calls the right function according to the data type
-    """
 
-    if 'criterion' in data and data['criterion'] != {}:
-        store_criterion(data['criterion'])
-    if 'api_call' in data and data['api_call'] == True:
-        handle_api_call(fbid)
-    if 'response' in data and data['response'] != []:
-        handle_response(fbid,data['response'])
 
 def handle_text(fbid, data):
     """
     Handles the sending to messenger of a text message
     """
     recipient = messages.Recipient(recipient_id=fbid)
-    if (data["api_call"] == False):
-        message = messages.Message(text=data["text"])
-        request = messages.MessageRequest(recipient, message)
-        messenger.send(request)
-    else:
-        wine_list = api.build_wine_list(data, RESULTS_LIMIT)
-        text = "Voici les meilleurs vins présentants les critères recherchés :\n".decode('utf-8')
-        res = ""
+    message = messages.Message(text=data["text"])
+    request = messages.MessageRequest(recipient, message)
+    messenger.send(request)
 
-        for wine in wine_list:
-            res += "- "
-            res += wine.get_name().decode('utf-8')
-            res += ", " + wine.get_appellation().decode('utf-8')
-            res += " (" + str(wine.get_vintage()) + ")"
-            res += ", " + wine.get_color()['fr'].decode('utf-8')
-            res += ", " + wine.get_taste()['fr'].decode('utf-8')
-            res += ", " + str(wine.get_price()) + " euros"
-            res += "\n"
 
-        pprint(wine_list)
+        # wine_list = api.build_wine_list(data, RESULTS_LIMIT)
+        # text = "Voici les meilleurs vins présentants les critères recherchés :\n".decode('utf-8')
+        # res = ""
+        #
+        # for wine in wine_list:
+        #     res += "- "
+        #     res += wine.get_name().decode('utf-8')
+        #     res += ", " + wine.get_appellation().decode('utf-8')
+        #     res += " (" + str(wine.get_vintage()) + ")"
+        #     res += ", " + wine.get_color()['fr'].decode('utf-8')
+        #     res += ", " + wine.get_taste()['fr'].decode('utf-8')
+        #     res += ", " + str(wine.get_price()) + " euros"
+        #     res += "\n"
 
-        if not res:
-            res = "Aucun vin ne correspond à votre recherche".decode('utf-8')
+        # pprint(wine_list)
 
-        text += res
+        # if not res:
+        #     res = "Aucun vin ne correspond à votre recherche".decode('utf-8')
 
-        message = messages.Message(text=text)
-        request = messages.MessageRequest(recipient, message)
-        messenger.send(request)
+        # text += res
+
+        # message = messages.Message(text=text)
+        # request = messages.MessageRequest(recipient, message)
+        # messenger.send(request)
 
 
 def handle_button(fbid, data):
@@ -113,5 +145,15 @@ def handle_error(fbid):
     """
     recipient = messages.Recipient(recipient_id=fbid)
     message = messages.Message(text='Oups, une erreur est survenue.')
+    request = messages.MessageRequest(recipient, message)
+    messenger.send(request)
+
+
+def handle_api_call(fbid):
+    """
+    TODO
+    """
+    recipient = messages.Recipient(recipient_id=fbid)
+    message = messages.Message(text='API call')
     request = messages.MessageRequest(recipient, message)
     messenger.send(request)
