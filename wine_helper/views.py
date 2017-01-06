@@ -17,6 +17,7 @@ from django.utils.decorators import method_decorator
 
 import send_response as sr
 import wit_handler as wit
+from wine_helper.models import Search
 
 
 class FacebookCallbackView(generic.View):
@@ -72,5 +73,8 @@ class FacebookCallbackView(generic.View):
                     pprint(received_message)
                     json_answer = wit.treatment(received_message.encode('utf-8'))
                     pprint(json_answer)
+                    search = Search(user_id=sender_id)
+                    pprint(search)
+                    search.save()
                     sr.send_facebook_message(sender_id, json_answer)
         return HttpResponse()
