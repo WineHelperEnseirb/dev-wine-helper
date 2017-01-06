@@ -38,11 +38,42 @@ def getColor(request):
        context['false'] = ""
     return context
 
+def askColor(request):
+
+    context = request['context']
+    entities = request['entities']
+    print request
+
+    context['response'] = []
+    question = {}
+    question['type'] = 'button'
+    question['text'] = 'Quel couleur de vin?'
+    question['options'] = []
+    # vin rouge
+    rouge = {}
+    rouge['text'] = 'Rouge'
+    rouge['payload'] = 'Rouge'
+    context['response'].append(rouge)
+    # vin rose
+    rose = {}
+    rose['text'] = 'Rose'
+    rose['payload'] = 'Rose'
+    context['response'].append(rose)
+    # vin blanc
+    blanc = {}
+    blanc['text'] = 'Blanc'
+    blanc['payload'] = 'Blanc'
+    context['response'].append(blanc)
+
+    return context
 
 def getAnswer(request):
     context = request['context']
     entities = request['entities']
     print request
+
+
+
 
     greetings = first_entity_value(entities, 'wit_greetings')
     color = first_entity_value(entities, 'wit_color')
@@ -125,6 +156,7 @@ def proposeColor(request):
 
 actions = {
     'getAnswer': getAnswer,
+    'askColor': askColor,
     'send': send,
     'getColor': getColor,
     'getPrice': getPrice,
