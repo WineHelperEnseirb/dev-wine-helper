@@ -41,9 +41,9 @@ def getColor(request):
 def askColor(request):
 
     context = request['context']
-    entities = request['entities']
     print request
 
+    #creation de la reponse de type bouton et ajout des boutons
     context['response'] = []
     question = {}
     question['type'] = 'button'
@@ -53,17 +53,19 @@ def askColor(request):
     rouge = {}
     rouge['text'] = 'Rouge'
     rouge['payload'] = 'Rouge'
-    context['response'].append(rouge)
+    context['question'].append(rouge)
     # vin rose
     rose = {}
     rose['text'] = 'Rose'
     rose['payload'] = 'Rose'
-    context['response'].append(rose)
+    context['question'].append(rose)
     # vin blanc
     blanc = {}
     blanc['text'] = 'Blanc'
     blanc['payload'] = 'Blanc'
-    context['response'].append(blanc)
+    context['question'].append(blanc)
+
+    context['response'].append(question)
 
     return context
 
@@ -71,8 +73,6 @@ def getAnswer(request):
     context = request['context']
     entities = request['entities']
     print request
-
-
 
 
     greetings = first_entity_value(entities, 'wit_greetings')
