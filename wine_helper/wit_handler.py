@@ -53,17 +53,17 @@ def askColor(request):
     rouge = {}
     rouge['text'] = 'Rouge'
     rouge['payload'] = 'Rouge'
-    question.append(rouge)
+    question['options'].append(rouge)
     # vin rose
     rose = {}
     rose['text'] = 'Rose'
     rose['payload'] = 'Rose'
-    question.append(rose)
+    question['options'].append(rose)
     # vin blanc
     blanc = {}
     blanc['text'] = 'Blanc'
     blanc['payload'] = 'Blanc'
-    question.append(blanc)
+    question['options'].append(blanc)
 
     context['response'].append(question)
 
