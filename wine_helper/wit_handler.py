@@ -1,4 +1,5 @@
 from wit import Wit
+import os
 import json
 
 
@@ -129,6 +130,7 @@ def proposeColor(request):
 
 
 actions = {
+    'getAnswer:': getAnswer,
     'send': send,
     'getColor': getColor,
     'getPrice': getPrice,
