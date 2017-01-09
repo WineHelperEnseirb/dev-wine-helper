@@ -88,10 +88,7 @@ actions = {
 client = Wit(access_token=os.getenv('WIT_TOKEN'), actions=actions)
 
 def treatment(request, sender_id):
-    context0 = {}
-    context1 = client.run_actions(sender_id, request, context0)
-    #client.interactive()
-    return context1
+    return client.run_actions(sender_id, request)
 
 #a corriger:
 #voir interet de la fonction send et de la fonction treatment
