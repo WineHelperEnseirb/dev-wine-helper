@@ -10,7 +10,7 @@ class Criterion(EmbeddedDocument):
 class Search(EmbeddedDocument):
     criteria = ListField(EmbeddedDocumentField(Criterion))
 
-class User(Document)
+class User(Document):
     user_id = StringField()
     current_search = EmbeddedDocumentField(Search)
     searches = ListField(EmbeddedDocumentField(Search))

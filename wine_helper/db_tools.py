@@ -1,4 +1,4 @@
-from models import Criterion,Search
+from models import Criterion,Search,User
 
 
 
