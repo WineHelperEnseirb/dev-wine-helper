@@ -4,10 +4,6 @@ import json
 
 
 # Sends response to server
-def send(request, response):
-    data = request['context']
-    json_data = json.dumps(data)
-    print('Sending to server...', json_data)
 
 
 def first_entity_value(entities, entity):
@@ -79,8 +75,7 @@ def askPrice(request):
 
 actions = {
     'askColor': askColor,
-    'askPrice': askPrice,
-    'send': send
+    'askPrice': askPrice
 }
 
 
