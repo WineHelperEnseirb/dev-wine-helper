@@ -11,6 +11,7 @@ from pprint import pprint
 from messengerbot import MessengerClient, messages, attachments, templates, elements
 
 import api_tools as api
+import db_tools as db
 from Criteria import Criteria
 
 # "Constants" (variables that should not change)
@@ -39,18 +40,15 @@ def send_facebook_message(fbid, data):
             handle_response(fbid, item)
 
 
-def store_criterion(fbid, data):
-    """
-    TODO
-    """
-    pprint("[DEBUG] store_criterion")
+def store_criterion (fbid,criterion):
+    user = get_user_by_id()
+    if user == None:
+        create_user(fbid)
+    create_criterion(fbid,criterion)
 
 
-def reset_search(fbid):
-    """
-    TODO
-    """
-    pprint("[DEBUG] reset_search")
+def reset_search (fbid):
+    close_search(fbid)
 
 
 def handle_response(fbid, data):
