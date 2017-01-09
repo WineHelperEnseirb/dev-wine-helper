@@ -63,7 +63,7 @@ def askPrice(request):
     context['response'] = []
     question = {}
     question['type'] = 'text'
-    question['text'] = 'Quel prix de vin? (exemple : "entre 10 et 20 euros"'
+    question['text'] = 'Quel prix de vin? (exemple : "entre 10 et 20 euros")'
     
     context['criteria'] = []
     criterion = {}
@@ -87,10 +87,9 @@ actions = {
 
 client = Wit(access_token=os.getenv('WIT_TOKEN'), actions=actions)
 
-def treatment(request):
-    session_id = 'my-user-session-41'
+def treatment(request, sender_id):
     context0 = {}
-    context1 = client.run_actions(session_id, request, context0)
+    context1 = client.run_actions(sender_id, request, context0)
     #client.interactive()
     return context1
 
