@@ -2,8 +2,22 @@ from wit import Wit
 import os
 import json
 
+import json_creator as jc
 
 # Sends response to server
+
+
+client = Wit(access_token=os.getenv('WIT_TOKEN'), actions=actions)
+
+
+def treatment(request, sender_id):
+    return client.run_actions(sender_id, request)
+
+
+actions = {
+    'askColor': askColor,
+    'askPrice': askPrice
+}
 
 
 def first_entity_value(entities, entity):
@@ -27,20 +41,12 @@ def askColor(request):
     question['text'] = 'Quel couleur de vin?'
     question['options'] = []
     # vin rouge
-    rouge = {}
-    rouge['text'] = 'Rouge'
-    rouge['payload'] = 'Rouge'
-    question['options'].append(rouge)
+    question['options'].append(jc.create_button('Rouge', 'Rouge'))
     # vin rose
-    rose = {}
-    rose['text'] = 'Rose'
-    rose['payload'] = 'Rose'
-    question['options'].append(rose)
+    question['options'].append(jc.create_button('Rose', 'Rose'))
     # vin blanc
-    blanc = {}
-    blanc['text'] = 'Blanc'
-    blanc['payload'] = 'Blanc'
-    question['options'].append(blanc)
+    question['options'].append(jc.create_button('Blanc', 'Blanc'))
+    question['options'].append(jc.create_button('Peu importe', 'Peu importe'))
 
     context['response'].append(question)
 
@@ -72,19 +78,3 @@ def askPrice(request):
     return context
 
 
-
-actions = {
-    'askColor': askColor,
-    'askPrice': askPrice
-}
-
-
-
-client = Wit(access_token=os.getenv('WIT_TOKEN'), actions=actions)
-
-def treatment(request, sender_id):
-    return client.run_actions(sender_id, request)
-
-#a corriger:
-#voir interet de la fonction send et de la fonction treatment
-#dans la fonction treatment voir l'interet de session id
