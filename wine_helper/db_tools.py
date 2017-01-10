@@ -13,10 +13,10 @@ def get_user_by_id (fbid):
 def create_user (fbid):
     user = get_user_by_id(fbid)
     if user == None:
-        print("[DEBUG] USER CREATED WITH FBID: " + fbid + "\n")
+        pprint("[DEBUG] USER CREATED WITH FBID: " + fbid + "\n")
         user = User(user_id=fbid, current_search=Search(criteria=[]), searches=[])
     else:
-        pprint("[DEBUG] create_user else")
+        pprint("[DEBUG] create user else")
 
 def close_search (fbid):
     user = get_user_by_id(fbid)
