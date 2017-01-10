@@ -14,3 +14,4 @@ class User(Document):
     user_id = StringField()
     current_search = EmbeddedDocumentField(Search)
     searches = ListField(EmbeddedDocumentField(Search))
+    meta = {'collection': 'users'}
