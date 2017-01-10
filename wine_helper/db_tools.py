@@ -4,14 +4,19 @@ from models import Criterion,Search,User
 
 
 def get_user_by_id (fbid):
-    user = User.objects.get(user_id=fbid)
+    try:
+        user = User.objects.get(user_id=fbid)
+    except User.DoesNotExist:
+        user = None
     return user
 
 def create_user (fbid):
     user = get_user_by_id(fbid)
     if user == None:
-        print("USER CREATED WHITH ID: " + fbid + "\n")
-        user = User(user_id=fbid,current_search = Search(criteria=[]),searches=[])
+        print("[DEBUG] USER CREATED WITH FBID: " + fbid + "\n")
+        user = User(user_id=fbid, current_search=Search(criteria=[]), searches=[])
+    else:
+        pprint("[DEBUG] create_user else")
 
 def close_search (fbid):
     user = get_user_by_id(fbid)
