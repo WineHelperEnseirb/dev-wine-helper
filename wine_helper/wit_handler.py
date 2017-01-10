@@ -38,7 +38,7 @@ def askColor(request):
     question['options'].append(jc.create_button('Rose', 'Rose'))
     # vin blanc
     question['options'].append(jc.create_button('Blanc', 'Blanc'))
-    question['options'].append(jc.create_button('Peu importe', 'Peu importe'))
+    #question['options'].append(jc.create_button('Peu importe', 'Peu importe'))
 
     context['response'].append(question)
 
@@ -69,9 +69,13 @@ def askPrice(request):
 
     return context
 
+def send(request, response):
+    print "sending to server..."
+
 actions = {
     'askColor': askColor,
-    'askPrice': askPrice
+    'askPrice': askPrice,
+    'send' : send
 }
 
 
