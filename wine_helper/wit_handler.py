@@ -6,18 +6,17 @@ import json_creator as jc
 
 # Sends response to server
 
+actions = {
+    'askColor': askColor,
+    'askPrice': askPrice
+}
+
 
 client = Wit(access_token=os.getenv('WIT_TOKEN'), actions=actions)
 
 
 def treatment(request, sender_id):
     return client.run_actions(sender_id, request)
-
-
-actions = {
-    'askColor': askColor,
-    'askPrice': askPrice
-}
 
 
 def first_entity_value(entities, entity):
