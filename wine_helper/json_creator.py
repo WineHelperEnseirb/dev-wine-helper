@@ -1,8 +1,7 @@
 import json
 
-
 def create_button(text, payload):
-	button = {}
+	sbutton = {}
 	button['text'] = text
-    button['payload'] = payload
-    return button
+	button['payload'] = payload
+	return button
