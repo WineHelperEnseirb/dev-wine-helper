@@ -23,10 +23,12 @@ messenger = MessengerClient(access_token=os.getenv('FB_PAGE_TOKEN'))
 
 def send_facebook_message(fbid, data):
     """
-    Calls the right function according to the data type
+    TODO: write description
     """
-    pprint("DEBUG send_facebook_message")
+    pprint("[DEBUG] send_facebook_message")
+    pprint("[DEBUG] data ---------------v")
     pprint(data)
+    pprint("[DEBUG] data ---------------^")
 
     if 'criterion' in data and data["criterion"] != {}:
         store_criterion(fbid, data["criterion"])
@@ -41,14 +43,14 @@ def send_facebook_message(fbid, data):
 
 
 def store_criterion (fbid,criterion):
-    user = get_user_by_id()
+    user = db.get_user_by_id()
     if user == None:
-        create_user(fbid)
-    create_criterion(fbid,criterion)
+        db.create_user(fbid)
+    db.create_criterion(fbid, criterion)
 
 
 def reset_search (fbid):
-    close_search(fbid)
+    db.close_search(fbid)
 
 
 def handle_response(fbid, data):
