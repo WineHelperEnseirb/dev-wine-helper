@@ -6,13 +6,6 @@ import json_creator as jc
 
 # Sends response to server
 
-actions = {
-    'askColor': askColor,
-    'askPrice': askPrice
-}
-
-
-client = Wit(access_token=os.getenv('WIT_TOKEN'), actions=actions)
 
 
 def treatment(request, sender_id):
@@ -76,4 +69,11 @@ def askPrice(request):
 
     return context
 
+actions = {
+    'askColor': askColor,
+    'askPrice': askPrice
+}
+
+
+client = Wit(access_token=os.getenv('WIT_TOKEN'), actions=actions)
 
