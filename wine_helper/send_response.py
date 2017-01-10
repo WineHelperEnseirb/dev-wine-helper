@@ -30,7 +30,7 @@ def send_facebook_message(fbid, data):
     pprint(data)
     pprint("[DEBUG] data ---------------^")
 
-    if 'criteria' in data and data["criteria"] != {}:
+    if 'criteria' in data and data["criteria"]:
         store_criteria(fbid, data["criteria"])
     if 'action' in data:
         if data["action"] == 'api_call':
@@ -46,8 +46,10 @@ def store_criteria(fbid, criteria):
     """
     TODO: write description
     """
-    user = db.get_user_by_id()
-    if user == None:
+    pprint("[DEBUG][send_response.py][store_criteria]")
+    user = db.get_user_by_id(fbid)
+    if user is None:
+        pprint("[DEBUG][send_response.py][store_criteria] user is None")
         db.create_user(fbid)
     for criterion in criteria:
         db.create_criterion(fbid, criterion)

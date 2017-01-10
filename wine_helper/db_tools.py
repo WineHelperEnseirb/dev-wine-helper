@@ -1,36 +1,40 @@
-from models import Criterion,Search,User
+from models import Criterion, Search, User
 from pprint import pprint
 
 
 
-def get_user_by_id (fbid):
+def get_user_by_id(fbid):
     try:
         user = User.objects.get(user_id=fbid)
     except User.DoesNotExist:
         user = None
     return user
 
-def create_user (fbid):
+
+def create_user(fbid):
     user = get_user_by_id(fbid)
-    if user == None:
-        pprint("[DEBUG] USER CREATED WITH FBID: " + str(fbid) + "\n")
+    if user is None:
+        pprint("[DEBUG][db_tools.py][create_user] user is None")
         user = User(user_id=fbid, current_search=Search(criteria=[]), searches=[])
+        user.save()
     else:
         pprint("[DEBUG] create user else")
 
-def close_search (fbid):
+
+def close_search(fbid):
     user = get_user_by_id(fbid)
-    if user != None:
-        if user.current_search != None:
+    if user is not None:
+        if user.current_search is not None:
             user.searches.append(current_search)
             user.current_search = Search(criteria=[])
             user.modify()
             user.save()
 
-def create_criterion (fbid,criterion):
+
+def create_criterion(fbid, criterion):
     user = get_user_by_id(fbid)
     is_created = False
-    if user != None:
+    if user is not None:
         current_search = user.current_search
         for c in current_search:
             if c['name'] == criterion['name']:
@@ -41,9 +45,3 @@ def create_criterion (fbid,criterion):
             user.criteria.append(cr)
         user.modify()
         user.save()
-
-
-create_user(0)
-create_user(1)
-create_user(1)
-create_user(2)
