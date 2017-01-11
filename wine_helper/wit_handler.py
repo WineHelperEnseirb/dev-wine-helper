@@ -74,7 +74,7 @@ def send(request, response):
 actions = {
     'askColor': askColor,
     'askPrice': askPrice,
-    'askStoryLine' : askStoryLine
+    'askStoryLine' : askStoryLine,
     'getColor' : getColor,
     'send' : send
 }
