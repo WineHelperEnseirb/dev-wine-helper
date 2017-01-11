@@ -3,6 +3,14 @@ from pprint import pprint
 
 
 
+
+def get_users ():
+    try:
+        users = User.objects.get()
+        return users
+    except User.DoesNotExist:
+        return []
+        
 def get_user_by_id(fbid):
     try:
         user = User.objects.get(user_id=fbid)
@@ -47,7 +55,12 @@ def create_criterion(fbid, criterion):
 
         user.save()
 
-def get_criteria_data_by_id ():
+def get_criteria_data_by_id (fbid):
     """
     get current criteria: a list/array of all the criteria of the current search
     """
+    user = get_user_by_id (fbid)
+    if user is not None:
+        return user.current_search.criteria
+    else:
+        return None
