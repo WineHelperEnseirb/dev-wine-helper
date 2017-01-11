@@ -23,17 +23,24 @@ def first_entity_value(entities, entity):
         return None
     return val['value'] if isinstance(val, dict) else val
 
+def askStoryline(request):
+    context = request['context']
+    print request
+
+    context['response'] = []
+    question = {}
+    question['type'] = 'text'
+    question['text'] = 'Souhaitez vous un vin pour : un aperitif, un repas, un cadeau ?'
+
+    context['response'].append(question)
+
+    return context
 
 def askColor(request):
     context = request['context']
     print request
     context['response'] = []
     context['response'].append(jc.create_text_response('Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant, peu importe)'))
-
-    return context
-
-def askStoryline(request):
-    context = request['context']
 
     return context
 
@@ -72,6 +79,7 @@ def getPrice(request):
     context['criteria'] = []
     context['criteria'].append(jc.create_criterion('priceMin', min))
     context['criteria'].append(jc.create_criterion('priceMax', max))
+    #context['criteria'].append(jc.create_criterion('currency', currency))
 
     return context
 
