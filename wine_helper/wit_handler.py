@@ -22,27 +22,26 @@ def first_entity_value(entities, entity):
 
 
 def askColor(request):
-
     context = request['context']
     print request
 
     #creation de la reponse de type bouton et ajout des boutons
     context['response'] = []
     question = {}
-    question['type'] = 'button'
-    question['text'] = 'Quel couleur de vin?'
-    question['options'] = []
-    # vin rouge
-    question['options'].append(jc.create_button('Rouge', 'Rouge'))
-    # vin rose
-    question['options'].append(jc.create_button('Rose', 'Rose'))
-    # vin blanc
-    question['options'].append(jc.create_button('Blanc', 'Blanc'))
-    #question['options'].append(jc.create_button('Peu importe', 'Peu importe'))
+    question['type'] = 'text'
+    question['text'] = 'Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant, peu importe)'
 
     context['response'].append(question)
 
     return context
+
+def getColor(request):
+    entities = request['entities']
+    #recuperation de la couleur du vin
+    color = first_entity_value(entities, 'wit_color')
+
+    context['criteria'].append(jc.create_criterion('color', color))
+
 
 
 def askPrice(request):
@@ -59,12 +58,6 @@ def askPrice(request):
     question['type'] = 'text'
     question['text'] = 'Quel prix de vin? (exemple : "entre 10 et 20 euros")'
     
-    context['criteria'] = []
-    criterion = {}
-    criterion['name'] = 'value'
-    criterion['value'] = color
-
-    context['criteria'].append(criterion)
     context['response'].append(question)
 
     return context
@@ -75,6 +68,7 @@ def send(request, response):
 actions = {
     'askColor': askColor,
     'askPrice': askPrice,
+    'getColor' : getColor,
     'send' : send
 }
 
