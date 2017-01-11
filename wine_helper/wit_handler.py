@@ -36,8 +36,8 @@ def askColor(request):
     context = request['context']
     print request
     context['response'] = []
-    context['response'].append(jc.create_text_response('Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant, peu importe)'))
-    context['response'].append(jc.create_whatever_button())
+    #context['response'].append(jc.create_text_response('Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant, peu importe)'))
+    context['response'].append(jc.create_whatever_button('Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant, peu importe)'))
 
     return context
 
@@ -48,8 +48,8 @@ def askPrice(request):
 
     #creation de la reponse de type bouton et ajout des boutons
     context['response'] = []
-    context['response'].append(jc.create_text_response('Quel prix de vin? (exemple : "entre 10 et 20 euros")'))
-    context['response'].append(jc.create_whatever_button())
+    #context['response'].append(jc.create_text_response('Quel prix de vin? (exemple : "entre 10 et 20 euros")'))
+    context['response'].append(jc.create_whatever_button('Quel prix de vin? (exemple : "entre 10 et 20 euros")'))
 
     return context
 
@@ -61,7 +61,7 @@ def getColor(request):
     color = first_entity_value(entities, 'wit_color')
 
     context['criteria'] = []
-    context['criteria'].append(jc.create_criterion('color.fr', color))
+    context['criteria'].append(jc.create_criterion('color', color))
 
     return context
 
