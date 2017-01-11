@@ -36,7 +36,6 @@ def create_criterion(fbid, criterion):
     is_created = False
     if user is not None:
         pprint("[DEBUG][db_tools.py][create_criterion] current_search")
-        pprint(current_search.criteria)
         for c in user.current_search.criteria:
             if c["name"] == criterion["name"]:
                 is_created = True
