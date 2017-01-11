@@ -1,9 +1,27 @@
-from models import Criterion, Search, User
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+# System dependencies
 from pprint import pprint
 
+from models import Criterion, Search, User
+
+
+def get_users ():
+    """
+    TODO: write description
+    """
+    try:
+        users = User.objects.get()
+        return users
+    except User.DoesNotExist:
+        return []
 
 
 def get_user_by_id(fbid):
+    """
+    TODO: get description
+    """
     try:
         user = User.objects.get(user_id=fbid)
     except User.DoesNotExist:
@@ -12,6 +30,9 @@ def get_user_by_id(fbid):
 
 
 def create_user(fbid):
+    """
+    TODO: write description
+    """
     user = get_user_by_id(fbid)
     if user is None:
         pprint("[DEBUG][db_tools.py][create_user] user is None")
@@ -22,6 +43,9 @@ def create_user(fbid):
 
 
 def close_search(fbid):
+    """
+    TODO: write description
+    """
     user = get_user_by_id(fbid)
     if user is not None:
         if user.current_search is not None:
@@ -32,6 +56,9 @@ def close_search(fbid):
 
 
 def create_criterion(fbid, criterion):
+    """
+    TODO: write description
+    """
     user = get_user_by_id(fbid)
     is_created = False
     if user is not None:
@@ -47,7 +74,13 @@ def create_criterion(fbid, criterion):
 
         user.save()
 
-def get_criteria_data_by_id ():
+
+def get_criteria_data_by_id (fbid):
     """
     get current criteria: a list/array of all the criteria of the current search
     """
+    user = get_user_by_id (fbid)
+    if user is not None:
+        return user.current_search.criteria
+    else:
+        return None

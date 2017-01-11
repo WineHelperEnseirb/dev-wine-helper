@@ -1,6 +1,12 @@
-from wit import Wit
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+# System dependencies
 import os
 import json
+
+# Vendors
+from wit import Wit
 
 import json_creator as jc
 
@@ -61,6 +67,8 @@ def getColor(request):
 
     context['criteria'] = []
     context['criteria'].append(jc.create_criterion('color', color))
+
+    return contexts
 
 
 def getPrice(request):
