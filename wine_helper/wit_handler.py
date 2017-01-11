@@ -37,6 +37,7 @@ def askColor(request):
     print request
     context['response'] = []
     context['response'].append(jc.create_text_response('Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant, peu importe)'))
+    context['response'].append(jc.create_whatever_button())
 
     return context
 
@@ -48,6 +49,7 @@ def askPrice(request):
     #creation de la reponse de type bouton et ajout des boutons
     context['response'] = []
     context['response'].append(jc.create_text_response('Quel prix de vin? (exemple : "entre 10 et 20 euros")'))
+    context['response'].append(jc.create_whatever_button())
 
     return context
 
