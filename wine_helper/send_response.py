@@ -133,33 +133,34 @@ def handle_api_call(fbid):
     """
     TODO: write description
     """
-    # TODO: api call with stored criteria
     recipient = messages.Recipient(recipient_id=fbid)
-    message = messages.Message(text='API call')
+
+    message = ""
+    criteria_data = db.get_criteria_data_by_id(fbid)
+    if criteria_data is not None:
+        wine_list = api.build_wine_list(criteria_data, RESULTS_LIMIT)
+        text = "Voici les meilleurs vins présentants les critères recherchés :\n".decode('utf-8')
+        res = ""
+        for wine in wine_list:
+            res += "- "
+            res += wine.get_name().decode('utf-8')
+            res += ", " + wine.get_appellation().decode('utf-8')
+            res += " (" + str(wine.get_vintage()) + ")"
+            res += ", " + wine.get_color()['fr'].decode('utf-8')
+            res += ", " + wine.get_taste()['fr'].decode('utf-8')
+            res += ", " + str(wine.get_price()) + " euros"
+            res += "\n"
+
+        pprint(wine_list)
+
+        if not res:
+            res = "Aucun vin ne correspond à votre recherche".decode('utf-8')
+
+        text += res
+
+        message = text
+    else:
+        message = "Une erreur s'est produite"
+
     request = messages.MessageRequest(recipient, message)
     messenger.send(request)
-            # criteria_data = db.get_criteria_data_by_id(fbid)
-            # wine_list = api.build_wine_list(criteria_data, RESULTS_LIMIT)
-            # text = "Voici les meilleurs vins présentants les critères recherchés :\n".decode('utf-8')
-            # res = ""
-            #
-            # for wine in wine_list:
-            #     res += "- "
-            #     res += wine.get_name().decode('utf-8')
-            #     res += ", " + wine.get_appellation().decode('utf-8')
-            #     res += " (" + str(wine.get_vintage()) + ")"
-            #     res += ", " + wine.get_color()['fr'].decode('utf-8')
-            #     res += ", " + wine.get_taste()['fr'].decode('utf-8')
-            #     res += ", " + str(wine.get_price()) + " euros"
-            #     res += "\n"
-
-            # pprint(wine_list)
-
-            # if not res:
-            #     res = "Aucun vin ne correspond à votre recherche".decode('utf-8')
-
-            # text += res
-
-            # message = messages.Message(text=text)
-            # request = messages.MessageRequest(recipient, message)
-            # messenger.send(request)
