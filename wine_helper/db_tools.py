@@ -65,8 +65,6 @@ def create_criterion(fbid, criterion):
         pprint(">>>> [DEBUG][db_tools.py][create_criterion] current_search")
         for i in range(len(user.current_search.criteria)):
             if user.current_search.criteria[i]["name"] == criterion["name"]:
-                pprint("[DEBUG] c.name: " + c["name"])
-                pprint("[DEBUG] criterion.name: "  + criterion["name"])
                 is_created = True
                 user.current_search.criteria[i]["value"] = str(criterion["value"])
                 user.update()
