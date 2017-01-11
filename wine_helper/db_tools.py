@@ -42,8 +42,13 @@ def create_criterion(fbid, criterion):
             if c['name'] == criterion['name']:
                 is_created = True
                 c['value'] = criterion['value']
-                user.modify()
         if not is_created:
             cr = Criterion(criterion["name"], criterion["value"])
             user.current_search.criteria.append(cr)
+        user.modify()
         user.save()
+
+def get_criteria_data_by_id ():
+    """
+    get current criteria: a list/array of all the criteria of the current search
+    """
