@@ -84,7 +84,7 @@ def getPrice(request):
     return context
 
 
-def api_call(request):
+def apiCall(request):
     context = request['context']
     context['action'] = 'api_call'
 
