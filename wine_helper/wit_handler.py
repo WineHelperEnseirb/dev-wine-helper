@@ -1,6 +1,12 @@
-from wit import Wit
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+# System dependencies
 import os
 import json
+
+# Vendors
+from wit import Wit
 
 import json_creator as jc
 
@@ -60,7 +66,7 @@ def askPrice(request):
     question = {}
     question['type'] = 'text'
     question['text'] = 'Quel prix de vin? (exemple : "entre 10 et 20 euros")'
-    
+
     context['response'].append(question)
 
     return context
@@ -78,4 +84,3 @@ actions = {
 
 
 client = Wit(access_token=os.getenv('WIT_TOKEN'), actions=actions)
-
