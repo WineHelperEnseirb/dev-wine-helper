@@ -4,9 +4,6 @@ import json
 
 import json_creator as jc
 
-# Sends response to server
-
-
 
 def treatment(request, sender_id):
     return client.run_actions(sender_id, request)
@@ -40,16 +37,6 @@ def askStoryline(request):
 
     return context
 
-def getColor(request):
-    context = request['context']
-    entities = request['entities']
-    #recuperation de la couleur du vin
-    color = first_entity_value(entities, 'wit_color')
-
-    context['criteria'] = []
-    context['criteria'].append(jc.create_criterion('color', color))
-
-
 
 def askPrice(request):
     context = request['context']
@@ -65,6 +52,37 @@ def askPrice(request):
 
     return context
 
+
+def getColor(request):
+    context = request['context']
+    entities = request['entities']
+    #recuperation de la couleur du vin
+    color = first_entity_value(entities, 'wit_color')
+
+    context['criteria'] = []
+    context['criteria'].append(jc.create_criterion('color', color))
+
+
+def getPrice(request):
+    context = request['context']
+    print request
+
+    entities = request['entities']
+    min = first_entity_value(entities, 'minprice')
+    max = first_entity_value(entities, 'maxprice')
+
+    context['criteria'] = []
+    context['criteria'].append(jc.create_criterion('pricemin', min))
+    context['criteria'].append(jc.create_criterion('pricemax', max))
+
+    return context
+
+def api_call(request):
+    context = request['context']
+    context['action'] = 'api_call'
+
+    return context
+
 def send(request, response):
     print "sending to server..."
 
@@ -73,9 +91,9 @@ actions = {
     'askPrice': askPrice,
     'askStoryline' : askStoryline,
     'getColor' : getColor,
+    'getPrice' : getPrice,
     'send' : send
 }
 
 
 client = Wit(access_token=os.getenv('WIT_TOKEN'), actions=actions)
-
