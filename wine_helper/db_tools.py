@@ -67,7 +67,7 @@ def create_criterion(fbid, criterion):
             if user.current_search.criteria[i]["name"] == criterion["name"]:
                 is_created = True
                 user.current_search.criteria[i]["value"] = str(criterion["value"])
-                user.update()
+                user.update(current_search=user.current_search)
         if not is_created:
             cr = Criterion(criterion["name"], str(criterion["value"]))
             user.current_search.criteria.append(cr)

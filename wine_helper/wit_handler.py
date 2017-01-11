@@ -23,6 +23,7 @@ def first_entity_value(entities, entity):
         return None
     return val['value'] if isinstance(val, dict) else val
 
+
 def askStoryline(request):
     context = request['context']
     print request
@@ -32,11 +33,13 @@ def askStoryline(request):
 
     return context
 
+
 def askColor(request):
     context = request['context']
     print request
     context['response'] = []
-    context['response'].append(jc.create_text_response('Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant, peu importe)'))
+    #context['response'].append(jc.create_text_response('Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant, peu importe)'))
+    context['response'].append(jc.create_whatever_button('Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant, peu importe)'))
 
     return context
 
@@ -47,7 +50,8 @@ def askPrice(request):
 
     #creation de la reponse de type bouton et ajout des boutons
     context['response'] = []
-    context['response'].append(jc.create_text_response('Quel prix de vin? (exemple : "entre 10 et 20 euros")'))
+    #context['response'].append(jc.create_text_response('Quel prix de vin? (exemple : "entre 10 et 20 euros")'))
+    context['response'].append(jc.create_whatever_button('Quel prix de vin? (exemple : "entre 10 et 20 euros")'))
 
     return context
 
@@ -59,7 +63,7 @@ def getColor(request):
     color = first_entity_value(entities, 'wit_color')
 
     context['criteria'] = []
-    context['criteria'].append(jc.create_criterion('color', color))
+    context['criteria'].append(jc.create_criterion('color.fr', color))
 
     return context
 
@@ -79,11 +83,13 @@ def getPrice(request):
 
     return context
 
-def api_call(request):
+
+def apiCall(request):
     context = request['context']
     context['action'] = 'api_call'
 
     return context
+
 
 def send(request, response):
     print "sending to server..."
@@ -94,6 +100,7 @@ actions = {
     'askStoryline' : askStoryline,
     'getColor' : getColor,
     'getPrice' : getPrice,
+    'apiCall' : apiCall,
     'send' : send
 }
 

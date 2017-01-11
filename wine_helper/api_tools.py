@@ -52,6 +52,8 @@ def get_wines_by_criteria(criteria, limit=0):
 
 # TODO: review this function
 def build_wine_list (data, limit):
+    pprint("[DEBUG][api_tools.py][build_wine_list] data")
+    pprint(data)
     criterion = data["criterion"]
     pprint("[DEBUG] WIT CRITERION")
     criteria_list = []
