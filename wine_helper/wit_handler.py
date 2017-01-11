@@ -35,7 +35,7 @@ def askColor(request):
 
     return context
 
-def askStoryLine(request):
+def askStoryline(request):
     context = request['context']
 
     return context
