@@ -15,3 +15,10 @@ def create_criterion(name, value):
 	criterion['value'] = value
 
 	return criterion
+
+def create_text_response(text):
+	question = {}
+	question['type'] = 'text'
+	question['text'] = text
+
+	return question
