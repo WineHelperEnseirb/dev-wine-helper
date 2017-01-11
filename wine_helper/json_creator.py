@@ -31,6 +31,6 @@ def create_text_response(text):
 
 #function to create whatever option
 def create_whatever_button():
-    button_table = create_button_table('Peu importe')
+    button_table = create_button_table('')
     button_table['options'].append(create_button('Peu importe', 'peu importe'))
     return button_table
