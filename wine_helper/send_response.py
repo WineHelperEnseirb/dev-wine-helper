@@ -137,7 +137,7 @@ def handle_api_call(fbid):
     """
     recipient = messages.Recipient(recipient_id=fbid)
 
-    message = ""
+    text = ""
     criteria_data = db.get_criteria_data_by_id(fbid)
     if criteria_data is not None:
         wine_list = api.build_wine_list(criteria_data, RESULTS_LIMIT)
@@ -159,10 +159,9 @@ def handle_api_call(fbid):
             res = "Aucun vin ne correspond à votre recherche".decode('utf-8')
 
         text += res
-
-        message = text
     else:
-        message = "Une erreur s'est produite"
+        text = "Une erreur s'est produite"
 
+    message = messages.Message(text=text)
     request = messages.MessageRequest(recipient, message)
     messenger.send(request)
