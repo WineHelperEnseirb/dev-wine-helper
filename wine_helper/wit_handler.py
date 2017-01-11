@@ -28,11 +28,7 @@ def askStoryline(request):
     print request
 
     context['response'] = []
-    question = {}
-    question['type'] = 'text'
-    question['text'] = 'Souhaitez vous un vin pour : un aperitif, un repas, un cadeau ?'
-
-    context['response'].append(question)
+    context['response'].append(jc.create_text_response('Souhaitez vous un vin pour : un aperitif, un repas, un cadeau ?'))
 
     return context
 
