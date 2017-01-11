@@ -133,6 +133,7 @@ def handle_api_call(fbid):
     """
     TODO: write description
     """
+    # TODO: api call with stored criteria
     recipient = messages.Recipient(recipient_id=fbid)
     message = messages.Message(text='API call')
     request = messages.MessageRequest(recipient, message)
