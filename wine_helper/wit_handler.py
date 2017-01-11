@@ -53,11 +53,7 @@ def getColor(request):
 
 def askPrice(request):
     context = request['context']
-    entities = request['entities']
     print request
-
-    #recuperation de la couleur du vin
-    color = first_entity_value(entities, 'wit_color')
 
     #creation de la reponse de type bouton et ajout des boutons
     context['response'] = []
