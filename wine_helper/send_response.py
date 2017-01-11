@@ -138,8 +138,8 @@ def handle_api_call(fbid):
     message = messages.Message(text='API call')
     request = messages.MessageRequest(recipient, message)
     messenger.send(request)
-
-            # wine_list = api.build_wine_list(data, RESULTS_LIMIT)
+            # criteria_data = db.get_criteria_data_by_id(fbid)
+            # wine_list = api.build_wine_list(criteria_data, RESULTS_LIMIT)
             # text = "Voici les meilleurs vins présentants les critères recherchés :\n".decode('utf-8')
             # res = ""
             #
