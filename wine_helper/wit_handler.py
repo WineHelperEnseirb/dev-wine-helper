@@ -58,7 +58,7 @@ def getColor(request):
     context['criteria'] = []
     context['criteria'].append(jc.create_criterion('color', color))
 
-    return contexts
+    return context
 
 
 def getPrice(request):
