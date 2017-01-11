@@ -29,7 +29,7 @@ def askColor(request):
     context['response'] = []
     question = {}
     question['type'] = 'text'
-    question['text'] = 'Quel type de vin souhaitez-vous acheter? (rouge, rosé, blanc, sucré, pétillant, peu importe)'
+    question['text'] = 'Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant, peu importe)'
 
     context['response'].append(question)
 
