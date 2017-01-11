@@ -23,6 +23,7 @@ def first_entity_value(entities, entity):
         return None
     return val['value'] if isinstance(val, dict) else val
 
+
 def askStoryline(request):
     context = request['context']
     print request
@@ -31,6 +32,7 @@ def askStoryline(request):
     context['response'].append(jc.create_text_response('Souhaitez vous un vin pour : un aperitif, un repas, un cadeau ?'))
 
     return context
+
 
 def askColor(request):
     context = request['context']
@@ -81,11 +83,13 @@ def getPrice(request):
 
     return context
 
+
 def api_call(request):
     context = request['context']
     context['action'] = 'api_call'
 
     return context
+
 
 def send(request, response):
     print "sending to server..."
@@ -96,6 +100,7 @@ actions = {
     'askStoryline' : askStoryline,
     'getColor' : getColor,
     'getPrice' : getPrice,
+    'apiCall' : apiCall,
     'send' : send
 }
 
