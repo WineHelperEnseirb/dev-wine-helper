@@ -36,6 +36,7 @@ def askColor(request):
     return context
 
 def getColor(request):
+    context = request['context']
     entities = request['entities']
     #recuperation de la couleur du vin
     color = first_entity_value(entities, 'wit_color')
