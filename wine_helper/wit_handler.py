@@ -27,14 +27,7 @@ def first_entity_value(entities, entity):
 def askColor(request):
     context = request['context']
     print request
-
-    #creation de la reponse de type bouton et ajout des boutons
-    context['response'] = []
-    question = {}
-    question['type'] = 'text'
-    question['text'] = 'Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant, peu importe)'
-
-    context['response'].append(question)
+    context['response'].append(jc.create_text_response('Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant, peu importe)'))
 
     return context
 
@@ -50,11 +43,7 @@ def askPrice(request):
 
     #creation de la reponse de type bouton et ajout des boutons
     context['response'] = []
-    question = {}
-    question['type'] = 'text'
-    question['text'] = 'Quel prix de vin? (exemple : "entre 10 et 20 euros")'
-    
-    context['response'].append(question)
+    context['response'].append(jc.create_text_response('Quel prix de vin? (exemple : "entre 10 et 20 euros")'))
 
     return context
 
@@ -80,8 +69,8 @@ def getPrice(request):
     max = first_entity_value(entities, 'maxprice')
 
     context['criteria'] = []
-    context['criteria'].append(jc.create_criterion('pricemin', min))
-    context['criteria'].append(jc.create_criterion('pricemax', max))
+    context['criteria'].append(jc.create_criterion('priceMin', min))
+    context['criteria'].append(jc.create_criterion('priceMax', max))
 
     return context
 
