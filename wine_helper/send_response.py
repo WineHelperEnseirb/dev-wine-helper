@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# Sytem dependencies
+# System dependencies
 import os
 import json
 from pprint import pprint
@@ -14,8 +14,10 @@ import api_tools as api
 import db_tools as db
 from Criteria import Criteria
 
+
 # "Constants" (variables that should not change)
 RESULTS_LIMIT = 3
+
 
 # Initializing client
 messenger = MessengerClient(access_token=os.getenv('FB_PAGE_TOKEN'))
