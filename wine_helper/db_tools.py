@@ -35,17 +35,16 @@ def create_criterion(fbid, criterion):
     user = get_user_by_id(fbid)
     is_created = False
     if user is not None:
-        current_search = user.current_search
         pprint("[DEBUG][db_tools.py][create_criterion] current_search")
-        pprint(current_search.criteria)
-        for c in current_search.criteria:
-            if c['name'] == criterion['name']:
+        for c in user.current_search.criteria:
+            if c["name"] == criterion["name"]:
                 is_created = True
-                c['value'] = criterion['value']
+                c["value"] = criterion["value"]
+                user.modify()
         if not is_created:
             cr = Criterion(criterion["name"], criterion["value"])
             user.current_search.criteria.append(cr)
-        user.modify()
+
         user.save()
 
 def get_criteria_data_by_id ():
