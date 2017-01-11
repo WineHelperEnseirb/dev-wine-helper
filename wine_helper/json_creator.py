@@ -1,5 +1,6 @@
 import json
 
+
 #generic function to create button
 def create_button(text, payload):
 	button = {}
@@ -11,7 +12,7 @@ def create_button(text, payload):
 #generic function to create criterion
 def create_criterion(name, value):
 	criterion = {}
-    criterion['name'] = name
-    criterion['value'] = value
+	criterion['name'] = name
+	criterion['value'] = value
 
     return criterion
