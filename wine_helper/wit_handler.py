@@ -27,6 +27,7 @@ def first_entity_value(entities, entity):
 def askColor(request):
     context = request['context']
     print request
+    context['response'] = []
     context['response'].append(jc.create_text_response('Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant, peu importe)'))
 
     return context
