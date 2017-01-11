@@ -47,6 +47,3 @@ def create_criterion(fbid, criterion):
             cr = Criterion(criterion["name"], criterion["value"])
             user.current_search.criteria.append(cr)
         user.save()
-
-# TODO: get current criteria: a list/array of all the criteria of the current
-# search
