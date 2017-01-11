@@ -57,7 +57,7 @@ def store_criteria(fbid, criteria):
 
 def reset_search(fbid):
     """
-    TODO: write description
+    Close the current_search of the user with id fbid
     """
     db.close_search(fbid)
 
