@@ -49,7 +49,7 @@ def askPrice(request):
 
     #creation de la reponse de type bouton et ajout des boutons
     context['response'] = []
-    context['response'].append(jc.create_whatever_button('Quel prix de vin? (exemple : "entre 10 et 20 euros")'))
+    context['response'].append(jc.create_whatever_button('Quel prix de vin? (exemple : "entre 10 et 20 euros", "moins de 100 euros"...)'))
 
     return context
 
@@ -75,7 +75,8 @@ def getPrice(request):
     max = first_entity_value(entities, 'maxprice')
 
     context['criteria'] = []
-    context['criteria'].append(jc.create_criterion('priceMin', min))
+    if min is not None:
+        context['criteria'].append(jc.create_criterion('priceMin', min))
     context['criteria'].append(jc.create_criterion('priceMax', max))
     #context['criteria'].append(jc.create_criterion('currency', currency))
 
