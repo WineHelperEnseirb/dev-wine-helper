@@ -5,7 +5,7 @@ from mongoengine import *
 
 class Criterion(EmbeddedDocument):
     name = StringField()
-    value = StringField()
+    value = DynamicField()
 
 class Search(EmbeddedDocument):
     criteria = ListField(EmbeddedDocumentField(Criterion))
