@@ -55,6 +55,8 @@ def build_wine_list (data, limit):
     pprint("[DEBUG][api_tools.py][build_wine_list]")
     criteria_list = []
     for criterion in data:
-        crit = C.Criteria(criterion["name"], criterion["value"].encode('utf-8'))
+        if type(criterion["value"]) == unicode:
+            criterion["value"] = criterion["value"].encode('utf-8')
+        crit = C.Criteria(criterion["name"], criterion["value"])
         criteria_list.append(crit)
     return get_wines_by_criteria(criteria_list, limit)
