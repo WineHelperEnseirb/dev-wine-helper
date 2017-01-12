@@ -22,7 +22,7 @@ def get_wines_by_criteria(criteria, limit=0):
     # setting criteria
     for criterion in criteria:
         # TODO: remove last &
-        query += "&" + criterion.get_name() + "=" + criterion.get_value()
+        query += "&" + criterion.get_name() + "=" + str(criterion.get_value())
     pprint("[DEBUG] query")
     pprint(query)
     url += query
