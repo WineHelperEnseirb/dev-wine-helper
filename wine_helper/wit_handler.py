@@ -53,6 +53,14 @@ def askPrice(request):
 
     return context
 
+def askAdjustment(request):
+    context = request['context']
+
+    context['response'] = []
+    context['response'].append(jc.create_text_response('Êtes-vous satisfait ou souhaitez-vous réajuster le prix ?'))
+
+    return context
+
 
 def getColor(request):
     context = request['context']
@@ -82,6 +90,11 @@ def getPrice(request):
 
     return context
 
+def reset(request):
+    context = request['context']
+    context['action'] = 'reset'
+
+    return context
 
 def apiCall(request):
     context = request['context']
@@ -97,8 +110,10 @@ actions = {
     'askColor': askColor,
     'askPrice': askPrice,
     'askStoryline' : askStoryline,
+    'askAdjustment' : askAdjustment,
     'getColor' : getColor,
     'getPrice' : getPrice,
+    'reset' : reset,
     'apiCall' : apiCall,
     'send' : send
 }
