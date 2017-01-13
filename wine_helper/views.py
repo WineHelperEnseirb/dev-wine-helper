@@ -57,7 +57,9 @@ class FacebookCallbackView(generic.View):
         # multiple messages in a single call during high load
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
-            	pprint(message)
+                pprint("[DEBUG] message received ---------------v")
+                pprint(data)
+                pprint("[DEBUG] message received ---------------^")
                 sender_id = None
                 received_message = None
 

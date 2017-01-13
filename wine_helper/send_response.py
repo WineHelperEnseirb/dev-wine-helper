@@ -27,10 +27,9 @@ def send_facebook_message(fbid, data):
     """
     TODO: write description
     """
-    pprint("[DEBUG] send_facebook_message")
-    pprint("[DEBUG] data ---------------v")
+    pprint("[DEBUG] data from Wit ---------------v")
     pprint(data)
-    pprint("[DEBUG] data ---------------^")
+    pprint("[DEBUG] data from Wit ---------------^")
 
     if 'criteria' in data and data["criteria"]:
         store_criteria(fbid, data["criteria"])
@@ -67,7 +66,6 @@ def handle_response(fbid, data):
     TODO: write description
     """
     if 'type' in data:
-        pprint("type in data ok")
         if data["type"] == "text":
             handle_text(fbid, data)
         elif data["type"] == "button":
