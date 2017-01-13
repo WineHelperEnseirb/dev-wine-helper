@@ -58,7 +58,7 @@ class FacebookCallbackView(generic.View):
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
                 pprint("[DEBUG] message received ---------------v")
-                pprint(data)
+                pprint(message)
                 pprint("[DEBUG] message received ---------------^")
                 sender_id = None
                 received_message = None
