@@ -29,7 +29,12 @@ def askStoryline(request):
     print request
 
     context['response'] = []
-    context['response'].append(jc.create_text_response('Bonjour, souhaitez vous un vin pour : un aperitif, un repas, un cadeau ?'))
+
+    button_table = jc.create_button_table('Bonjour, souhaitez vous un vin pour ?')
+    button_table['options'].append(jc.create_button('Un aperitif', 'aperitif'))
+    button_table['options'].append(jc.create_button('Un repas', 'repas'))
+    button_table['options'].append(jc.create_button('Un cadeau', 'cadeau'))
+    context['response'].append(button_table)
 
     return context
 
@@ -55,6 +60,15 @@ def askPrice(request):
 
 
 def askAdjustment(request):
+    context = request['context']
+
+    context['response'] = []
+    context['response'].append(jc.create_whatever_button('Avez-vous une préférence de région de provenance pour votre vin ?'))
+
+    return context
+
+
+def askRegion(request):
     context = request['context']
 
     context['response'] = []
@@ -103,6 +117,18 @@ def getPrice(request):
 
     return context
 
+def getRegion(request):
+    context = request['context']
+    print request
+
+    entities = request['entities']
+    appellation = first_entity_value(entities, 'wit_region')
+
+    context['criteria'] = []
+    context['criteria'].append(jc.create_criterion('appellation', appellation))
+
+    return context
+
 
 def reset(request):
     context = request['context']
@@ -138,9 +164,11 @@ actions = {
     'askPrice': askPrice,
     'askStoryline' : askStoryline,
     'askAdjustment' : askAdjustment,
+    'askRegion': askRegion,
     'sayGoodbye' : sayGoodbye,
     'getColor' : getColor,
     'getPrice' : getPrice,
+    'getRegion': getRegion,
     'reset' : reset,
     'apiCall' : apiCall,
     'responseApero' : responseApero,
