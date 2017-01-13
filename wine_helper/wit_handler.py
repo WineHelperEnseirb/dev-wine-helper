@@ -60,6 +60,7 @@ def askPrice(request):
 
 
 def askAdjustment(request):
+    print "TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST4........................"
     context = request['context']
 
     context['response'] = []
