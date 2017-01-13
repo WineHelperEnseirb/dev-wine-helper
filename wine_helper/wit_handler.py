@@ -29,7 +29,7 @@ def askStoryline(request):
     print request
 
     context['response'] = []
-    context['response'].append(jc.create_text_response('Souhaitez vous un vin pour : un aperitif, un repas, un cadeau ?'))
+    context['response'].append(jc.create_text_response('Bonjour, souhaitez vous un vin pour : un aperitif, un repas, un cadeau ?'))
 
     return context
 
@@ -53,11 +53,21 @@ def askPrice(request):
 
     return context
 
+
 def askAdjustment(request):
     context = request['context']
 
     context['response'] = []
     context['response'].append(jc.create_text_response('Êtes-vous satisfait ou souhaitez-vous réajuster le prix ?'))
+
+    return context
+
+
+def sayGoodbye(request):
+    context = request['context']
+
+    context['response'] = []
+    context['response'].append(jc.create_text_response('Merci d\'avoir utilisé mes services, je vais me coucher dis moi bonjour pour me réveiller si tu as besoin de moi !'))
 
     return context
 
@@ -89,11 +99,22 @@ def getPrice(request):
 
     return context
 
+
+def sayGoodbye(request):
+    context = request['context']
+
+    context['response'] = []
+    context['response'].append(jc.create_text_response('Merci d\'avoir utilisé mes services, je vais me coucher dis moi bonjour pour me réveiller si tu as besoin de moi !'))
+
+    return context
+
+
 def reset(request):
     context = request['context']
     context['action'] = 'reset'
 
     return context
+
 
 def apiCall(request):
     context = request['context']
@@ -104,6 +125,7 @@ def apiCall(request):
 
 def send(request, response):
     print "sending to server..."
+
 
 actions = {
     'askColor': askColor,
