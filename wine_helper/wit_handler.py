@@ -148,15 +148,18 @@ def send(request, response):
     print "sending to server..."
 
 def responseApero(request):
+    request['context']['apero'] = true
     return askColor(request)
 
 def responseColorApero(request):
     request['context'] = getColor(request)
+    request['context']['apero'] = true
     return askPrice(request)
 
 def responsePriceApero(request):
     request['context'] = getPrice(request)
     request['context'] = apiCall(request)
+    request['context']['apero'] = true
     return askAdjustment(request)
 
 actions = {
