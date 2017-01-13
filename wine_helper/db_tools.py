@@ -49,7 +49,7 @@ def close_search(fbid):
     user = get_user_by_id(fbid)
     if user is not None:
         if user.current_search is not None:
-            user.searches.append(current_search)
+            user.searches.append(user.current_search)
             user.current_search = Search(criteria=[])
             user.modify()
             user.save()
