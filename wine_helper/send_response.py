@@ -48,10 +48,8 @@ def store_criteria(fbid, criteria):
     """
     TODO: write description
     """
-    pprint("[DEBUG][send_response.py][store_criteria]")
     user = db.get_user_by_id(fbid)
     if user is None:
-        pprint("[DEBUG][send_response.py][store_criteria] user is None")
         db.create_user(fbid)
     for criterion in criteria:
         db.create_criterion(fbid, criterion)
@@ -68,20 +66,13 @@ def handle_response(fbid, data):
     """
     TODO: write description
     """
-    pprint("[DEBUG] handle_response")
-    pprint("[DEBUG] data ---------------v")
-    pprint(data)
-    pprint("[DEBUG] data ---------------^")
     if 'type' in data:
         pprint("type in data ok")
         if data["type"] == "text":
-            pprint("[DEBUG] type text ok")
             handle_text(fbid, data)
         elif data["type"] == "button":
-            pprint("[DEBUG] type button ok")
             handle_button(fbid, data)
         else:
-            pprint("[DEBUG] type else ok")
             handle_error(fbid)
 
 
@@ -89,7 +80,6 @@ def handle_text(fbid, data):
     """
     Handles the sending to messenger of a text message
     """
-    pprint("[DEBUG] handle_text")
     recipient = messages.Recipient(recipient_id=fbid)
     message = messages.Message(text=data["text"])
     request = messages.MessageRequest(recipient, message)
