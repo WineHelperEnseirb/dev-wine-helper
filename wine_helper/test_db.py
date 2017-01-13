@@ -91,3 +91,6 @@ class DBTest(TestCase):
         self.assertTrue(user.searches[len(user.searches) - 1] == old_search)
         print("TEST PASSED: test_close_search \n")
         nb_test_passed = nb_test_passed + 1
+
+    def test_print_results:
+        print ("\n Nombre de succès/Nombre de tests : " + nb_test_passed+ "/" + nb_test)
