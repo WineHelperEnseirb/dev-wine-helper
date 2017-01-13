@@ -148,12 +148,12 @@ def send(request, response):
     print "sending to server..."
 
 def responseApero(request):
-    request['context']['aperoColor'] = true
+    request['context']['aperoColor'] = True
     return askColor(request)
 
 def responseColorApero(request):
     request['context'] = getColor(request)
-    request['context']['aperoPrice'] = true
+    request['context']['aperoPrice'] = True
     return askPrice(request)
 
 def responsePriceApero(request):
