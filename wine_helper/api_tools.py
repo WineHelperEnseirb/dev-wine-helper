@@ -1,4 +1,4 @@
-# coding: utf-8
+# -*- coding: utf-8 -*-
 
 import requests as re
 from pprint import pprint
@@ -56,6 +56,6 @@ def build_wine_list (data, limit):
     for criterion in data:
         if type(criterion["value"]) == unicode:
             criterion["value"] = criterion["value"].encode('utf-8')
-        crit = C.Criteria(criterion["name"], criterion["value"])
+        crit = C.Criteria(criterion["name"].encode('utf-8'), criterion["value"])
         criteria_list.append(crit)
     return get_wines_by_criteria(criteria_list, limit)
