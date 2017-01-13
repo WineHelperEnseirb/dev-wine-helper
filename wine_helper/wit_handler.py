@@ -29,7 +29,12 @@ def askStoryline(request):
     print request
 
     context['response'] = []
-    context['response'].append(jc.create_text_response('Souhaitez vous un vin pour : un aperitif, un repas, un cadeau ?'))
+
+    button_table = jc.create_button_table('Bonjour, souhaitez vous un vin pour ?')
+    button_table['options'].append(jc.create_button('Un aperitif', 'aperitif'))
+    button_table['options'].append(jc.create_button('Un repas', 'repas'))
+    button_table['options'].append(jc.create_button('Un cadeau', 'cadeau'))
+    context['response'].append(button_table)
 
     return context
 
@@ -50,6 +55,38 @@ def askPrice(request):
     #creation de la reponse de type bouton et ajout des boutons
     context['response'] = []
     context['response'].append(jc.create_whatever_button('Quel prix de vin? (exemple : "entre 10 et 20 euros", "moins de 100 euros"...)'))
+
+    return context
+
+
+def askAdjustment(request):
+    print "TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST4........................"
+    context = request['context']
+
+    context['response'] = []
+    context['response'].append(jc.create_whatever_button('Avez-vous une préférence de région de provenance pour votre vin ?'))
+
+    return context
+
+
+def askRegion(request):
+    context = request['context']
+
+    context['response'] = []
+
+    button_table = jc.create_button_table('Êtes-vous satisfait ou souhaitez-vous réajuster le prix ?')
+    button_table['options'].append(jc.create_button('Je suis satisfait', 'satisfait'))
+    button_table['options'].append(jc.create_button('Réajuster le prix', 'réajuster'))
+    context['response'].append(button_table)
+
+    return context
+
+
+def sayGoodbye(request):
+    context = request['context']
+
+    context['response'] = []
+    context['response'].append(jc.create_text_response('Merci d\'avoir utilisé mes services, je vais me coucher dis moi bonjour pour me réveiller si tu as besoin de moi !'))
 
     return context
 
@@ -81,13 +118,22 @@ def getPrice(request):
 
     return context
 
-def getNone(request):
+def getRegion(request):
     context = request['context']
-    entities = request['entities']
     print request
 
-    intent = first_entity_value(entities, 'intent')
-    context['criteria'].append(jc.create_criterion(intent, max))
+    entities = request['entities']
+    appellation = first_entity_value(entities, 'wit_region')
+
+    context['criteria'] = []
+    context['criteria'].append(jc.create_criterion('appellation', appellation))
+
+    return context
+
+
+def reset(request):
+    context = request['context']
+    context['action'] = 'reset'
 
     return context
 
@@ -102,16 +148,42 @@ def apiCall(request):
 def send(request, response):
     print "sending to server..."
 
+def responseApero(request):
+    print "TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST1........................"
+    return askColor(request)
+
+def responseColorApero(request):
+    request['context'] = getColor(request)
+    print "TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST2........................"
+    return askPrice(request)
+
+def responsePriceApero(request):
+    print "TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST3........................"
+    request['context'] = getPrice(request)
+    request['context'] = apiCall(request)
+    return askAdjustment(request)
+
 actions = {
     'askColor': askColor,
     'askPrice': askPrice,
     'askStoryline' : askStoryline,
+    'askAdjustment' : askAdjustment,
+    'askRegion': askRegion,
+    'sayGoodbye' : sayGoodbye,
     'getColor' : getColor,
     'getPrice' : getPrice,
-    'getNone': getNone,
+    'getRegion': getRegion,
+    'reset' : reset,
     'apiCall' : apiCall,
+    'responseApero' : responseApero,
+    'responseColorApero' : responseColorApero,
+    'responsePriceApero' : responsePriceApero,
     'send' : send
 }
 
 
 client = Wit(access_token=os.getenv('WIT_TOKEN'), actions=actions)
+
+#TODO:
+#Erreur quand on fait deux fois "peu importe" aux deux questions de la story Apero
+#Voir pour obliger l'utilisateur a suivre le scénario et reposer la question s'il n'a pas bien répondu
