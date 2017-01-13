@@ -163,6 +163,7 @@ def responsePriceApero(request):
     return askAdjustment(request)
 
 actions = {
+    'askStoryLine' : askStoryline,
     'reset' : reset,
     'sayGoodbye' : sayGoodbye,
     'responseApero' : responseApero,
