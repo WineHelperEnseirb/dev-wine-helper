@@ -66,11 +66,15 @@ def create_criterion(fbid, criterion):
         for i in range(len(user.current_search.criteria)):
             if user.current_search.criteria[i]["name"] == criterion["name"]:
                 is_created = True
-                user.current_search.criteria[i]["value"] = criterion["value"]
+                if criterion["value"] is None:
+                    del user.current_search.criteria[i]
+                else:
+                    user.current_search.criteria[i]["value"] = criterion["value"]
                 user.update(current_search=user.current_search)
         if not is_created:
-            cr = Criterion(criterion["name"], criterion["value"])
-            user.current_search.criteria.append(cr)
+            if criterion["value"] is not None:
+                cr = Criterion(criterion["name"], criterion["value"])
+                user.current_search.criteria.append(cr)
         user.save()
 
 

@@ -83,8 +83,7 @@ def getPrice(request):
     max = first_entity_value(entities, 'maxprice')
 
     context['criteria'] = []
-    if min is not None:
-        context['criteria'].append(jc.create_criterion('priceMin', min))
+    context['criteria'].append(jc.create_criterion('priceMin', min))
     context['criteria'].append(jc.create_criterion('priceMax', max))
     #context['criteria'].append(jc.create_criterion('currency', currency))
 
