@@ -59,8 +59,7 @@ def askPrice(request):
     return context
 
 
-def askAdjustment(request):
-    print "TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST4........................"
+def askRegion(request):
     context = request['context']
 
     context['response'] = []
@@ -69,7 +68,7 @@ def askAdjustment(request):
     return context
 
 
-def askRegion(request):
+def askAdjustment(request):
     context = request['context']
 
     context['response'] = []
@@ -164,17 +163,8 @@ def responsePriceApero(request):
     return askAdjustment(request)
 
 actions = {
-    'askColor': askColor,
-    'askPrice': askPrice,
-    'askStoryline' : askStoryline,
-    'askAdjustment' : askAdjustment,
-    'askRegion': askRegion,
-    'sayGoodbye' : sayGoodbye,
-    'getColor' : getColor,
-    'getPrice' : getPrice,
-    'getRegion': getRegion,
     'reset' : reset,
-    'apiCall' : apiCall,
+    'sayGoodbye' : sayGoodbye,
     'responseApero' : responseApero,
     'responseColorApero' : responseColorApero,
     'responsePriceApero' : responsePriceApero,
