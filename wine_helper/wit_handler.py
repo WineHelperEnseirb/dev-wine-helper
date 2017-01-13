@@ -121,6 +121,17 @@ def apiCall(request):
 def send(request, response):
     print "sending to server..."
 
+def responseApero(request):
+    return askColor(request)
+
+def responseColorApero(request):
+    request['context'] = getColor(request)
+    return askPrice(request)
+
+def reponsePriceApero(request):
+    request['context'] = getPrice(request)
+    request['context'] = apiCall(request)
+    return askAdjustment(request)
 
 actions = {
     'askColor': askColor,
@@ -132,8 +143,15 @@ actions = {
     'getPrice' : getPrice,
     'reset' : reset,
     'apiCall' : apiCall,
+    'responseApero' : responseApero,
+    'responseColorApero' : responseColorApero,
+    'reponsePriceApero' : reponsePriceApero,
     'send' : send
 }
 
 
 client = Wit(access_token=os.getenv('WIT_TOKEN'), actions=actions)
+
+#TODO:
+#Erreur quand on fait deux fois "peu importe" aux deux questions de la story Apero
+#Voir pour obliger l'utilisateur a suivre le scénario et reposer la question s'il n'a pas bien répondu
