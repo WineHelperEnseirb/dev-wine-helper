@@ -58,7 +58,11 @@ def askAdjustment(request):
     context = request['context']
 
     context['response'] = []
-    context['response'].append(jc.create_text_response('Êtes-vous satisfait ou souhaitez-vous réajuster le prix ?'))
+
+    button_table = jc.create_button_table('Êtes-vous satisfait ou souhaitez-vous réajuster le prix ?')
+    button_table['options'].append(jc.create_button('Je suis satisfait', 'satisfait'))
+    button_table['options'].append(jc.create_button('Je souhaite réajuster le prix', 'réajuster'))
+    context['response'].append(button_table)
 
     return context
 
@@ -100,15 +104,6 @@ def getPrice(request):
     return context
 
 
-def sayGoodbye(request):
-    context = request['context']
-
-    context['response'] = []
-    context['response'].append(jc.create_text_response('Merci d\'avoir utilisé mes services, je vais me coucher dis moi bonjour pour me réveiller si tu as besoin de moi !'))
-
-    return context
-
-
 def reset(request):
     context = request['context']
     context['action'] = 'reset'
@@ -132,6 +127,7 @@ actions = {
     'askPrice': askPrice,
     'askStoryline' : askStoryline,
     'askAdjustment' : askAdjustment,
+    'sayGoodbye' : sayGoodbye,
     'getColor' : getColor,
     'getPrice' : getPrice,
     'reset' : reset,
