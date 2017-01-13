@@ -29,7 +29,12 @@ def askStoryline(request):
     print request
 
     context['response'] = []
-    context['response'].append(jc.create_text_response('Bonjour, souhaitez vous un vin pour : un aperitif, un repas, un cadeau ?'))
+
+    button_table = jc.create_button_table('Bonjour, souhaitez vous un vin pour ?')
+    button_table['options'].append(jc.create_button('Un aperitif', 'aperitif'))
+    button_table['options'].append(jc.create_button('Un repas', 'repas'))
+    button_table['options'].append(jc.create_button('Un cadeau', 'cadeau'))
+    context['response'].append(button_table)
 
     return context
 
