@@ -154,7 +154,7 @@ def responseColorApero(request):
     request['context'] = getColor(request)
     return askPrice(request)
 
-def reponsePriceApero(request):
+def responsePriceApero(request):
     request['context'] = getPrice(request)
     request['context'] = apiCall(request)
     return askAdjustment(request)
@@ -173,7 +173,7 @@ actions = {
     'apiCall' : apiCall,
     'responseApero' : responseApero,
     'responseColorApero' : responseColorApero,
-    'reponsePriceApero' : reponsePriceApero,
+    'responsePriceApero' : responsePriceApero,
     'send' : send
 }
 
