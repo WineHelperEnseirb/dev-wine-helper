@@ -57,7 +57,9 @@ class FacebookCallbackView(generic.View):
         # multiple messages in a single call during high load
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
-            	pprint(message)
+                pprint("[DEBUG] message received ---------------v")
+                pprint(message)
+                pprint("[DEBUG] message received ---------------^")
                 sender_id = None
                 received_message = None
 
@@ -70,6 +72,5 @@ class FacebookCallbackView(generic.View):
 
                 if sender_id is not None and received_message is not None:
                     json_answer = wit.treatment(received_message.encode('utf-8'), sender_id)
-                    pprint(json_answer)
                     sr.send_facebook_message(sender_id, json_answer)
         return HttpResponse()

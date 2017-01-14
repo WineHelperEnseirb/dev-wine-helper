@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 # System dependencies
@@ -38,8 +37,6 @@ def create_user(fbid):
         pprint("[DEBUG][db_tools.py][c  reate_user] user is None")
         user = User(user_id=fbid, current_search=Search(criteria=[]), searches=[])
         user.save()
-    else:
-        pprint("[DEBUG] create user else")
 
 
 def close_search(fbid):
@@ -62,7 +59,6 @@ def create_criterion(fbid, criterion):
     user = get_user_by_id(fbid)
     is_created = False
     if user is not None:
-        pprint(">>>> [DEBUG][db_tools.py][create_criterion] current_search")
         for i in range(len(user.current_search.criteria)):
             if user.current_search.criteria[i]["name"] == criterion["name"]:
                 is_created = True
