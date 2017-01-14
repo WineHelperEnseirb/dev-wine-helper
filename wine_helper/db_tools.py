@@ -12,7 +12,7 @@ def get_users ():
     TODO: write description
     """
     try:
-        users = User.objects.get()
+        users = User.objects.all()
         return users
     except User.DoesNotExist:
         return []
@@ -35,7 +35,7 @@ def create_user(fbid):
     """
     user = get_user_by_id(fbid)
     if user is None:
-        pprint("[DEBUG][db_tools.py][create_user] user is None")
+        pprint("[DEBUG][db_tools.py][c  reate_user] user is None")
         user = User(user_id=fbid, current_search=Search(criteria=[]), searches=[])
         user.save()
     else:
