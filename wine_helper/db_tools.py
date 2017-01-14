@@ -27,6 +27,11 @@ def get_user_by_id(fbid):
         user = None
     return user
 
+def delete_users():
+    """
+    TODO: write description
+    """
+    User.drop_collection()
 
 def create_user(fbid):
     """
