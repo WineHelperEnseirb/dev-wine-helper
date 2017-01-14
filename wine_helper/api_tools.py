@@ -22,9 +22,8 @@ def get_wines_by_criteria(criteria, limit=0):
     for criterion in criteria:
         # TODO: remove last &
         query += "&" + criterion.get_name() + "=" + str(criterion.get_value())
-    pprint("[DEBUG] query")
-    pprint(query)
     url += query
+    pprint("[DEBUG] API call url: " + url)
 
     response = re.get(url)
     data = response.json()
@@ -51,7 +50,6 @@ def get_wines_by_criteria(criteria, limit=0):
 
 # TODO: review this function
 def build_wine_list (data, limit):
-    pprint("[DEBUG][api_tools.py][build_wine_list]")
     criteria_list = []
     for criterion in data:
         if type(criterion["value"]) == unicode:

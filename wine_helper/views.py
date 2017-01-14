@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 # Sytem dependencies
@@ -57,9 +56,6 @@ class FacebookCallbackView(generic.View):
         # multiple messages in a single call during high load
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
-                pprint("[DEBUG] message received ---------------v")
-                pprint(message)
-                pprint("[DEBUG] message received ---------------^")
                 sender_id = None
                 received_message = None
 
@@ -71,6 +67,12 @@ class FacebookCallbackView(generic.View):
                     received_message = message['postback']['payload']
 
                 if sender_id is not None and received_message is not None:
+                    pprint("[DEBUG] received message -------------------------------v")
+                    pprint(received_message)
+                    pprint("[DEBUG] received message -------------------------------^")
                     json_answer = wit.treatment(received_message.encode('utf-8'), sender_id)
+                    pprint("[DEBUG] data from Wit ==================================v")
+                    pprint(json_answer)
+                    pprint("[DEBUG] data from Wit ==================================^")
                     sr.send_facebook_message(sender_id, json_answer)
         return HttpResponse()

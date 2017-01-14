@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 # System dependencies
@@ -27,14 +26,6 @@ def send_facebook_message(fbid, data):
     """
     TODO: write description
     """
-    pprint("[DEBUG] data from Wit ---------------v")
-    pprint(data)
-    pprint("[DEBUG] data from Wit ---------------^")
-
-    print("\n\n---------------------------------BEGIN DEBUG REAJUST-----------------------------------\n\n")
-    print ("Data:\n")
-    print(data)
-    print("\n\n---------------------------------END DEBUG REAJUST-----------------------------------\n\n")
     if 'criteria' in data and data["criteria"]:
         store_criteria(fbid, data["criteria"])
     if 'action' in data:
