@@ -62,15 +62,19 @@ def create_criterion(fbid, criterion):
     """
     user = get_user_by_id(fbid)
     is_created = False
+    to_delete_criterion = -1
     if user is not None:
         for i in range(len(user.current_search.criteria)):
             if user.current_search.criteria[i]["name"] == criterion["name"]:
                 is_created = True
                 if criterion["value"] is None:
-                    del user.current_search.criteria[i]
+                    to_delete_criterion = i
                 else:
                     user.current_search.criteria[i]["value"] = criterion["value"]
-                user.update(current_search=user.current_search)
+                    user.update(current_search=user.current_search)
+        if (to_delete_criterion != -1):
+            del user.current_search.criteria[to_delete_criterion]
+            user.update(current_search=user.current_search)
         if not is_created:
             if criterion["value"] is not None:
                 cr = Criterion(criterion["name"], criterion["value"])
