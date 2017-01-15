@@ -50,6 +50,7 @@ def askColor(request):
 
 def askPrice(request):
     context = request['context']
+    entities = request['entities']
     print request
 
     #creation de la reponse de type bouton et ajout des boutons
@@ -61,6 +62,7 @@ def askPrice(request):
 
 def askRegion(request):
     context = request['context']
+    print request
 
     context['response'] = []
     context['response'].append(jc.create_whatever_button('Avez-vous une préférence de région de provenance pour votre vin ?'))
@@ -70,6 +72,7 @@ def askRegion(request):
 
 def askAdjustment(request):
     context = request['context']
+    print request
 
     context['response'] = []
 
@@ -83,6 +86,7 @@ def askAdjustment(request):
 
 def sayGoodbye(request):
     context = request['context']
+    print request
 
     context['response'] = []
     context['response'].append(jc.create_text_response('Merci d\'avoir utilisé mes services, je vais me coucher dis moi bonjour pour me réveiller si tu as besoin de moi !'))
@@ -93,11 +97,14 @@ def sayGoodbye(request):
 def getColor(request):
     context = request['context']
     entities = request['entities']
+    print request
+
     #recuperation de la couleur du vin
     color = first_entity_value(entities, 'wit_color')
-
-    context['criteria'] = []
-    context['criteria'].append(jc.create_criterion('color.fr', color))
+    readjust = first_entity_value(entities, 'wit_readjust')
+    if readjust is None:
+        context['criteria'] = []
+        context['criteria'].append(jc.create_criterion('color.fr', color))
 
     return context
 
@@ -131,6 +138,7 @@ def getRegion(request):
 
 
 def reset(request):
+    print request
     context = request['context']
     context['action'] = 'reset'
 
