@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Sytem dependencies
+# System dependencies
 import os
 import json
 from pprint import pprint
@@ -68,7 +68,7 @@ class FacebookCallbackView(generic.View):
 
                 if sender_id is not None and received_message is not None:
                     pprint("[DEBUG] received message -------------------------------v")
-                    pprint(received_message)
+                    pprint(received_message.encode('utf-8'))
                     pprint("[DEBUG] received message -------------------------------^")
                     json_answer = wit.treatment(received_message.encode('utf-8'), sender_id)
                     pprint("[DEBUG] data from Wit ==================================v")

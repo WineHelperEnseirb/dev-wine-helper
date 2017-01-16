@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 """
@@ -91,15 +90,7 @@ DATABASES = {
     }
 }
 
-_MONGODB_USER = 'winehelper.enseirb'
-_MONGODB_PASSWD = 'HwtB6c5a'
-_MONGODB_HOST = 'ds155718.mlab.com:55718'
-_MONGODB_NAME = 'wine-helper'
-_MONGODB_DATABASE_HOST = \
-    'mongodb://%s:%s@%s/%s' \
-    % (_MONGODB_USER, _MONGODB_PASSWD, _MONGODB_HOST, _MONGODB_NAME)
-
-mongoengine.connect(_MONGODB_NAME, host=_MONGODB_DATABASE_HOST)
+mongoengine.connect('wine-helper', host=os.getenv('MONGODB_URI'))
 
 
 
