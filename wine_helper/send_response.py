@@ -28,7 +28,7 @@ def send_facebook_message(fbid, data):
     TODO: write description
     """
     if 'storyline' in data:
-        store_storyline(fbdi,data["storyline"])
+        store_storyline(fbid,data["storyline"])
     if 'criteria' in data and data["criteria"]:
         store_criteria(fbid, data["criteria"])
     if 'action' in data:
