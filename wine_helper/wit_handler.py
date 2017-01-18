@@ -43,6 +43,7 @@ def askColor(request):
     context = request['context']
     print request
     context['response'] = []
+    print "TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST1"
     context['response'].append(jc.create_whatever_button('Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant)'))
 
     return context
@@ -52,7 +53,7 @@ def askPrice(request):
     context = request['context']
     entities = request['entities']
     print request
-
+    print "TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST2"
     #creation de la reponse de type bouton et ajout des boutons
     context['response'] = []
     context['response'].append(jc.create_whatever_button('Quel prix de vin? (exemple : "entre 10 et 20 euros", "moins de 100 euros"...)'))
