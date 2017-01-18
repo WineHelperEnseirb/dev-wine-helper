@@ -64,7 +64,7 @@ class FacebookCallbackView(generic.View):
                 if 'message' in message:
                     received_message = message['message']['text']
                 if 'postback' in message:
-                    received_message = message['postback']['payload']
+                    received_message = message['postback']['payload'].decode('utf-8')
 
                 if sender_id is not None and received_message is not None:
                     pprint("[DEBUG] received message -------------------------------v")
