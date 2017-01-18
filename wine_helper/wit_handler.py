@@ -77,7 +77,7 @@ def askAdjustment(request):
 
     button_table = jc.create_button_table('Êtes-vous satisfait ou souhaitez-vous réajuster le prix ?')
     button_table['options'].append(jc.create_button('Je suis satisfait', 'satisfait'))
-    button_table['options'].append(jc.create_button('Réajuster le prix', 'reajuster'))
+    button_table['options'].append(jc.create_button('Reajuster le prix', 'reajuster'))
     context['response'].append(button_table)
 
     return context
