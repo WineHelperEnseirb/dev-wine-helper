@@ -12,7 +12,7 @@ import json_creator as jc
 
 
 def treatment(request, sender_id):
-    return client.run_actions(sender_id, request)
+    return client.run_actions(sender_id, request.decode('utf-8'))
 
 
 def first_entity_value(entities, entity):
@@ -43,7 +43,7 @@ def askColor(request):
     context = request['context']
     print request
     context['response'] = []
-    context['response'].append(jc.create_whatever_button('Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant)'))
+    context['response'].append(jc.create_whatever_button('Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant)', 'color'))
 
     return context
 
@@ -52,10 +52,9 @@ def askPrice(request):
     context = request['context']
     entities = request['entities']
     print request
-
     #creation de la reponse de type bouton et ajout des boutons
     context['response'] = []
-    context['response'].append(jc.create_whatever_button('Quel prix de vin? (exemple : "entre 10 et 20 euros", "moins de 100 euros"...)'))
+    context['response'].append(jc.create_whatever_button('Quel prix de vin? (exemple : "entre 10 et 20 euros", "moins de 100 euros"...)', 'price'))
 
     return context
 
@@ -65,7 +64,7 @@ def askRegion(request):
     print request
 
     context['response'] = []
-    context['response'].append(jc.create_whatever_button('Avez-vous une préférence de région de provenance pour votre vin ?'))
+    context['response'].append(jc.create_whatever_button('Avez-vous une préférence de région de provenance pour votre vin ?', 'region'))
 
     return context
 
@@ -78,7 +77,7 @@ def askAdjustment(request):
 
     button_table = jc.create_button_table('Êtes-vous satisfait ou souhaitez-vous réajuster le prix ?')
     button_table['options'].append(jc.create_button('Je suis satisfait', 'satisfait'))
-    button_table['options'].append(jc.create_button('Réajuster le prix', 'réajuster'))
+    button_table['options'].append(jc.create_button('Reajuster le prix', 'reajuster'))
     context['response'].append(button_table)
 
     return context
@@ -94,6 +93,14 @@ def sayGoodbye(request):
     return context
 
 
+def getStorylineAperitif(request):
+    context = request['context']
+
+    #recuperation du scenario choisi
+    context['storyline'] = 'aperitif'
+
+    return context
+
 def getColor(request):
     context = request['context']
     entities = request['entities']
@@ -101,10 +108,8 @@ def getColor(request):
 
     #recuperation de la couleur du vin
     color = first_entity_value(entities, 'wit_color')
-    readjust = first_entity_value(entities, 'wit_readjust')
-    if readjust is None:
-        context['criteria'] = []
-        context['criteria'].append(jc.create_criterion('color.fr', color))
+    context['criteria'] = []
+    context['criteria'].append(jc.create_criterion('color.fr', color))
 
     return context
 
@@ -155,25 +160,20 @@ def apiCall(request):
 def send(request, response):
     print "sending to server..."
 
-def responseApero(request):
-    return askColor(request)
-
-def responseColorApero(request):
-    request['context'] = getColor(request)
-    return askPrice(request)
-
-def responsePriceApero(request):
-    request['context'] = getPrice(request)
-    request['context'] = apiCall(request)
-    return askAdjustment(request)
 
 actions = {
     'askStoryline' : askStoryline,
+    'askColor' : askColor,
+    'askPrice' : askPrice,
+    'askRegion' : askRegion,
+    'askAdjustment' : askAdjustment,
+    'getStorylineAperitif' : getStorylineAperitif,
+    'getColor' : getColor,
+    'getPrice' : getPrice,
+    'getRegion' : getRegion,
     'reset' : reset,
     'sayGoodbye' : sayGoodbye,
-    'responseApero' : responseApero,
-    'responseColorApero' : responseColorApero,
-    'responsePriceApero' : responsePriceApero,
+    'apiCall' : apiCall,
     'send' : send
 }
 
