@@ -71,7 +71,7 @@ class Dbtest(unittest.TestCase):
         self.assertEqual(len(criteria),2)
         delete_users()
 
-    def test_zclose_search(self):
+    def test_close_search(self):
         fbid = "1"
         create_user(fbid)
         criterion1 = {"name":"color","value":"rouge"}
