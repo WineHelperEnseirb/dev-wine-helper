@@ -12,6 +12,7 @@ import json_creator as jc
 
 
 def treatment(request, sender_id):
+    print "wit received message : " + request
     return client.run_actions(sender_id, request.decode('utf-8'))
 
 
