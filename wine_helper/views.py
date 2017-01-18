@@ -70,7 +70,7 @@ class FacebookCallbackView(generic.View):
                     pprint("[DEBUG] received message -------------------------------v")
                     pprint(received_message.encode('utf-8'))
                     pprint("[DEBUG] received message -------------------------------^")
-                    received_message = sr.adapt_message_to_wit(received_message.encode('utf-8'))
+                    received_message = sr.adapt_message_to_wit(sender_id,received_message.encode('utf-8'))
                     json_answer = wit.treatment(received_message, sender_id)
                     pprint("[DEBUG] data from Wit ==================================v")
                     pprint(json_answer)
