@@ -22,10 +22,13 @@ RESULTS_LIMIT = 3
 messenger = MessengerClient(access_token=os.getenv('FB_PAGE_TOKEN'))
 
 
+
 def send_facebook_message(fbid, data):
     """
     TODO: write description
     """
+    if 'storyline' in data:
+        store_storyline(fbid,data["storyline"])
     if 'criteria' in data and data["criteria"]:
         store_criteria(fbid, data["criteria"])
     if 'action' in data:
@@ -38,9 +41,28 @@ def send_facebook_message(fbid, data):
             handle_response(fbid, item)
 
 
+def adapt_message_to_wit(fbid,message):
+    user = db.get_user_by_id(fbid)
+    storyline = None
+    if user is not None:
+        storyline = db.get_storyline_by_user_id(fbid)
+        if storyline is not None:
+            new_message = message + "_" + storyline
+            return new_message
+        else:
+            return message
+    else:
+        return message
+
+def store_storyline(fbid,storyline):
+    """
+    Add to the user with fbid the storyline defined by the variable storyline.
+    """
+    db.create_storyline(fbid,storyline)
+
 def store_criteria(fbid, criteria):
     """
-    TODO: write description
+    Add the criteria to the user with the id equal to fbid
     """
     user = db.get_user_by_id(fbid)
     if user is None:

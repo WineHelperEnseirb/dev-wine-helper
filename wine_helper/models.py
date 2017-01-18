@@ -8,6 +8,7 @@ class Criterion(EmbeddedDocument):
     value = DynamicField()
 
 class Search(EmbeddedDocument):
+    user_storyline = StringField()
     criteria = ListField(EmbeddedDocumentField(Criterion))
 
 class User(Document):

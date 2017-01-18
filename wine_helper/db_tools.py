@@ -39,9 +39,22 @@ def create_user(fbid):
     """
     user = get_user_by_id(fbid)
     if user is None:
-        user = User(user_id=fbid, current_search=Search(criteria=[]), searches=[])
+        user = User(user_id=fbid, current_search=Search(criteria=[],user_storyline=None), searches=[])
         user.save()
 
+def create_storyline(fbid,storyline):
+    user = get_user_by_id(fbid)
+    if user is not None:
+        user.current_search.user_storyline = storyline
+        user.update(current_search=user.current_search)
+        user.save()
+
+def get_storyline_by_user_id(fbid):
+    user = get_user_by_id(fbid)
+    if user is not None:
+        return user.current_search.user_storyline
+    else:
+        return None
 
 def close_search(fbid):
     """
@@ -51,7 +64,7 @@ def close_search(fbid):
     if user is not None:
         if user.current_search is not None:
             user.searches.append(user.current_search)
-            user.current_search = Search(criteria=[])
+            user.current_search = Search(criteria=[],user_storyline=None)
             user.update(current_search=user.current_search)
             user.save()
 
