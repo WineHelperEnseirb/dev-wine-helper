@@ -142,8 +142,6 @@ def getRegion(request):
 
     return context
 
-def getStoryLine(request):
-
 
 def reset(request):
     print request
