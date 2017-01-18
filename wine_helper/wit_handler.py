@@ -12,7 +12,7 @@ import json_creator as jc
 
 
 def treatment(request, sender_id):
-    return client.run_actions(sender_id, request)
+    return client.run_actions(sender_id, request.decode('utf-8'))
 
 
 def first_entity_value(entities, entity):
