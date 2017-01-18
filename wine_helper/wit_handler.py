@@ -94,6 +94,14 @@ def sayGoodbye(request):
     return context
 
 
+def getStorylineAperitif(request):
+    context = request['context']
+
+    #recuperation du scenario choisi
+    context['storyline'] = 'aperitif'
+
+    return context
+
 def getColor(request):
     context = request['context']
     entities = request['entities']
@@ -101,10 +109,8 @@ def getColor(request):
 
     #recuperation de la couleur du vin
     color = first_entity_value(entities, 'wit_color')
-    readjust = first_entity_value(entities, 'wit_readjust')
-    if readjust is None:
-        context['criteria'] = []
-        context['criteria'].append(jc.create_criterion('color.fr', color))
+    context['criteria'] = []
+    context['criteria'].append(jc.create_criterion('color.fr', color))
 
     return context
 
@@ -136,6 +142,8 @@ def getRegion(request):
 
     return context
 
+def getStoryLine(request):
+
 
 def reset(request):
     print request
@@ -155,25 +163,20 @@ def apiCall(request):
 def send(request, response):
     print "sending to server..."
 
-def responseApero(request):
-    return askColor(request)
-
-def responseColorApero(request):
-    request['context'] = getColor(request)
-    return askPrice(request)
-
-def responsePriceApero(request):
-    request['context'] = getPrice(request)
-    request['context'] = apiCall(request)
-    return askAdjustment(request)
 
 actions = {
     'askStoryline' : askStoryline,
+    'askColor' : askColor,
+    'askPrice' : askPrice,
+    'askRegion' : askRegion,
+    'askAdjustment' : askAdjustment,
+    'getStorylineAperitif' : getStoryline,
+    'getColor' : getColor,
+    'getPrice' : getPrice,
+    'getRegion' : getRegion,
     'reset' : reset,
     'sayGoodbye' : sayGoodbye,
-    'responseApero' : responseApero,
-    'responseColorApero' : responseColorApero,
-    'responsePriceApero' : responsePriceApero,
+    'apiCall' : apiCall,
     'send' : send
 }
 
