@@ -42,7 +42,7 @@ def create_user(fbid):
         user = User(user_id=fbid, current_search=Search(criteria=[],user_storyline=None), searches=[])
         user.save()
         pprint("\n\n\n\n================================ DEBUG BDD =================================\n\n")
-        pprint("CREATION USER: " + user.user_id + ", " + user.current_search.user_storyline)
+        pprint("CREATION USER: " + fbid)
         pprint("\n\n================================ DEBUG BDD =================================\n\n\n\n")
 
 def create_storyline(fbid,storyline):
