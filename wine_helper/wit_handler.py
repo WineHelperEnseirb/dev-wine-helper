@@ -43,7 +43,7 @@ def askColor(request):
     context = request['context']
     print request
     context['response'] = []
-    context['response'].append(jc.create_whatever_button('Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant)'))
+    context['response'].append(jc.create_whatever_button('Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant)', 'color'))
 
     return context
 
@@ -54,7 +54,7 @@ def askPrice(request):
     print request
     #creation de la reponse de type bouton et ajout des boutons
     context['response'] = []
-    context['response'].append(jc.create_whatever_button('Quel prix de vin? (exemple : "entre 10 et 20 euros", "moins de 100 euros"...)'))
+    context['response'].append(jc.create_whatever_button('Quel prix de vin? (exemple : "entre 10 et 20 euros", "moins de 100 euros"...)', 'price'))
 
     return context
 
@@ -64,7 +64,7 @@ def askRegion(request):
     print request
 
     context['response'] = []
-    context['response'].append(jc.create_whatever_button('Avez-vous une préférence de région de provenance pour votre vin ?'))
+    context['response'].append(jc.create_whatever_button('Avez-vous une préférence de région de provenance pour votre vin ?', 'region'))
 
     return context
 

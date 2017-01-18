@@ -30,7 +30,7 @@ def create_text_response(text):
     return question
 
 #function to create whatever option
-def create_whatever_button(text):
+def create_whatever_button(text, type_question):
     button_table = create_button_table(text)
-    button_table['options'].append(create_button('Peu importe', 'peu importe'))
+    button_table['options'].append(create_button('Peu importe', 'peu importe ' + type_question))
     return button_table
