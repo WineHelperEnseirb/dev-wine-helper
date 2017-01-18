@@ -77,6 +77,15 @@ def askRegion(request):
     return context
 
 
+def askVintage(request):
+    context = request['context']
+    print request
+
+    context['response'] = []
+    context['response'].append(jc.create_whatever_button('Avez-vous une préférence de millésime (2009, 2013,...) ?', 'vintage'))
+
+    return context
+
 def askAdjustment(request):
     context = request['context']
     print request
@@ -157,6 +166,16 @@ def getRegion(request):
 
     return context
 
+def getVintage(request):
+    context = request['context']
+    print request
+
+    entities = request['entities']
+    vintage = first_entity_value(entities, 'vintage')
+
+    context['criteria'] = []
+    context['criteria'].append(jc.create_criterion('vintage', vintage))
+
 
 def reset(request):
     print request
@@ -183,12 +202,14 @@ actions = {
     'askColor' : askColor,
     'askPrice' : askPrice,
     'askRegion' : askRegion,
+    'askVintage' : askVintage,
     'askAdjustment' : askAdjustment,
     'getStorylineAperitif' : getStorylineAperitif,
     'getStorylineGift' : getStorylineGift,
     'getColor' : getColor,
     'getPrice' : getPrice,
     'getRegion' : getRegion,
+    'getVintage' : getVintage,
     'reset' : reset,
     'sayGoodbye' : sayGoodbye,
     'apiCall' : apiCall,
