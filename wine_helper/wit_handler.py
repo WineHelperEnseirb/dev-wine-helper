@@ -104,10 +104,18 @@ def sayGoodbye(request):
 def getStorylineAperitif(request):
     context = request['context']
 
-    #recuperation du scenario choisi
+    #ajout du scenario dans le contexte
     context['storyline'] = 'aperitif'
 
     return context
+
+
+def getStorylineGift(request):
+    context = request['context']
+    context['storyline'] = 'cadeau'
+
+    return context
+
 
 def getColor(request):
     context = request['context']
@@ -177,6 +185,7 @@ actions = {
     'askRegion' : askRegion,
     'askAdjustment' : askAdjustment,
     'getStorylineAperitif' : getStorylineAperitif,
+    'getStorylineGift' : getStorylineGift,
     'getColor' : getColor,
     'getPrice' : getPrice,
     'getRegion' : getRegion,
