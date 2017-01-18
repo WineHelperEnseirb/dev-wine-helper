@@ -41,6 +41,9 @@ def create_user(fbid):
     if user is None:
         user = User(user_id=fbid, current_search=Search(criteria=[],user_storyline=None), searches=[])
         user.save()
+        pprint("\n\n\n\n================================ DEBUG BDD =================================\n\n")
+        pprint("CREATION USER: " + fbid)
+        pprint("\n\n================================ DEBUG BDD =================================\n\n\n\n")
 
 def create_storyline(fbid,storyline):
     user = get_user_by_id(fbid)

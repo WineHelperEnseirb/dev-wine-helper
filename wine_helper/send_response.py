@@ -41,18 +41,18 @@ def send_facebook_message(fbid, data):
             handle_response(fbid, item)
 
 
-def adapt_message_to_wit(fbid,message):
+def adapt_message_to_wit(fbid, message):
     user = db.get_user_by_id(fbid)
     storyline = None
-    if user is not None:
-        storyline = db.get_storyline_by_user_id(fbid)
-        if storyline is not None:
-            new_message = message + "_" + storyline
-            return new_message
-        else:
-            return message
+    if user is None:
+        db.create_user(fbid)
+    storyline = db.get_storyline_by_user_id(fbid)
+    if storyline is not None:
+        new_message = message + "_" + storyline
+        return new_message
     else:
         return message
+
 
 def store_storyline(fbid,storyline):
     """
