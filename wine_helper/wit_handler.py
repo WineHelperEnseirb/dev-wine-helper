@@ -168,7 +168,7 @@ actions = {
     'askPrice' : askPrice,
     'askRegion' : askRegion,
     'askAdjustment' : askAdjustment,
-    'getStorylineAperitif' : getStoryline,
+    'getStorylineAperitif' : getStorylineAperitif,
     'getColor' : getColor,
     'getPrice' : getPrice,
     'getRegion' : getRegion,
