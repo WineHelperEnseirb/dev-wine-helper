@@ -29,6 +29,8 @@ def defaultAnswer(request):
     context['response'] = []
     context['response'].append(jc.create_text_response('Désolé je n\'ai pas compris...'))
 
+    return context
+
 
 def askStoryline(request):
     context = request['context']
@@ -168,6 +170,7 @@ def send(request, response):
 
 
 actions = {
+    'defaultAnswer' : defaultAnswer,
     'askStoryline' : askStoryline,
     'askColor' : askColor,
     'askPrice' : askPrice,
