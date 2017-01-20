@@ -18,6 +18,9 @@ import api_tools as api
 # save this in a more persistant memory store.
 #authed_teams = {}
 
+# "Constants" (variables that should not change)
+RESULTS_LIMIT = 3
+
 class Bot(object):
     """ Instanciates a Bot object to handle Slack onboarding interactions."""
     def __init__(self):
