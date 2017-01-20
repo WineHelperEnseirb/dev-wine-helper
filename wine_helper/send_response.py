@@ -28,7 +28,7 @@ def send_facebook_message(fbid, data):
     TODO: write description
     """
     if 'last_step' in data:
-        store_last_step(fbdi, data["last_step"])
+        store_last_step(fbid, data["last_step"])
     if 'storyline' in data:
         store_storyline(fbid,data["storyline"])
     if 'criteria' in data and data["criteria"]:
