@@ -36,7 +36,8 @@ ROOT_URLCONF = 'config.urls'
 WSGI_APPLICATION = 'config.wsgi.application'
 
 ALLOWED_HOSTS = [
-    u'wine-helper.herokuapp.com'
+    u'wine-helper.herokuapp.com',
+    u'585e363d.ngrok.io', u'127.0.0.1'
 ]
 
 
@@ -58,6 +59,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -66,7 +68,7 @@ MIDDLEWARE = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,3 +129,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+SLACK_CLIENT_ID = "91470583841.124982239781"
+SLACK_CLIENT_SECRET = "08c0718cfa34de26fde5783f8d99f17a"
+SLACK_VERIFICATION_TOKEN = "rQRhWgTRgJxNbtvJTroOSeWy"
