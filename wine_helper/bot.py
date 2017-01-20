@@ -340,8 +340,6 @@ class Bot(object):
                 res += ", " + str(wine.get_price()) + " euros"
                 res += "\n"
 
-            pprint(wine_list)
-
             if not res:
                 res = "Aucun vin ne correspond à votre recherche".decode('utf-8')
 
