@@ -73,14 +73,14 @@ def askPrice(request):
     return context
 
 
-def askRegion(request):
+def askAppelation(request):
     context = request['context']
     print request
 
     context['response'] = []
-    context['response'].append(jc.create_whatever_button('Avez-vous une préférence de région de provenance pour votre vin ?'))
+    context['response'].append(jc.create_whatever_button('Souhaitez-vous une appelation de vin particulière ? (Bordeaux, Haut medoc, entre deux mers,...)'))
 
-    context['last_step'] = 'region'
+    context['last_step'] = 'appelation'
 
     return context
 
@@ -218,7 +218,7 @@ actions = {
     'askStoryline' : askStoryline,
     'askColor' : askColor,
     'askPrice' : askPrice,
-    'askRegion' : askRegion,
+    'askAppelation' : askAppelation,
     'askVintage' : askVintage,
     'askAdjustment' : askAdjustment,
     'getStorylineAperitif' : getStorylineAperitif,
