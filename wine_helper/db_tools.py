@@ -54,17 +54,19 @@ def create_storyline(fbid,storyline):
         user.update(current_search=user.current_search)
         user.save()
 
+
 def get_storyline_by_user_id(fbid):
     """
     TODO: write description
     """
     user = get_user_by_id(fbid)
     if user is not None:
-        return user.current_search.user_last_step
+        return user.current_search.user_storyline
     else:
         return None
 
-def create_last_step(fbid,last_step):
+
+def create_last_step(fbid, last_step):
     """
     TODO: write description
     """
@@ -74,15 +76,17 @@ def create_last_step(fbid,last_step):
         user.update(current_search=user.current_search)
         user.save()
 
+
 def get_last_step_by_user_id(fbid):
     """
     TODO: write description
     """
     user = get_user_by_id(fbid)
     if user is not None:
-        return user.current_search.user_storyline
+        return user.current_search.user_last_step
     else:
         return None
+
 
 def close_search(fbid):
     """

@@ -31,6 +31,7 @@ class FacebookCallbackView(generic.View):
     def dispatch(self, request, *args, **kwargs):
         return generic.View.dispatch(self, request, *args, **kwargs)
 
+
     def get(self, request, *args, **kwargs):
         """
         Handles server verification performed by Facebook
@@ -44,6 +45,7 @@ class FacebookCallbackView(generic.View):
                 HttpResponse('Error, invalid challenge')
         else:
             return HttpResponse('Error, invalid token')
+
 
     def post(self, request, *args, **kwargs):
         """

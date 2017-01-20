@@ -27,10 +27,8 @@ def send_facebook_message(fbid, data):
     """
     TODO: write description
     """
-    """
     if 'last_step' in data:
-        store_last_step(fbdi,data["last_step"])
-    """
+        store_last_step(fbdi, data["last_step"])
     if 'storyline' in data:
         store_storyline(fbid,data["storyline"])
     if 'criteria' in data and data["criteria"]:
@@ -46,27 +44,40 @@ def send_facebook_message(fbid, data):
 
 
 def adapt_message_to_wit(fbid, message):
+    """
+    TODO: write description
+    """
     user = db.get_user_by_id(fbid)
+    last_step = None
     storyline = None
+
     if user is None:
         db.create_user(fbid)
-    storyline = db.get_storyline_by_user_id(fbid)
-    if storyline is not None:
-        new_message = message + "_" + storyline
-        return new_message
-    else:
-        return message
 
-def store_last_step(fbid,last_step):
+    last_step = db.get_last_step_by_user_id(fbid)
+    storyline = db.get_storyline_by_user_id(fbid)
+
+    if last_step is not None:
+        message = message + "_" + last_step
+    if storyline is not None:
+        message = new_message + "_" + storyline
+
+    return message
+
+
+def store_last_step(fbid, last_step):
     """
-    TO DO : ALL
+    TODO: write description
     """
-    db.create_storyline(fbid,last_step)
-def store_storyline(fbid,storyline):
+    db.create_last_step(fbid, last_step)
+
+
+def store_storyline(fbid, storyline):
     """
     Add to the user with fbid the storyline defined by the variable storyline.
     """
-    db.create_storyline(fbid,storyline)
+    db.create_storyline(fbid, storyline)
+
 
 def store_criteria(fbid, criteria):
     """
