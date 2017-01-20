@@ -37,7 +37,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 ALLOWED_HOSTS = [
     u'wine-helper.herokuapp.com',
-    u'585e363d.ngrok.io', u'127.0.0.1'
 ]
 
 

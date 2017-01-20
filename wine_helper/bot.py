@@ -282,7 +282,7 @@ class Bot(object):
             sr.store_criteria(s_id, data["criteria"])
         if 'action' in data:
             if data["action"] == 'api_call':
-                self.handle_api_call(s_id)
+                self.handle_api_call(s_id, channel)
             elif data["action"] == 'reset':
                 sr.reset_search(s_id)
         if 'response' in data and data["response"]:
@@ -315,6 +315,38 @@ class Bot(object):
         """
         attachments = [self.json_button_generator(data)]
         self.slacker.chat.post_message(channel, "", attachments=attachments)
+
+    def handle_api_call(self, s_id, channel):
+    """
+    TODO: write description
+    """
+    text = ""
+    criteria_data = db.get_criteria_data_by_id(s_id)
+    if criteria_data is not None:
+        wine_list = api.build_wine_list(criteria_data, RESULTS_LIMIT)
+        text = "Voici les meilleurs vins présentants les critères recherchés :\n".decode('utf-8')
+        res = ""
+        for wine in wine_list:
+            res += "- "
+            res += wine.get_name().decode('utf-8')
+            res += ", " + wine.get_appellation().decode('utf-8')
+            res += " (" + str(wine.get_vintage()) + ")"
+            res += ", " + wine.get_color()['fr'].decode('utf-8')
+            res += ", " + wine.get_taste()['fr'].decode('utf-8')
+            res += ", " + str(wine.get_price()) + " euros"
+            res += "\n"
+
+        pprint(wine_list)
+
+        if not res:
+            res = "Aucun vin ne correspond à votre recherche".decode('utf-8')
+
+        text += res
+    else:
+        text = "Une erreur s'est produite"
+
+    self.slacker.chat.post_message(channel, text)
+
 
     def json_button_generator(self, data):
         if not "options" in data:
