@@ -60,7 +60,7 @@ def adapt_message_to_wit(fbid, message):
     if last_step is not None:
         message = message + "_" + last_step
     if storyline is not None:
-        message = new_message + "_" + storyline
+        message = message + "_" + storyline
 
     return message
 
