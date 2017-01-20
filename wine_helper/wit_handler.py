@@ -108,6 +108,8 @@ def askAdjustment(request):
     button_table['options'].append(jc.create_button('Reajuster le prix', 'reajuster'))
     context['response'].append(button_table)
 
+    context['last_step'] = 'adjust'
+
     return context
 
 
