@@ -168,12 +168,12 @@ def getPrice(request):
     return context
 
 
-def getRegion(request):
+def getAppelation(request):
     context = request['context']
     print request
 
     entities = request['entities']
-    appellation = first_entity_value(entities, 'wit_region')
+    appellation = first_entity_value(entities, 'wit_appelation')
 
     context['criteria'] = []
     context['criteria'].append(jc.create_criterion('appellation', appellation))
@@ -225,7 +225,7 @@ actions = {
     'getStorylineGift' : getStorylineGift,
     'getColor' : getColor,
     'getPrice' : getPrice,
-    'getRegion' : getRegion,
+    'getAppelation' : getAppelation,
     'getVintage' : getVintage,
     'reset' : reset,
     'sayGoodbye' : sayGoodbye,
