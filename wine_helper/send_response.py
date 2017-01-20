@@ -27,6 +27,10 @@ def send_facebook_message(fbid, data):
     """
     TODO: write description
     """
+    """
+    if 'last_step' in data:
+        store_last_step(fbdi,data["last_step"])
+    """
     if 'storyline' in data:
         store_storyline(fbid,data["storyline"])
     if 'criteria' in data and data["criteria"]:
@@ -53,7 +57,11 @@ def adapt_message_to_wit(fbid, message):
     else:
         return message
 
-
+def store_last_step(fbid,last_step):
+    """
+    TO DO : ALL
+    """
+    db.create_storyline(fbid,last_step)
 def store_storyline(fbid,storyline):
     """
     Add to the user with fbid the storyline defined by the variable storyline.

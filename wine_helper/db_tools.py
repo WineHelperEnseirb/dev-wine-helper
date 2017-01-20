@@ -41,11 +41,13 @@ def create_user(fbid):
     if user is None:
         user = User(user_id=fbid, current_search=Search(criteria=[],user_storyline=None), searches=[])
         user.save()
-        pprint("\n\n\n\n================================ DEBUG BDD =================================\n\n")
-        pprint("CREATION USER: " + fbid)
-        pprint("\n\n================================ DEBUG BDD =================================\n\n\n\n")
+
+
 
 def create_storyline(fbid,storyline):
+    """
+    TODO: write description
+    """
     user = get_user_by_id(fbid)
     if user is not None:
         user.current_search.user_storyline = storyline
@@ -53,6 +55,29 @@ def create_storyline(fbid,storyline):
         user.save()
 
 def get_storyline_by_user_id(fbid):
+    """
+    TODO: write description
+    """
+    user = get_user_by_id(fbid)
+    if user is not None:
+        return user.current_search.user_last_step
+    else:
+        return None
+
+def create_last_step(fbid,last_step):
+    """
+    TODO: write description
+    """
+    user = get_user_by_id(fbid)
+    if user is not None:
+        user.current_search.user_last_step = last_step
+        user.update(current_search=user.current_search)
+        user.save()
+
+def get_last_step_by_user_id(fbid):
+    """
+    TODO: write description
+    """
     user = get_user_by_id(fbid)
     if user is not None:
         return user.current_search.user_storyline

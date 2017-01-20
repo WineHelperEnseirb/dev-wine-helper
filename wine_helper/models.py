@@ -9,6 +9,7 @@ class Criterion(EmbeddedDocument):
 
 class Search(EmbeddedDocument):
     user_storyline = StringField()
+    user_last_step = StringField()
     criteria = ListField(EmbeddedDocumentField(Criterion))
 
 class User(Document):
