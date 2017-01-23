@@ -171,7 +171,10 @@ def _event_handler(event_type, slack_event):
 
     elif event_type == "message":
         sender_id = None
+        print "MESSAGE ICI \n \n"
+        print slack_event["event"]["text"]        
         message_id = slack_event["event"]["event_ts"]
+        print message_id
         if "user" in slack_event["event"] and message_id != pyBot.last_message_id:
             sender_id = slack_event["event"]["user"]
             pyBot.last_message_id = message_id
