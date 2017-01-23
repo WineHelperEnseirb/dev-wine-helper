@@ -171,8 +171,10 @@ def _event_handler(event_type, slack_event):
 
     elif event_type == "message":
         sender_id = None
-        if "user" in slack_event["event"]:
+        message_id = slack_event["event"]["event_ts"]
+        if "user" in slack_event["event"] and message_id != pyBot.last_message_id:
             sender_id = slack_event["event"]["user"]
+            pyBot.last_message_id = message_id
             adapted_message = pyBot.adapt_message_to_wit(sender_id, slack_event["event"]["text"].encode('utf-8'))
             message = wit.treatment(adapted_message, sender_id)
             channel = slack_event["event"]["channel"]
@@ -185,8 +187,8 @@ def _event_handler(event_type, slack_event):
     # Return a helpful error message
     channel = slack_event["event"]["channel"]
     
-    if "user" in slack_event["event"]:
-        pyBot.send_message(channel, message)
+    #if "user" in slack_event["event"]:
+    #    pyBot.send_message(channel, message)
     return HttpResponse(message, 200,)
     #removed {"X-Slack-No-Retry": 1}
 

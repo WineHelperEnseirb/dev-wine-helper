@@ -48,6 +48,7 @@ class Bot(object):
         # persistantly in  a database.
         self.messages = {}
         self.authed_teams = {}
+        self.last_message_id = ""
 
 
     def auth(self, code):
