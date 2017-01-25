@@ -111,7 +111,7 @@ def slack_oauth(request):
     )
     return HttpResponse('Bot added to your Slack team!')
 
-    
+
 def _event_handler(event_type, slack_event):
     """
     A helper function that routes events from Slack to our Bot
@@ -131,10 +131,10 @@ def _event_handler(event_type, slack_event):
 
     if event_type == "message":
         sender_id = None
-        print "MESSAGE ICI \n \n"        
+        print "MESSAGE ICI \n \n"
         print slack_event["event"]
-        
-        if "user" in slack_event["event"]: 
+
+        if "user" in slack_event["event"]:
             #and message_id not in pyBot.last_messages:
             sender_id = slack_event["event"]["user"]
             #pyBot.last_messages.append(message_id)
@@ -151,7 +151,7 @@ def _event_handler(event_type, slack_event):
     message = "You have not added an event handler for the %s" % event_type
     # Return a helpful error message
     channel = slack_event["event"]["channel"]
-    
+
     #if "user" in slack_event["event"]:
     #    pyBot.send_message(channel, message)
     return HttpResponse(message, status= 200)
@@ -220,21 +220,21 @@ def hears(request):
         event_type = slack_event["event"]["type"]
         # Then handle the event by event_type and have your bot respond
         return _event_handler(event_type, slack_event)
-        
+
     # If our bot hears things that are not events we've subscribed to,
     # send a quirky but helpful error response
     return HttpResponse("[NO EVENT IN SLACK REQUEST] These are not the droids\
                          you're looking for.", status= 404)
 
 @csrf_exempt
-def button(request):    
-    response = urllib.unquote(request.body)[8:]    
+def button(request):
+    response = urllib.unquote(request.body)[8:]
     json_res = json.loads(response)
-    
+
     sender_id = json_res["user"]["id"]
     channel = json_res["channel"]["id"]
-    
-    answer = json_res["actions"][0]["value"] 
+
+    answer = json_res["actions"][0]["value"]
     adapted_message = sr.adapt_message_to_wit(sender_id, answer.encode('utf-8'))
     message = wit.treatment(adapted_message, sender_id)
     print "MESSAGE ICI\n"
