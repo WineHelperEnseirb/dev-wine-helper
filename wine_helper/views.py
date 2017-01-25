@@ -129,6 +129,9 @@ def _event_handler(event_type, slack_event):
     obj
     Response object with 200 - ok or 500 - No Event Handler error"""
 
+    team_id = slack_event["team_id"]
+    pyBot.find_team(team_id)
+
     if event_type == "message":
         sender_id = None
         print "MESSAGE ICI \n \n"        
@@ -190,8 +193,6 @@ def hears(request):
     """
     slack_event = json.loads(request.body)
 
-    team_id = slack_event["team_id"]
-    pyBot.find_team(team_id)
 
     print "REQUEST ICI\n"
     print request.META
