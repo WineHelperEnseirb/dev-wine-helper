@@ -142,10 +142,10 @@ def _event_handler(event_type, slack_event):
             sender_id = slack_event["event"]["user"]
             #pyBot.last_messages.append(message_id)
             adapted_message = sr.adapt_message_to_wit(sender_id, slack_event["event"]["text"].encode('utf-8'))
-            #message = wit.treatment(adapted_message, sender_id)
+            message = wit.treatment(adapted_message, sender_id)
             channel = slack_event["event"]["channel"]
-            pyBot.slacker.chat.post_message(channel, "Oups, une erreur est survenue")
-            #pyBot.send_message(sender_id, channel, message)
+            #pyBot.slacker.chat.post_message(channel, "Oups, une erreur est survenue")
+            pyBot.send_message(sender_id, channel, message)
         # By adding "X-Slack-No-Retry" : 1 to our response headers, we turn off
         # Slack's automatic retries.
         return HttpResponse("OK", 200)
