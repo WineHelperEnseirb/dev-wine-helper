@@ -85,4 +85,3 @@ def adapt_type_number(current_element):
 
 
 #read_csv_file("/Users/aymesr/Desktop/Cours/Cours3A/ProjetGL/dev-wine-helper/wine_helper/data/wine_helper_data_wines.csv")
-print("Resultat de Rouge: " + search_translation("/Users/aymesr/Desktop/Cours/Cours3A/ProjetGL/dev-wine-helper/wine_helper/data/translate_file.csv",1,2,"8.9"))
