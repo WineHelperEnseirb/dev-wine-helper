@@ -304,11 +304,8 @@ actions = {
     'getPrice' : getPrice,
     'getAppelation' : getAppelation,
     'getVintage' : getVintage,
-<<<<<<< HEAD
     'getDinerType' : getDinerType,
     'getMealChoice' : getMealChoice,
-=======
->>>>>>> a87f0fb8761db4c6f0f0ee5d5055774ebcac5d99
     'reset' : reset,
     'sayGoodbye' : sayGoodbye,
     'apiCall' : apiCall,
