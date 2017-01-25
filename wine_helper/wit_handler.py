@@ -113,6 +113,21 @@ def askAdjustment(request):
     return context
 
 
+def askDinerType(request):
+    context = request['context']
+    print request
+
+    button_table = jc.create_button_table('Pour quel repas souhaitez-vous un vin ?')
+    button_table['options'].append(jc.create_button('Dejeuner', 'dejeuner'))
+    button_table['options'].append(jc.create_button('Diner', 'diner'))
+    button_table['options'].append(jc.create_button('Peu importe', 'peu importe'))
+    context['response'].append(button_table)
+
+    context['last_step'] = 'dinertype'
+
+    return context
+
+
 def sayGoodbye(request):
     context = request['context']
     print request
@@ -234,6 +249,7 @@ actions = {
     'askAppelation' : askAppelation,
     'askVintage' : askVintage,
     'askAdjustment' : askAdjustment,
+    'askDinerType' : askDinerType,
     'getStorylineAperitif' : getStorylineAperitif,
     'getStorylineGift' : getStorylineGift,
     'getStorylineRepas' : getStorylineRepas,
@@ -249,7 +265,3 @@ actions = {
 
 
 client = Wit(access_token=os.getenv('WIT_TOKEN'), actions=actions)
-
-#TODO:
-#Erreur quand on fait deux fois "peu importe" aux deux questions de la story Apero
-#Voir pour obliger l'utilisateur a suivre le scénario et reposer la question s'il n'a pas bien répondu
