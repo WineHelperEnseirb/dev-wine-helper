@@ -127,6 +127,8 @@ def askDinerType(request):
     context = request['context']
     print request
 
+    context['response'] = []
+    
     button_table = jc.create_button_table('Pour quel repas souhaitez-vous un vin ?')
     button_table['options'].append(jc.create_button('Dejeuner', 'dejeuner'))
     button_table['options'].append(jc.create_button('Diner', 'diner'))
