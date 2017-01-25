@@ -27,8 +27,7 @@ def first_entity_value(entities, entity):
 
 def defaultAnswer(request):
     context = request['context']
-    context['response'] = []
-    context['response'].append(jc.create_text_response('Désolé je n\'ai pas compris...'))
+    context['action'] = 'reask'
 
     return context
 
