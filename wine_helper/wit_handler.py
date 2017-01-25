@@ -9,10 +9,12 @@ import json
 from wit import Wit
 
 import json_creator as jc
+from django.conf import settings
+
 
 
 def treatment(request, sender_id):
-    #print "wit received message : " + request
+    print "wit received message : " + request
     return client.run_actions(sender_id, request.decode('utf-8'))
 
 
@@ -34,10 +36,11 @@ def defaultAnswer(request):
 
 def askStoryline(request):
     context = request['context']
+    print request
 
     context['response'] = []
 
-    button_table = jc.create_button_table('Bonjour, souhaitez vous un vin pour ?')
+    button_table = jc.create_button_table(settings.INTRO_SENTENCE)
     button_table['options'].append(jc.create_button('Un aperitif', 'aperitif'))
     button_table['options'].append(jc.create_button('Un repas', 'repas'))
     button_table['options'].append(jc.create_button('Un cadeau', 'cadeau'))
@@ -50,9 +53,9 @@ def askStoryline(request):
 
 def askColor(request):
     context = request['context']
+    print request
     context['response'] = []
-    button_table = jc.create_button_table(
-        'Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant)')
+    button_table = jc.create_button_table(settings.ASK_COLOR)
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
     button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer '))
     context['response'].append(button_table)
@@ -65,10 +68,10 @@ def askColor(request):
 def askPrice(request):
     context = request['context']
     entities = request['entities']
+    print request
     # creation de la reponse de type bouton et ajout des boutons
     context['response'] = []
-    button_table = jc.create_button_table(
-        'Quel prix de vin? (exemple : "entre 10 et 20 euros", "moins de 100 euros"...)')
+    button_table = jc.create_button_table(settings.ASK_PRICE)
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
     button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer '))
     context['response'].append(button_table)
@@ -80,10 +83,11 @@ def askPrice(request):
 
 def askAppelation(request):
     context = request['context']
+    print request
 
     context['response'] = []
 
-    button_table = jc.create_button_table('Souhaitez-vous une appelation de vin particulière ? (Bordeaux, Haut medoc, entre deux mers,...)')
+    button_table = jc.create_button_table(settings.ASK_APPELATION)
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
     button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer '))
     context['response'].append(button_table)
@@ -95,9 +99,10 @@ def askAppelation(request):
 
 def askVintage(request):
     context = request['context']
+    print request
 
     context['response'] = []
-    button_table = jc.create_button_table('Avez-vous une préférence de millésime (2009, 2013,...) ?')
+    button_table = jc.create_button_table(settings.ASK_VINTAGE)
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
     button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer '))
     context['response'].append(button_table)
@@ -109,10 +114,11 @@ def askVintage(request):
 
 def askAdjustment(request):
     context = request['context']
+    print request
 
     context['response'] = []
 
-    button_table = jc.create_button_table('Êtes-vous satisfait ou souhaitez-vous réajuster le prix ?')
+    button_table = jc.create_button_table(settings.ASK_ADJUSTMENT)
     button_table['options'].append(jc.create_button('Je suis satisfait', 'satisfait'))
     button_table['options'].append(jc.create_button('Reajuster le prix', 'reajuster'))
     context['response'].append(button_table)
@@ -124,10 +130,11 @@ def askAdjustment(request):
 
 def askDinerType(request):
     context = request['context']
+    print request
 
     context['response'] = []
 
-    button_table = jc.create_button_table('Pour quel repas souhaitez-vous un vin ?')
+    button_table = jc.create_button_table(settings.ASK_DINER_TYPE)
     button_table['options'].append(jc.create_button('Dejeuner', 'dejeuner'))
     button_table['options'].append(jc.create_button('Diner', 'diner'))
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe'))
@@ -140,10 +147,11 @@ def askDinerType(request):
 
 def askMealChoice(request):
     context = request['context']
+    print request
 
     context['response'] = []
 
-    button_table = jc.create_button_table('Pour quel type de repas souhaitez-vous un vin ?')
+    button_table = jc.create_button_table(settings.ASK_MEAL_CHOICE)
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe'))
     button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer '))
     context['response'].append(button_table)
@@ -155,10 +163,10 @@ def askMealChoice(request):
 
 def sayGoodbye(request):
     context = request['context']
+    print request
 
     context['response'] = []
-    context['response'].append(jc.create_text_response(
-        'Merci d\'avoir utilisé mes services, je vais me coucher dis moi bonjour pour me réveiller si tu as besoin de moi !'))
+    context['response'].append(jc.create_text_response(settings.CONCLUSION_SENTENCE))
 
     return context
 
@@ -195,27 +203,23 @@ def getStorylineRepas(request):
 def getColor(request):
     context = request['context']
     entities = request['entities']
+    print request
 
     # recuperation de la couleur du vin
     color = first_entity_value(entities, 'wit_color')
     context['criteria'] = []
-    context['criteria'].append(jc.create_criterion('color', color))
+    context['criteria'].append(jc.create_criterion('color.fr', color))
 
     return context
 
 
 def getPrice(request):
     context = request['context']
+    print request
 
     entities = request['entities']
     min = first_entity_value(entities, 'minprice')
     max = first_entity_value(entities, 'maxprice')
-    #test if the minPrice is the minimum value and switch values if it is not
-    if min is not None and max is not None:
-        if min > max:
-            min = min + max
-            max = min - max
-            min = min - max
 
     context['criteria'] = []
     context['criteria'].append(jc.create_criterion('priceMin', min))
@@ -227,6 +231,7 @@ def getPrice(request):
 
 def getAppelation(request):
     context = request['context']
+    print request
 
     entities = request['entities']
     appellation = first_entity_value(entities, 'wit_appelation')
@@ -239,6 +244,7 @@ def getAppelation(request):
 
 def getVintage(request):
     context = request['context']
+    print request
 
     entities = request['entities']
     vintage = first_entity_value(entities, 'vintage')
@@ -251,6 +257,7 @@ def getVintage(request):
 
 def getDinerType(request):
     context = request['context']
+    print request
 
     entities = request['entities']
     dinertype = first_entity_value(entities, 'wit_typediner')
@@ -263,17 +270,19 @@ def getDinerType(request):
 
 def getMealChoice(request):
     context = request['context']
+    print request
 
     entities = request['entities']
     meal = first_entity_value(entities, 'wit_meal')
 
     context['criteria'] = []
-    context['criteria'].append(jc.create_criterion('food_pairing_french', meal))
+    context['criteria'].append(jc.create_criterion('food_padding', meal))
 
     return context
 
 
 def reset(request):
+    print request
     context = request['context']
     context['action'] = 'reset'
 
