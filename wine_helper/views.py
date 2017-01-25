@@ -235,11 +235,12 @@ def button(request):
 
     print "DEBUG BUTTON SLACK\n"
     print json_res
-    
+
     sender_id = json_res["user"]["id"]
     channel = json_res["channel"]["id"]
 
     answer = json_res["actions"][0]["value"]
+    answer = answer.replace("+", " ")
     adapted_message = sr.adapt_message_to_wit(sender_id, answer.encode('utf-8'))
     message = wit.treatment(adapted_message, sender_id)
     pyBot.send_message(sender_id, channel, message)
