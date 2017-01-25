@@ -22,8 +22,8 @@ def read_csv_file(file_name):
         nb_rd_rows = nb_rd_rows + 1
         if nb_rd_rows != 1:
             for current_element in row:
-                #current_element = current_element.replace("é","e")
-                #current_element = current_element.replace("à","a")
+                #current_element = current_element.replace("e","e")
+                #current_element = current_element.replace("a","a")
                 current_element = current_element.lower()
                 to_add = []
                 # Case of float
@@ -62,14 +62,11 @@ def search_translation(file_name,line_original_language,line_new_language,to_tra
     """
     csv_file = open(file_name, 'rb')
     rd = csv.reader(csv_file, delimiter=';',quoting=csv.QUOTE_ALL)
-
-    nb_rd_rows = 0
     for row in rd:
-        nb_rd_rows += 1
-            if line_original_language > 0 and line_new_language > 0:
-                if row[line_original_language] == to_translate:
-                    to_translate = row[line_new_language]
-                    break
+        if line_original_language > 0 and line_new_language > 0:
+            if row[line_original_language - 1] == to_translate:
+                to_translate = row[line_new_language - 1]
+                break
     return to_translate
 
 
@@ -88,4 +85,4 @@ def adapt_type_number(current_element):
 
 
 #read_csv_file("/Users/aymesr/Desktop/Cours/Cours3A/ProjetGL/dev-wine-helper/wine_helper/data/wine_helper_data_wines.csv")
-print("Résultat de Rouge: " + search_translation("/Users/aymesr/Desktop/Cours/Cours3A/ProjetGL/dev-wine-helper/wine_helper/data/translate_file.csv",1,2,"rouge"):
+print("Resultat de Rouge: " + search_translation("/Users/aymesr/Desktop/Cours/Cours3A/ProjetGL/dev-wine-helper/wine_helper/data/translate_file.csv",1,2,"8.9"))

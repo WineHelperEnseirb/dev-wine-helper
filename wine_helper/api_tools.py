@@ -3,6 +3,7 @@
 import requests as re
 from pprint import pprint
 import db_tools as db
+import csv_reader as cr
 
 import Wine as W
 import Criteria as C
@@ -22,6 +23,7 @@ def get_wines_by_criteria(criteria, limit=0):
     # setting criteria
     for criterion in criteria:
         # TODO: remove last &
+        value = cr.search_translation("/Users/aymesr/Desktop/Cours/Cours3A/ProjetGL/dev-wine-helper/wine_helper/data/translate_file.csv",1,2,str(criterion.get_value()))
         query += "&" + criterion.get_name() + "=" + str(criterion.get_value())
     url += query.replace(" ","%20")
     pprint("[DEBUG] API call url: " + url)

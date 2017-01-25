@@ -198,18 +198,3 @@ class Bot(object):
         json_return["attachment_type"] = "default"
         json_return["actions"]=actions
         return json_return
-
-
-    def adapt_message_to_wit(self, fbid, message):
-        user = db.get_user_by_id(fbid)
-        print "TTTT!!!!\n\n"
-        storyline = None
-        if user is None:
-            db.create_user(fbid)
-        storyline = db.get_storyline_by_user_id(fbid)
-        if storyline is not None:
-            new_message = message + "_" + storyline
-            return new_message
-        else:
-            return message
-
