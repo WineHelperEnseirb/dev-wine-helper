@@ -148,7 +148,7 @@ def _event_handler(event_type, slack_event):
             message = wit.treatment(adapted_message, sender_id)
             channel = slack_event["event"]["channel"]
             pyBot.send_message(sender_id, channel, message)
-        return HttpResponse("TTTTTTT", 200)
+        return HttpResponse("TTTTTTT", 200, {"X-Slack-No-Retry": 1})
 
     # ============= Event Type Not Found! ============= #
     # If the event_type does not have a handler
@@ -158,7 +158,7 @@ def _event_handler(event_type, slack_event):
     
     #if "user" in slack_event["event"]:
     #    pyBot.send_message(channel, message)
-    return HttpResponse(message, 200,)
+    return HttpResponse(message, 200, {"X-Slack-No-Retry": 1})
     #removed {"X-Slack-No-Retry": 1}
 
 # SLACK BOT BELOW
@@ -212,8 +212,7 @@ def hears(request):
                    %s\n\n" % (slack_event["token"], pyBot.verification)
         # By adding "X-Slack-No-Retry" : 1 to our response headers, we turn off
         # Slack's automatic retries during development.
-        HttpResponse(message, 403,)
-        #removed  {"X-Slack-No-Retry": 1}
+        return HttpResponse(message, 403, {"X-Slack-No-Retry": 1})
 
     # ====== Process Incoming Events from Slack ======= #
     # If the incoming request is an Event we've subcribed to
@@ -225,8 +224,7 @@ def hears(request):
     # If our bot hears things that are not events we've subscribed to,
     # send a quirky but helpful error response
     return HttpResponse("[NO EVENT IN SLACK REQUEST] These are not the droids\
-                         you're looking for.", 404,)
-    #removed  {"X-Slack-No-Retry": 1}
+                         you're looking for.", 404, {"X-Slack-No-Retry": 1})
 
 @csrf_exempt
 def button(request):    

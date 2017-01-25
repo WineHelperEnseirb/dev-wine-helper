@@ -81,7 +81,6 @@ class Bot(object):
                                  auth_response["bot"]["bot_access_token"]}
         # Then we'll reconnect to the Slack Client with the correct team's
         # bot token
-        self.client = SlackClient(self.authed_teams[team_id]["bot_token"])
         self.slacker = Slacker(self.authed_teams[team_id]["bot_token"])
         team = self.find_team(team_id)
         if team is None:
@@ -94,33 +93,12 @@ class Bot(object):
     def find_team(self, team_id):
         try:
             team = Team.objects.get(team_id=team_id)        
-            self.client = SlackClient(team.bot_access_token)
+            #self.client = SlackClient(team.bot_access_token)
             self.slacker = Slacker(team.bot_access_token)
             self.id = team.bot_user_id
         except Team.DoesNotExist:
             team = None
         return team
-
-
-    def open_dm(self, user_id):
-        """
-        Open a DM to send a welcome message when a 'team_join' event is
-        recieved from Slack.
-
-        Parameters
-        ----------
-        user_id : str
-            id of the Slack user associated with the 'team_join' event
-
-        Returns
-        ----------
-        dm_id : str
-            id of the DM channel opened by this method
-        """
-        new_dm = self.client.api_call("im.open",
-                                      user=user_id)
-        dm_id = new_dm["channel"]["id"]
-        return dm_id
 
     def send_message(self, s_id, channel, data):
         if 'last_step' in data:
@@ -137,9 +115,7 @@ class Bot(object):
         if 'response' in data and data["response"]:
             for item in data["response"]:
                 self.handle_response(s_id, item, channel)
-        #self.slacker.chat.post_message(channel, message, attachments=attachments)
-        #self.client.api_call("chat.postMessage", channel=channel, username=self.name, icon_emoji=self.emoji, text=message,attachments=attachments)
-    
+        
     def handle_response(self, s_id, data, channel):    
         """
         TODO: write description
@@ -150,13 +126,19 @@ class Bot(object):
             elif data["type"] == "button":
                 self.handle_button(s_id, data, channel)
             else:
-                self.handle_error(s_id)
+                self.handle_error(channel)
     def handle_text(self, s_id, data, channel):
         """
         Handles the sending to messenger of a text message
         """
         self.slacker.chat.post_message(channel, data["text"])
 
+
+    def handle_error(self, channel):
+        """
+        Sends an error message to slack
+        """
+        self.slacker.chat.post_message(channel, "Oups, une erreur est survenue")
        
     def handle_button(self, s_id, data, channel):
         """
