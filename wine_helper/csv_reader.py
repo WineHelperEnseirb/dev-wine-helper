@@ -67,13 +67,7 @@ def search_translation(file_name,line_original_language,line_new_language,to_tra
         if line_original_language > 0 and line_new_language > 0:
             if row[line_original_language - 1] == to_translate:
                 to_translate = row[line_new_language - 1]
-                pprint("------------------------DEBUG---------------------------\n\n")
-                pprint(to_translate)
-                pprint("\n\n------------------------DEBUG---------------------------\n\n")
                 break
-    pprint("------------------------DEBUG---------------------------\n\n")
-    pprint("IS IN SEARCH_TRANSLATION !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    pprint("\n\n------------------------DEBUG---------------------------\n\n")
     return to_translate
 
 
