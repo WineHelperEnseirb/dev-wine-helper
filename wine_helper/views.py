@@ -141,6 +141,8 @@ def _event_handler(event_type, slack_event):
             adapted_message = sr.adapt_message_to_wit(sender_id, slack_event["event"]["text"].encode('utf-8'))
             message = wit.treatment(adapted_message, sender_id)
             channel = slack_event["event"]["channel"]           
+            print "SLACK DEBUG \n"
+            print message
             pyBot.send_message(sender_id, channel, message)        
         return HttpResponse("OK", 200)
 
