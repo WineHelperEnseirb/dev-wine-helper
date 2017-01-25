@@ -128,6 +128,8 @@ def getStorylineAperitif(request):
 
     #ajout du scenario dans le contexte
     context['storyline'] = 'aperitif'
+    context['criteria'] = []
+    context['criteria'].append(jc.create_criterion('degustation', 'aperitif'))
 
     return context
 
@@ -135,6 +137,8 @@ def getStorylineAperitif(request):
 def getStorylineGift(request):
     context = request['context']
     context['storyline'] = 'cadeau'
+    context['criteria'] = []
+    context['criteria'].append(jc.create_criterion('degustation', 'cadeau'))
 
     return context
 
