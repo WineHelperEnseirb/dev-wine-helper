@@ -37,7 +37,7 @@ def send_facebook_message(fbid, data):
             handle_api_call(fbid)
         elif data["action"] == 'reset':
             reset_search(fbid)
-        elif data["reask"] == 'reask':
+        elif data["action"] == 'reask':
             handle_reask(fbid)
     if 'last_step' in data:
         store_last_step(fbid, data["last_step"])
