@@ -34,7 +34,8 @@ def defaultAnswer(request):
     return context
 
 def sayDontUnderstand(request):
-    if context['response'] is None:
+    context = request['context']
+    if not 'response' in context:
         context['response'] = []
     context['response'].append(jc.create_text_response(settings.DONT_UNDERSTAND))
 
@@ -42,7 +43,7 @@ def sayDontUnderstand(request):
 
 def askStoryline(request):
     context = request['context']
-    if context['response'] is None:
+    if not 'response' in context:
         context['response'] = []
 
     button_table = jc.create_button_table(settings.INTRO_SENTENCE)
@@ -58,7 +59,7 @@ def askStoryline(request):
 
 def askColor(request):
     context = request['context']
-    if context['response'] is None:
+    if not 'response' in context:
         context['response'] = []
 
     button_table = jc.create_button_table(settings.ASK_COLOR)
@@ -75,7 +76,7 @@ def askPrice(request):
     context = request['context']
     entities = request['entities']
     # creation de la reponse de type bouton et ajout des boutons
-    if context['response'] is None:
+    if not 'response' in context:
         context['response'] = []
     button_table = jc.create_button_table(settings.ASK_PRICE)
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
@@ -90,7 +91,7 @@ def askPrice(request):
 def askAppelation(request):
     context = request['context']
 
-    if context['response'] is None:
+    if not 'response' in context:
         context['response'] = []
 
     button_table = jc.create_button_table(settings.ASK_APPELATION)
@@ -106,7 +107,7 @@ def askAppelation(request):
 def askVintage(request):
     context = request['context']
 
-    if context['response'] is None:
+    if not 'response' in context:
         context['response'] = []
     button_table = jc.create_button_table(settings.ASK_VINTAGE)
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
@@ -121,7 +122,7 @@ def askVintage(request):
 def askAdjustment(request):
     context = request['context']
 
-    if context['response'] is None:
+    if not 'response' in context:
         context['response'] = []
 
     button_table = jc.create_button_table(settings.ASK_ADJUSTMENT)
@@ -137,7 +138,7 @@ def askAdjustment(request):
 def askDinerType(request):
     context = request['context']
 
-    if context['response'] is None:
+    if not 'response' in context:
         context['response'] = []
 
     button_table = jc.create_button_table(settings.ASK_DINER_TYPE)
@@ -154,7 +155,7 @@ def askDinerType(request):
 def askMealChoice(request):
     context = request['context']
 
-    if context['response'] is None:
+    if not 'response' in context:
         context['response'] = []
 
     button_table = jc.create_button_table(settings.ASK_MEAL_CHOICE)
@@ -170,7 +171,7 @@ def askMealChoice(request):
 def sayGoodbye(request):
     context = request['context']
 
-    if context['response'] is None:
+    if not 'response' in context:
         context['response'] = []
     context['response'].append(jc.create_text_response(settings.CONCLUSION_SENTENCE))
 

@@ -236,6 +236,9 @@ def button(request):
     print "DEBUG BUTTON SLACK\n"
     print json_res
 
+    team_id = json_res["team"]["id"]
+    pyBot.find_team(team_id)
+
     sender_id = json_res["user"]["id"]
     channel = json_res["channel"]["id"]
 
