@@ -69,48 +69,5 @@ def adapt_type_number(current_element):
         return current_element
 
 
-def test_function(current_element):
-    to_add = []
-    current_object = {}
-    # Case of float
-    if current_element[0] >= "0" and current_element[0] <= "9":
-        if ',' in current_element:
-            current_element = current_element.replace(",",".")
-        to_add.append(float(current_element))
-    else:
-        print("COUCOU")
-        is_in_parenthesis = False
-        to_add = current_element.split(',')
-        special_index = -1
-        special_value = ""
-        for nb in range(len(to_add)):
-            print("IN")
-            if is_in_parenthesis == True:
-                if special_index >=0:
-                    to_add[nb] = special_value + " " + to_add[nb]
-            if '(' in to_add[nb]:
-                print("OPEN PARENTHESIS")
-                if nb >= 1:
-                    special_index = nb
-                    special_value = to_add[nb].split("(")[0]
-                is_in_parenthesis = True
-                to_add[nb] = to_add[nb].replace("(","")
-            elif ')' in to_add[nb]:
-                print("CLOSE PARENTHESIS")
-                to_add[nb] = to_add[nb].replace(")","")
-                is_in_parenthesis = False
-    print("TO_ADD:\n\n")
-    print(to_add)
 
 read_csv_file("/Users/aymesr/Desktop/Cours/Cours3A/ProjetGL/dev-wine-helper/wine_helper/data/wine_helper_data_wines.csv")
-"""
-print("FLOAT: ")
-print(type(adapt_type_number("6,890")))
-print("\n\n")
-print("INT: ")
-print(type(adapt_type_number("64554")))
-print("\n\n")
-print("OTHER: ")
-print(type(adapt_type_number("6,890-45563")))
-print("\n\n")
-"""
