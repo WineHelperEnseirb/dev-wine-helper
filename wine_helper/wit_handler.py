@@ -53,7 +53,9 @@ def askColor(request):
     context = request['context']
     print request
     context['response'] = []
-    context['response'].append(jc.create_whatever_button('Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant)'))
+    button_table = jc.create_button_table('Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant)')
+    button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
+    button_table['options'].append(jc.create_button('Recommencer une recherche', 'Recommencer '))
 
     context['last_step'] = 'color'
 
@@ -66,7 +68,9 @@ def askPrice(request):
     print request
     #creation de la reponse de type bouton et ajout des boutons
     context['response'] = []
-    context['response'].append(jc.create_whatever_button('Quel prix de vin? (exemple : "entre 10 et 20 euros", "moins de 100 euros"...)'))
+    button_table = jc.create_button_table('Quel prix de vin? (exemple : "entre 10 et 20 euros", "moins de 100 euros"...)')
+    button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
+    button_table['options'].append(jc.create_button('Recommencer une recherche', 'Recommencer '))
 
     context['last_step'] = 'price'
 
@@ -78,7 +82,11 @@ def askAppelation(request):
     print request
 
     context['response'] = []
-    context['response'].append(jc.create_whatever_button('Souhaitez-vous une appelation de vin particulière ? (Bordeaux, Haut medoc, entre deux mers,...)'))
+
+    button_table = jc.create_button_table('Souhaitez-vous une appelation de vin particulière ? (Bordeaux, Haut medoc, entre deux mers,...)')
+    button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
+    button_table['options'].append(jc.create_button('Recommencer une recherche', 'Recommencer '))
+
 
     context['last_step'] = 'appelation'
 
@@ -90,7 +98,9 @@ def askVintage(request):
     print request
 
     context['response'] = []
-    context['response'].append(jc.create_whatever_button('Avez-vous une préférence de millésime (2009, 2013,...) ?'))
+    button_table = jc.create_button_table('Avez-vous une préférence de millésime (2009, 2013,...) ?')
+    button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
+    button_table['options'].append(jc.create_button('Recommencer une recherche', 'Recommencer '))
 
     context['last_step'] = 'vintage'
 
@@ -116,8 +126,6 @@ def askAdjustment(request):
 def askDinerType(request):
     context = request['context']
     print request
-
-    context['response'] = []
 
     button_table = jc.create_button_table('Pour quel repas souhaitez-vous un vin ?')
     button_table['options'].append(jc.create_button('Dejeuner', 'dejeuner'))
@@ -235,6 +243,7 @@ def getVintage(request):
     return context
 
 
+
 def getDinerType(request):
     context = request['context']
     print request
@@ -295,13 +304,15 @@ actions = {
     'getPrice' : getPrice,
     'getAppelation' : getAppelation,
     'getVintage' : getVintage,
+<<<<<<< HEAD
     'getDinerType' : getDinerType,
     'getMealChoice' : getMealChoice,
+=======
+>>>>>>> a87f0fb8761db4c6f0f0ee5d5055774ebcac5d99
     'reset' : reset,
     'sayGoodbye' : sayGoodbye,
     'apiCall' : apiCall,
     'send' : send
 }
-
 
 client = Wit(access_token=os.getenv('WIT_TOKEN'), actions=actions)
