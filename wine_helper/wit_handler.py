@@ -24,6 +24,7 @@ def first_entity_value(entities, entity):
         return None
     return val['value'] if isinstance(val, dict) else val
 
+
 def defaultAnswer(request):
     context = request['context']
     context['response'] = []
@@ -53,9 +54,11 @@ def askColor(request):
     context = request['context']
     print request
     context['response'] = []
-    button_table = jc.create_button_table('Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant)')
+    button_table = jc.create_button_table(
+        'Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant)')
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
-    button_table['options'].append(jc.create_button('Recommencer une recherche', 'Recommencer '))
+    button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer '))
+    context['response'].append(button_table)
 
     context['last_step'] = 'color'
 
@@ -66,11 +69,13 @@ def askPrice(request):
     context = request['context']
     entities = request['entities']
     print request
-    #creation de la reponse de type bouton et ajout des boutons
+    # creation de la reponse de type bouton et ajout des boutons
     context['response'] = []
-    button_table = jc.create_button_table('Quel prix de vin? (exemple : "entre 10 et 20 euros", "moins de 100 euros"...)')
+    button_table = jc.create_button_table(
+        'Quel prix de vin? (exemple : "entre 10 et 20 euros", "moins de 100 euros"...)')
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
-    button_table['options'].append(jc.create_button('Recommencer une recherche', 'Recommencer '))
+    button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer '))
+    context['response'].append(button_table)
 
     context['last_step'] = 'price'
 
@@ -85,8 +90,8 @@ def askAppelation(request):
 
     button_table = jc.create_button_table('Souhaitez-vous une appelation de vin particulière ? (Bordeaux, Haut medoc, entre deux mers,...)')
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
-    button_table['options'].append(jc.create_button('Recommencer une recherche', 'Recommencer '))
-
+    button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer '))
+    context['response'].append(button_table)
 
     context['last_step'] = 'appelation'
 
@@ -100,7 +105,8 @@ def askVintage(request):
     context['response'] = []
     button_table = jc.create_button_table('Avez-vous une préférence de millésime (2009, 2013,...) ?')
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
-    button_table['options'].append(jc.create_button('Recommencer une recherche', 'Recommencer '))
+    button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer '))
+    context['response'].append(button_table)
 
     context['last_step'] = 'vintage'
 
@@ -145,18 +151,24 @@ def askMealChoice(request):
     print request
 
     context['response'] = []
-    context['response'].append(jc.create_whatever_button('Pour quel type de repas souhaitez-vous un vin ?'))
+
+    button_table = jc.create_button_table('Pour quel type de repas souhaitez-vous un vin ?')
+    button_table['options'].append(jc.create_button('Peu importe', 'peu importe'))
+    button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer '))
+    context['response'].append(button_table)
 
     context['last_step'] = 'meal'
 
     return context
+
 
 def sayGoodbye(request):
     context = request['context']
     print request
 
     context['response'] = []
-    context['response'].append(jc.create_text_response('Merci d\'avoir utilisé mes services, je vais me coucher dis moi bonjour pour me réveiller si tu as besoin de moi !'))
+    context['response'].append(jc.create_text_response(
+        'Merci d\'avoir utilisé mes services, je vais me coucher dis moi bonjour pour me réveiller si tu as besoin de moi !'))
 
     return context
 
@@ -164,7 +176,7 @@ def sayGoodbye(request):
 def getStorylineAperitif(request):
     context = request['context']
 
-    #ajout du scenario dans le contexte
+    # ajout du scenario dans le contexte
     context['storyline'] = 'aperitif'
     context['criteria'] = []
     context['criteria'].append(jc.create_criterion('degustation', 'aperitif'))
@@ -195,7 +207,7 @@ def getColor(request):
     entities = request['entities']
     print request
 
-    #recuperation de la couleur du vin
+    # recuperation de la couleur du vin
     color = first_entity_value(entities, 'wit_color')
     context['criteria'] = []
     context['criteria'].append(jc.create_criterion('color.fr', color))
@@ -220,7 +232,7 @@ def getPrice(request):
     context['criteria'] = []
     context['criteria'].append(jc.create_criterion('priceMin', min))
     context['criteria'].append(jc.create_criterion('priceMax', max))
-    #context['criteria'].append(jc.create_criterion('currency', currency))
+    # context['criteria'].append(jc.create_criterion('currency', currency))
 
     return context
 
@@ -251,7 +263,6 @@ def getVintage(request):
     return context
 
 
-
 def getDinerType(request):
     context = request['context']
     print request
@@ -264,6 +275,7 @@ def getDinerType(request):
 
     return context
 
+
 def getMealChoice(request):
     context = request['context']
     print request
@@ -275,6 +287,7 @@ def getMealChoice(request):
     context['criteria'].append(jc.create_criterion('food_padding', meal))
 
     return context
+
 
 def reset(request):
     print request
@@ -296,28 +309,28 @@ def send(request, response):
 
 
 actions = {
-    'defaultAnswer' : defaultAnswer,
-    'askStoryline' : askStoryline,
-    'askColor' : askColor,
-    'askPrice' : askPrice,
-    'askAppelation' : askAppelation,
-    'askVintage' : askVintage,
-    'askAdjustment' : askAdjustment,
-    'askDinerType' : askDinerType,
-    'askMealChoice' : askMealChoice,
-    'getStorylineAperitif' : getStorylineAperitif,
-    'getStorylineGift' : getStorylineGift,
-    'getStorylineRepas' : getStorylineRepas,
-    'getColor' : getColor,
-    'getPrice' : getPrice,
-    'getAppelation' : getAppelation,
-    'getVintage' : getVintage,
-    'getDinerType' : getDinerType,
-    'getMealChoice' : getMealChoice,
-    'reset' : reset,
-    'sayGoodbye' : sayGoodbye,
-    'apiCall' : apiCall,
-    'send' : send
+    'defaultAnswer': defaultAnswer,
+    'askStoryline': askStoryline,
+    'askColor': askColor,
+    'askPrice': askPrice,
+    'askAppelation': askAppelation,
+    'askVintage': askVintage,
+    'askAdjustment': askAdjustment,
+    'askDinerType': askDinerType,
+    'askMealChoice': askMealChoice,
+    'getStorylineAperitif': getStorylineAperitif,
+    'getStorylineGift': getStorylineGift,
+    'getStorylineRepas': getStorylineRepas,
+    'getColor': getColor,
+    'getPrice': getPrice,
+    'getAppelation': getAppelation,
+    'getVintage': getVintage,
+    'getDinerType': getDinerType,
+    'getMealChoice': getMealChoice,
+    'reset': reset,
+    'sayGoodbye': sayGoodbye,
+    'apiCall': apiCall,
+    'send': send
 }
 
 client = Wit(access_token=os.getenv('WIT_TOKEN'), actions=actions)
