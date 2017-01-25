@@ -147,7 +147,7 @@ def _event_handler(event_type, slack_event):
             pyBot.send_message(sender_id, channel, message)
         # By adding "X-Slack-No-Retry" : 1 to our response headers, we turn off
         # Slack's automatic retries.
-        return HttpResponse("TTTTTTT", 200)
+        return HttpResponse("OK", 200)
 
     # ============= Event Type Not Found! ============= #
     # If the event_type does not have a handler
@@ -157,7 +157,7 @@ def _event_handler(event_type, slack_event):
     
     #if "user" in slack_event["event"]:
     #    pyBot.send_message(channel, message)
-    return HttpResponse(message, 200)
+    return HttpResponse("OK", 200)
 
 
 def pre_install(request):
