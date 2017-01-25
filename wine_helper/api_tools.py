@@ -2,6 +2,7 @@
 
 import requests as re
 from pprint import pprint
+import db_tools as db
 
 import Wine as W
 import Criteria as C
@@ -22,19 +23,24 @@ def get_wines_by_criteria(criteria, limit=0):
     for criterion in criteria:
         # TODO: remove last &
         query += "&" + criterion.get_name() + "=" + str(criterion.get_value())
-    url += query
+    url += query.replace(" ","%20")
     pprint("[DEBUG] API call url: " + url)
 
     response = re.get(url)
     data = response.json()
     wine_list = []
     for wine in data:
+        gws = ""
+        if wine['globalScore']:
+            gws = wine['globalScore']
+        elif wine['gws']:
+            gws = wine['gws']
         wine_object = W.Wine(
             wine['appellation'].encode('utf-8'),
             wine['name'].encode('utf-8'),
             int(wine['vintage']),
             float(wine['price']),
-            float(wine['globalScore']),
+            float(gws),
             {
                 'fr': wine['color']['fr'].encode('utf-8'),
                 'en': wine['color']['en'].encode('utf-8')
@@ -46,7 +52,6 @@ def get_wines_by_criteria(criteria, limit=0):
         )
         wine_list.append(wine_object)
     return wine_list
-
 
 # TODO: review this function
 def build_wine_list (data, limit):
