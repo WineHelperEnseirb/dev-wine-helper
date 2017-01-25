@@ -35,8 +35,10 @@ def send_facebook_message(fbid, data):
         if data["action"] == 'api_call':
             handle_api_call(fbid)
         elif data["action"] == 'reset':
+            pprint(">>> RESET")
             reset_search(fbid)
     if 'last_step' in data:
+        pprint(">>>> last_step")
         store_last_step(fbid, data["last_step"])
     if 'response' in data and data["response"]:
         for item in data["response"]:
