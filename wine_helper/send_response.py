@@ -58,7 +58,7 @@ def adapt_message_to_wit(fbid, message):
     storyline = db.get_storyline_by_user_id(fbid)
 
     if last_step is not None:
-        message = message + "_" + last_step
+        message = message.decode("utf-8") + "_" + last_step
     if storyline is not None:
         message = message + "_" + storyline
 
