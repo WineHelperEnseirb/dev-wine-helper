@@ -134,27 +134,21 @@ def _event_handler(event_type, slack_event):
 
     if event_type == "message":
         sender_id = None
-        print "MESSAGE ICI \n \n"        
-        print slack_event["event"]
-        
+
         if "user" in slack_event["event"]: 
-            #and message_id not in pyBot.last_messages:
-            sender_id = slack_event["event"]["user"]
-            #pyBot.last_messages.append(message_id)
+            
+            sender_id = slack_event["event"]["user"]            
             adapted_message = sr.adapt_message_to_wit(sender_id, slack_event["event"]["text"].encode('utf-8'))
             message = wit.treatment(adapted_message, sender_id)
-            channel = slack_event["event"]["channel"]
-            #pyBot.slacker.chat.post_message(channel, "Oups, une erreur est survenue")
-            pyBot.send_message(sender_id, channel, message)
-        # By adding "X-Slack-No-Retry" : 1 to our response headers, we turn off
-        # Slack's automatic retries.
+            channel = slack_event["event"]["channel"]           
+            pyBot.send_message(sender_id, channel, message)        
         return HttpResponse("OK", 200)
 
     # ============= Event Type Not Found! ============= #
     # If the event_type does not have a handler
-    message = "You have not added an event handler for the %s" % event_type
+    #message = "You have not added an event handler for the %s" % event_type
     # Return a helpful error message
-    channel = slack_event["event"]["channel"]
+    #channel = slack_event["event"]["channel"]
     
     #if "user" in slack_event["event"]:
     #    pyBot.send_message(channel, message)
@@ -192,14 +186,13 @@ def hears(request):
     This route listens for incoming events from Slack and uses the event
     handler helper function to route events to our Bot.
     """
+
+    #Wit makes our responses timeout, so we ignore Slack retries
     if "HTTP_X_SLACK_RETRY_NUM" in request.META:
         return HttpResponse("OK", 200)
 
     slack_event = json.loads(request.body)
 
-
-    print "REQUEST ICI\n"
-    print request.META
     # ============= Slack URL Verification ============ #
     # In order to verify the url of our endpoint, Slack will send a challenge
     # token in a request and check for this token in the response our endpoint
@@ -242,8 +235,5 @@ def button(request):
     answer = json_res["actions"][0]["value"] 
     adapted_message = sr.adapt_message_to_wit(sender_id, answer.encode('utf-8'))
     message = wit.treatment(adapted_message, sender_id)
-    print "MESSAGE ICI\n"
-    print message
     pyBot.send_message(sender_id, channel, message)
-    #Not sure about this No-Retry
     return HttpResponse("Vous avez choisi "+answer, 200)
