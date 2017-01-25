@@ -63,11 +63,13 @@ def search_translation(file_name,line_original_language,line_new_language,to_tra
     """
     csv_file = open(file_name, 'rb')
     rd = csv.reader(csv_file, delimiter=';',quoting=csv.QUOTE_ALL)
+    nb_row = 0
     for row in rd:
+        nb_row += 1
+        pprint("----------DEBUG-----------\n\n")
+        pprint("row " + nb_row + ": " +row[line_original_language] " , " + row[line_new_language])
+        pprint("\n\n--------------------------DEBUG---------------------------\n\n")
         if line_original_language > 0 and line_new_language > 0:
-            pprint("--------------------------DEBUG---------------------------\n\n")
-            pprint("TO_TRANSLATE: " + to_translate + " , " + "IN THE TABLE: " + row[line_original_language])
-            pprint("\n\n--------------------------DEBUG---------------------------\n\n")
             if row[line_original_language - 1] == to_translate:
                 to_translate = row[line_new_language - 1]
                 break
