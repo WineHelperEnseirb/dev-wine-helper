@@ -128,7 +128,7 @@ def askDinerType(request):
     print request
 
     context['response'] = []
-    
+
     button_table = jc.create_button_table('Pour quel repas souhaitez-vous un vin ?')
     button_table['options'].append(jc.create_button('Dejeuner', 'dejeuner'))
     button_table['options'].append(jc.create_button('Diner', 'diner'))
@@ -210,6 +210,12 @@ def getPrice(request):
     entities = request['entities']
     min = first_entity_value(entities, 'minprice')
     max = first_entity_value(entities, 'maxprice')
+    #test if the minPrice is the minimum value and switch values if it is not
+    if min is not None and max is not None:
+        if min > max:
+            min = min + max
+            max = min - max
+            min = min - max
 
     context['criteria'] = []
     context['criteria'].append(jc.create_criterion('priceMin', min))
