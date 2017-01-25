@@ -65,6 +65,9 @@ def search_translation(file_name,line_original_language,line_new_language,to_tra
     rd = csv.reader(csv_file, delimiter=';',quoting=csv.QUOTE_ALL)
     for row in rd:
         if line_original_language > 0 and line_new_language > 0:
+            pprint("--------------------------DEBUG---------------------------\n\n")
+            pprint("TO_TRANSLATE: " + to_translate + " , " + "IN THE TABLE: " + row[line_original_language])
+            pprint("\n\n--------------------------DEBUG---------------------------\n\n")
             if row[line_original_language - 1] == to_translate:
                 to_translate = row[line_new_language - 1]
                 break
@@ -86,3 +89,4 @@ def adapt_type_number(current_element):
 
 
 #read_csv_file("/Users/aymesr/Desktop/Cours/Cours3A/ProjetGL/dev-wine-helper/wine_helper/data/wine_helper_data_wines.csv")
+#print("LE RESULTAT DE ROUGE EST:" + search_translation("/Users/aymesr/Desktop/Cours/Cours3A/ProjetGL/dev-wine-helper/wine_helper/data/translate_file.csv",2,1,"rouge"))
