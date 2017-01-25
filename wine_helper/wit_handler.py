@@ -12,7 +12,7 @@ import json_creator as jc
 
 
 def treatment(request, sender_id):
-    print "wit received message : " + request
+    #print "wit received message : " + request
     return client.run_actions(sender_id, request.decode('utf-8'))
 
 
@@ -35,7 +35,6 @@ def defaultAnswer(request):
 
 def askStoryline(request):
     context = request['context']
-    print request
 
     context['response'] = []
 
@@ -52,7 +51,6 @@ def askStoryline(request):
 
 def askColor(request):
     context = request['context']
-    print request
     context['response'] = []
     button_table = jc.create_button_table(
         'Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant)')
@@ -68,7 +66,6 @@ def askColor(request):
 def askPrice(request):
     context = request['context']
     entities = request['entities']
-    print request
     # creation de la reponse de type bouton et ajout des boutons
     context['response'] = []
     button_table = jc.create_button_table(
@@ -84,7 +81,6 @@ def askPrice(request):
 
 def askAppelation(request):
     context = request['context']
-    print request
 
     context['response'] = []
 
@@ -100,7 +96,6 @@ def askAppelation(request):
 
 def askVintage(request):
     context = request['context']
-    print request
 
     context['response'] = []
     button_table = jc.create_button_table('Avez-vous une préférence de millésime (2009, 2013,...) ?')
@@ -115,7 +110,6 @@ def askVintage(request):
 
 def askAdjustment(request):
     context = request['context']
-    print request
 
     context['response'] = []
 
@@ -131,7 +125,6 @@ def askAdjustment(request):
 
 def askDinerType(request):
     context = request['context']
-    print request
 
     context['response'] = []
 
@@ -148,7 +141,6 @@ def askDinerType(request):
 
 def askMealChoice(request):
     context = request['context']
-    print request
 
     context['response'] = []
 
@@ -164,7 +156,6 @@ def askMealChoice(request):
 
 def sayGoodbye(request):
     context = request['context']
-    print request
 
     context['response'] = []
     context['response'].append(jc.create_text_response(
@@ -205,7 +196,6 @@ def getStorylineRepas(request):
 def getColor(request):
     context = request['context']
     entities = request['entities']
-    print request
 
     # recuperation de la couleur du vin
     color = first_entity_value(entities, 'wit_color')
@@ -217,7 +207,6 @@ def getColor(request):
 
 def getPrice(request):
     context = request['context']
-    print request
 
     entities = request['entities']
     min = first_entity_value(entities, 'minprice')
@@ -239,7 +228,6 @@ def getPrice(request):
 
 def getAppelation(request):
     context = request['context']
-    print request
 
     entities = request['entities']
     appellation = first_entity_value(entities, 'wit_appelation')
@@ -252,7 +240,6 @@ def getAppelation(request):
 
 def getVintage(request):
     context = request['context']
-    print request
 
     entities = request['entities']
     vintage = first_entity_value(entities, 'vintage')
@@ -265,7 +252,6 @@ def getVintage(request):
 
 def getDinerType(request):
     context = request['context']
-    print request
 
     entities = request['entities']
     dinertype = first_entity_value(entities, 'wit_typediner')
@@ -278,7 +264,6 @@ def getDinerType(request):
 
 def getMealChoice(request):
     context = request['context']
-    print request
 
     entities = request['entities']
     meal = first_entity_value(entities, 'wit_meal')
@@ -290,7 +275,6 @@ def getMealChoice(request):
 
 
 def reset(request):
-    print request
     context = request['context']
     context['action'] = 'reset'
 
