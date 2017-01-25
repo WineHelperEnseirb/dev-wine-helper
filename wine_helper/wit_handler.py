@@ -130,6 +130,17 @@ def askDinerType(request):
     return context
 
 
+def askMealChoice(request):
+    context = request['context']
+    print request
+
+    context['response'] = []
+    context['response'].append(jc.create_whatever_button('Pour quel type de repas souhaitez-vous un vin ?'))
+
+    context['last_step'] = 'meal'
+
+    return context
+
 def sayGoodbye(request):
     context = request['context']
     print request
@@ -236,6 +247,18 @@ def getDinerType(request):
 
     return context
 
+def getMealChoice(request):
+    context = request['context']
+    print request
+
+    entities = request['entities']
+    meal = first_entity_value(entities, 'wit_meal')
+
+    context['criteria'] = []
+    context['criteria'].append(jc.create_criterion('food_padding', meal))
+
+    return context
+
 def reset(request):
     print request
     context = request['context']
@@ -264,6 +287,7 @@ actions = {
     'askVintage' : askVintage,
     'askAdjustment' : askAdjustment,
     'askDinerType' : askDinerType,
+    'askMealChoice' : askMealChoice,
     'getStorylineAperitif' : getStorylineAperitif,
     'getStorylineGift' : getStorylineGift,
     'getStorylineRepas' : getStorylineRepas,
@@ -272,6 +296,7 @@ actions = {
     'getAppelation' : getAppelation,
     'getVintage' : getVintage,
     'getDinerType' : getDinerType,
+    'getMealChoice' : getMealChoice,
     'reset' : reset,
     'sayGoodbye' : sayGoodbye,
     'apiCall' : apiCall,
