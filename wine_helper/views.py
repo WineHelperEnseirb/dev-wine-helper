@@ -144,10 +144,12 @@ def _event_handler(event_type, slack_event):
         if "user" in slack_event["event"] and message_id not in pyBot.last_messages:
             sender_id = slack_event["event"]["user"]
             pyBot.last_messages.append(message_id)
-            adapted_message = pyBot.adapt_message_to_wit(sender_id, slack_event["event"]["text"].encode('utf-8'))
+            adapted_message = sr.adapt_message_to_wit(sender_id, slack_event["event"]["text"].encode('utf-8'))
             message = wit.treatment(adapted_message, sender_id)
             channel = slack_event["event"]["channel"]
             pyBot.send_message(sender_id, channel, message)
+        # By adding "X-Slack-No-Retry" : 1 to our response headers, we turn off
+        # Slack's automatic retries.
         return HttpResponse("TTTTTTT", 200, {"X-Slack-No-Retry": 1})
 
     # ============= Event Type Not Found! ============= #
@@ -159,7 +161,6 @@ def _event_handler(event_type, slack_event):
     #if "user" in slack_event["event"]:
     #    pyBot.send_message(channel, message)
     return HttpResponse(message, 200, {"X-Slack-No-Retry": 1})
-    #removed {"X-Slack-No-Retry": 1}
 
 # SLACK BOT BELOW
 
@@ -235,7 +236,7 @@ def button(request):
     channel = json_res["channel"]["id"]
     
     answer = json_res["actions"][0]["value"] 
-    adapted_message = pyBot.adapt_message_to_wit(sender_id, answer.encode('utf-8'))
+    adapted_message = sr.adapt_message_to_wit(sender_id, answer.encode('utf-8'))
     message = wit.treatment(adapted_message, sender_id)
     print "MESSAGE ICI\n"
     print message
