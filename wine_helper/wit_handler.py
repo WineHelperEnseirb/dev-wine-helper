@@ -57,7 +57,7 @@ def askColor(request):
     button_table = jc.create_button_table(
         'Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant)')
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
-    button_table['options'].append(jc.create_button('Recommencer une recherche', 'Recommencer '))
+    button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer '))
     context['response'].append(button_table)
 
     context['last_step'] = 'color'
@@ -74,7 +74,7 @@ def askPrice(request):
     button_table = jc.create_button_table(
         'Quel prix de vin? (exemple : "entre 10 et 20 euros", "moins de 100 euros"...)')
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
-    button_table['options'].append(jc.create_button('Recommencer une recherche', 'Recommencer '))
+    button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer '))
     context['response'].append(button_table)
 
     context['last_step'] = 'price'
@@ -88,10 +88,9 @@ def askAppelation(request):
 
     context['response'] = []
 
-    button_table = jc.create_button_table(
-        'Souhaitez-vous une appelation de vin particulière ? (Bordeaux, Haut medoc, entre deux mers,...)')
+    button_table = jc.create_button_table('Souhaitez-vous une appelation de vin particulière ? (Bordeaux, Haut medoc, entre deux mers,...)')
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
-    button_table['options'].append(jc.create_button('Recommencer une recherche', 'Recommencer '))
+    button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer '))
     context['response'].append(button_table)
 
     context['last_step'] = 'appelation'
@@ -106,7 +105,7 @@ def askVintage(request):
     context['response'] = []
     button_table = jc.create_button_table('Avez-vous une préférence de millésime (2009, 2013,...) ?')
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
-    button_table['options'].append(jc.create_button('Recommencer une recherche', 'Recommencer '))
+    button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer '))
     context['response'].append(button_table)
 
     context['last_step'] = 'vintage'
@@ -155,7 +154,7 @@ def askMealChoice(request):
 
     button_table = jc.create_button_table('Pour quel type de repas souhaitez-vous un vin ?')
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe'))
-    button_table['options'].append(jc.create_button('Recommencer une recherche', 'Recommencer '))
+    button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer '))
     context['response'].append(button_table)
 
     context['last_step'] = 'meal'
