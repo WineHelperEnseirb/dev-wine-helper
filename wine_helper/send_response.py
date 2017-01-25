@@ -12,6 +12,7 @@ from messengerbot import MessengerClient, messages, attachments, templates, elem
 import api_tools as api
 import db_tools as db
 from Criteria import Criteria
+import wit_handler as wit
 
 
 # "Constants" (variables that should not change)
@@ -35,16 +36,17 @@ def send_facebook_message(fbid, data):
         if data["action"] == 'api_call':
             handle_api_call(fbid)
         elif data["action"] == 'reset':
-            pprint(">>> RESET")
             reset_search(fbid)
+        elif data["reask"] == 'reask':
+            handle_reask(fbid)
     if 'last_step' in data:
-        pprint(">>>> last_step")
         store_last_step(fbid, data["last_step"])
     if 'response' in data and data["response"]:
         for item in data["response"]:
             handle_response(fbid, item)
 
 
+# TODO: change name
 def adapt_message_to_wit(fbid, message):
     """
     TODO: write description
@@ -60,11 +62,20 @@ def adapt_message_to_wit(fbid, message):
     storyline = db.get_storyline_by_user_id(fbid)
 
     if last_step is not None:
-        message = message.decode("utf-8") + "_" + last_step
+        message = message.decode("utf-8") + " _" + last_step
     if storyline is not None:
-        message = message + "_" + storyline
+        message = message + " _" + storyline
 
     return message
+
+
+# TODO: find another solution, do not call Wit here!
+def handle_reask(fbid):
+    """
+    TODO: write description
+    """
+    adapted_message = adapt_message_to_wit(fbid, "reask")
+    wit.treatment(adapted_message, fbid)
 
 
 def store_last_step(fbid, last_step):
