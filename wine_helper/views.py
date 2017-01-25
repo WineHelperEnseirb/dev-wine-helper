@@ -132,51 +132,14 @@ def _event_handler(event_type, slack_event):
     pyBot.find_team(team_id)
 
 
-
-    # ================ Team Join Events =============== #
-    # When the user first joins a team, the type of event will be team_join
-    if event_type == "team_join":
-        user_id = slack_event["event"]["user"]["id"]
-        # Send the onboarding message
-        pyBot.onboarding_message(team_id, user_id)
-        return HttpResponse("Welcome Message Sent", 200,)
-
-    # ============== Share Message Events ============= #
-    # If the user has shared the onboarding message, the event type will be
-    # message. We'll also need to check that this is a message that has been
-    # shared by looking into the attachments for "is_shared".
-    elif event_type == "message" and slack_event["event"].get("attachments"):
-        user_id = slack_event["event"].get("user")
-        if slack_event["event"]["attachments"][0].get("is_share"):
-            # Update the onboarding message and check off "Share this Message"
-            pyBot.update_share(team_id, user_id)
-            return HttpResponse("Welcome message updates with shared message",
-                                 200,)
-
-    # ============= Reaction Added Events ============= #
-    # If the user has added an emoji reaction to the onboarding message
-    elif event_type == "reaction_added":
-        user_id = slack_event["event"]["user"]
-        # Update the onboarding message
-        pyBot.update_emoji(team_id, user_id)
-        return HttpResponse("Welcome message updates with reactji", 200,)
-
-    # =============== Pin Added Events ================ #
-    # If the user has added an emoji reaction to the onboarding message
-    elif event_type == "pin_added":
-        user_id = slack_event["event"]["user"]
-        # Update the onboarding message
-        pyBot.update_pin(team_id, user_id)
-        return HttpResponse("Welcome message updates with pin", 200,)
-
-    elif event_type == "message":
+    if event_type == "message":
         sender_id = None
         print "MESSAGE ICI \n \n"        
         message_id = slack_event["event"]["event_ts"]
         print message_id
-        if "user" in slack_event["event"] and message_id != pyBot.last_message_id:
+        if "user" in slack_event["event"] and message_id not in pyBot.last_messages:
             sender_id = slack_event["event"]["user"]
-            pyBot.last_message_id = message_id
+            pyBot.last_messages.append(message_id)
             adapted_message = pyBot.adapt_message_to_wit(sender_id, slack_event["event"]["text"].encode('utf-8'))
             message = wit.treatment(adapted_message, sender_id)
             channel = slack_event["event"]["channel"]
