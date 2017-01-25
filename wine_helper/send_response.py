@@ -27,8 +27,6 @@ def send_facebook_message(fbid, data):
     """
     TODO: write description
     """
-    if 'last_step' in data:
-        store_last_step(fbid, data["last_step"])
     if 'storyline' in data:
         store_storyline(fbid,data["storyline"])
     if 'criteria' in data and data["criteria"]:
@@ -38,6 +36,8 @@ def send_facebook_message(fbid, data):
             handle_api_call(fbid)
         elif data["action"] == 'reset':
             reset_search(fbid)
+    if 'last_step' in data:
+        store_last_step(fbid, data["last_step"])
     if 'response' in data and data["response"]:
         for item in data["response"]:
             handle_response(fbid, item)
