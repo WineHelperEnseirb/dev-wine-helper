@@ -8,7 +8,7 @@ API_BASE_URL = "http://wine-helper-fake-api.herokuapp.com/api/wines"
 
 def read_csv_file(file_name):
     """
-    Read the file with file_name name, except if it is not a csv file.
+    Read the file with file_name name, except if it is not a csv file. Add the datas to the API of url API_BASE_URL.
     """
     csv_file = open(file_name, 'rb')
     rd = csv.reader(csv_file, delimiter=';',quoting=csv.QUOTE_ALL)
@@ -22,8 +22,8 @@ def read_csv_file(file_name):
         nb_rd_rows = nb_rd_rows + 1
         if nb_rd_rows != 1:
             for current_element in row:
-                current_element = current_element.replace("é","e")
-                current_element = current_element.replace("à","a")
+                #current_element = current_element.replace("é","e")
+                #current_element = current_element.replace("à","a")
                 current_element = current_element.lower()
                 to_add = []
                 # Case of float
@@ -55,6 +55,24 @@ def read_csv_file(file_name):
                 #print(current_request.reason)
                 print("\n\n")
 
+def search_translation(file_name,line_original_language,line_new_language,to_translate):
+    """
+    Translate the string to_translate from the first language into the second language. The function look in the file
+    of name file_name.
+    """
+    csv_file = open(file_name, 'rb')
+    rd = csv.reader(csv_file, delimiter=';',quoting=csv.QUOTE_ALL)
+
+    nb_rd_rows = 0
+    for row in rd:
+        nb_rd_rows += 1
+            if line_original_language > 0 and line_new_language > 0:
+                if row[line_original_language] == to_translate:
+                    to_translate = row[line_new_language]
+                    break
+    return to_translate
+
+
 def adapt_type_number(current_element):
     is_number = True
     for char in current_element:
@@ -69,5 +87,5 @@ def adapt_type_number(current_element):
         return current_element
 
 
-
-read_csv_file("/Users/aymesr/Desktop/Cours/Cours3A/ProjetGL/dev-wine-helper/wine_helper/data/wine_helper_data_wines.csv")
+#read_csv_file("/Users/aymesr/Desktop/Cours/Cours3A/ProjetGL/dev-wine-helper/wine_helper/data/wine_helper_data_wines.csv")
+print("Résultat de Rouge: " + search_translation("/Users/aymesr/Desktop/Cours/Cours3A/ProjetGL/dev-wine-helper/wine_helper/data/translate_file.csv",1,2,"rouge"):
