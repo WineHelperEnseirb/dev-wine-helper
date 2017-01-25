@@ -233,6 +233,9 @@ def button(request):
     response = urllib.unquote(request.body)[8:]
     json_res = json.loads(response)
 
+    print "DEBUG BUTTON SLACK\n"
+    print json_res
+    
     sender_id = json_res["user"]["id"]
     channel = json_res["channel"]["id"]
 
