@@ -127,6 +127,8 @@ def askDinerType(request):
     context = request['context']
     print request
 
+    context['response'] = []
+    
     button_table = jc.create_button_table('Pour quel repas souhaitez-vous un vin ?')
     button_table['options'].append(jc.create_button('Dejeuner', 'dejeuner'))
     button_table['options'].append(jc.create_button('Diner', 'diner'))
@@ -304,11 +306,8 @@ actions = {
     'getPrice' : getPrice,
     'getAppelation' : getAppelation,
     'getVintage' : getVintage,
-<<<<<<< HEAD
     'getDinerType' : getDinerType,
     'getMealChoice' : getMealChoice,
-=======
->>>>>>> a87f0fb8761db4c6f0f0ee5d5055774ebcac5d99
     'reset' : reset,
     'sayGoodbye' : sayGoodbye,
     'apiCall' : apiCall,
