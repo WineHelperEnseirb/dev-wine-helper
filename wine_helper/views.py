@@ -241,4 +241,5 @@ def button(request):
     print "MESSAGE ICI\n"
     print message
     pyBot.send_message(sender_id, channel, message)
-    return HttpResponse("Vous avez choisi "+answer, 200,)
+    #Not sure about this No-Retry
+    return HttpResponse("Vous avez choisi "+answer, 200,{"X-Slack-No-Retry": 1})
