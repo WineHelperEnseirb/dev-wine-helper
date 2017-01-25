@@ -207,11 +207,11 @@ def hears(request):
     # We can verify the request is coming from Slack by checking that the
     # verification token in the request matches our app's settings
     if pyBot.verification != slack_event.get("token"):
-        message = "Invalid Slack verification token: %s \npyBot has: \
+        print "Invalid Slack verification token: %s \npyBot has: \
                    %s\n\n" % (slack_event["token"], pyBot.verification)
         # By adding "X-Slack-No-Retry" : 1 to our response headers, we turn off
         # Slack's automatic retries during development.
-        return HttpResponse(message, status_code = 403, {"X-Slack-No-Retry": 1})
+        return HttpResponse(message, status_code = 403,)
 
     # ====== Process Incoming Events from Slack ======= #
     # If the incoming request is an Event we've subcribed to
@@ -223,7 +223,7 @@ def hears(request):
     # If our bot hears things that are not events we've subscribed to,
     # send a quirky but helpful error response
     return HttpResponse("[NO EVENT IN SLACK REQUEST] These are not the droids\
-                         you're looking for.", status_code = 404, {"X-Slack-No-Retry": 1})
+                         you're looking for.", status_code = 404,)
 
 @csrf_exempt
 def button(request):    
