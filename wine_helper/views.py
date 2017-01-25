@@ -128,9 +128,6 @@ def _event_handler(event_type, slack_event):
     ----------
     obj
     Response object with 200 - ok or 500 - No Event Handler error"""
-    team_id = slack_event["team_id"]
-    pyBot.find_team(team_id)
-
 
     if event_type == "message":
         sender_id = None
@@ -193,6 +190,10 @@ def hears(request):
     handler helper function to route events to our Bot.
     """
     slack_event = json.loads(request.body)
+
+    team_id = slack_event["team_id"]
+    pyBot.find_team(team_id)
+
     # ============= Slack URL Verification ============ #
     # In order to verify the url of our endpoint, Slack will send a challenge
     # token in a request and check for this token in the response our endpoint
