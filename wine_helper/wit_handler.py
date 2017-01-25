@@ -143,6 +143,15 @@ def getStorylineGift(request):
     return context
 
 
+def getStorylineRepas(request):
+    context = request['context']
+    context['storyline'] = 'repas'
+    context['criteria'] = []
+    context['criteria'].append(jc.create_criterion('degustation', 'dejeuner|diner'))
+
+    return context
+
+
 def getColor(request):
     context = request['context']
     entities = request['entities']
@@ -227,6 +236,7 @@ actions = {
     'askAdjustment' : askAdjustment,
     'getStorylineAperitif' : getStorylineAperitif,
     'getStorylineGift' : getStorylineGift,
+    'getStorylineRepas' : getStorylineRepas,
     'getColor' : getColor,
     'getPrice' : getPrice,
     'getAppelation' : getAppelation,
