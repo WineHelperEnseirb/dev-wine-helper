@@ -135,6 +135,10 @@ def _event_handler(event_type, slack_event):
     if event_type == "message":
         sender_id = None
         print "MESSAGE ICI \n \n"        
+        print slack_event["event"]
+        print "LIST ID \n"
+        print pyBot.last_messages
+        print "MESSAGE ID\n"
         message_id = slack_event["event"]["event_ts"]
         print message_id
         if "user" in slack_event["event"] and message_id not in pyBot.last_messages:
