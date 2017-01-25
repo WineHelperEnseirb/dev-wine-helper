@@ -194,7 +194,7 @@ def hears(request):
     pyBot.find_team(team_id)
 
     print "REQUEST ICI\n"
-    print request
+    print request.META
     # ============= Slack URL Verification ============ #
     # In order to verify the url of our endpoint, Slack will send a challenge
     # token in a request and check for this token in the response our endpoint
