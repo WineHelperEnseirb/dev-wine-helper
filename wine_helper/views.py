@@ -144,7 +144,7 @@ def _event_handler(event_type, slack_event):
             pyBot.send_message(sender_id, channel, message)
         # By adding "X-Slack-No-Retry" : 1 to our response headers, we turn off
         # Slack's automatic retries.
-        return HttpResponse("TTTTTTT", status_code = 200)
+        return HttpResponse("TTTTTTT", status= 200)
 
     # ============= Event Type Not Found! ============= #
     # If the event_type does not have a handler
@@ -154,7 +154,7 @@ def _event_handler(event_type, slack_event):
     
     #if "user" in slack_event["event"]:
     #    pyBot.send_message(channel, message)
-    return HttpResponse(message, status_code = 200)
+    return HttpResponse(message, status= 200)
 
 # SLACK BOT BELOW
 
@@ -200,7 +200,7 @@ def hears(request):
     # sends back.
     #       For more info: https://api.slack.com/events/url_verification
     if "challenge" in slack_event:
-        return HttpResponse(slack_event["challenge"], status_code = 200,)
+        return HttpResponse(slack_event["challenge"], status= 200)
         #removed  {"content_type":"application/json"} from flask response
 
     # ============ Slack Token Verification =========== #
@@ -211,7 +211,7 @@ def hears(request):
                    %s\n\n" % (slack_event["token"], pyBot.verification)
         # By adding "X-Slack-No-Retry" : 1 to our response headers, we turn off
         # Slack's automatic retries during development.
-        return HttpResponse(message, status_code = 403,)
+        return HttpResponse(message, status= 403)
 
     # ====== Process Incoming Events from Slack ======= #
     # If the incoming request is an Event we've subcribed to
@@ -223,7 +223,7 @@ def hears(request):
     # If our bot hears things that are not events we've subscribed to,
     # send a quirky but helpful error response
     return HttpResponse("[NO EVENT IN SLACK REQUEST] These are not the droids\
-                         you're looking for.", status_code = 404,)
+                         you're looking for.", status= 404)
 
 @csrf_exempt
 def button(request):    
@@ -240,4 +240,4 @@ def button(request):
     print message
     pyBot.send_message(sender_id, channel, message)
     #Not sure about this No-Retry
-    return HttpResponse("Vous avez choisi "+answer, status_code = 200)
+    return HttpResponse("Vous avez choisi "+answer, status= 200)
