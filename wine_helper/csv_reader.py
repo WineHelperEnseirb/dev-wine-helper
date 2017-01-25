@@ -3,6 +3,7 @@ import csv
 import requests as re
 import api_tools as api
 import json
+from pprint import pprint
 
 API_BASE_URL = "http://wine-helper-fake-api.herokuapp.com/api/wines"
 
