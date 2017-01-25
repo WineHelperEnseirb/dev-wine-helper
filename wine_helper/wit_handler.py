@@ -308,6 +308,7 @@ def send(request, response):
 
 actions = {
     'defaultAnswer': defaultAnswer,
+    'sayDontUnderstand' : sayDontUnderstand,
     'askStoryline': askStoryline,
     'askColor': askColor,
     'askPrice': askPrice,
