@@ -129,6 +129,9 @@ def _event_handler(event_type, slack_event):
     obj
     Response object with 200 - ok or 500 - No Event Handler error"""
 
+    team_id = slack_event["team_id"]
+    pyBot.find_team(team_id)
+
     if event_type == "message":
         sender_id = None
         print "MESSAGE ICI \n \n"
@@ -139,12 +142,13 @@ def _event_handler(event_type, slack_event):
             sender_id = slack_event["event"]["user"]
             #pyBot.last_messages.append(message_id)
             adapted_message = sr.adapt_message_to_wit(sender_id, slack_event["event"]["text"].encode('utf-8'))
-            message = wit.treatment(adapted_message, sender_id)
+            #message = wit.treatment(adapted_message, sender_id)
             channel = slack_event["event"]["channel"]
-            pyBot.send_message(sender_id, channel, message)
+            pyBot.slacker.chat.post_message(channel, "Oups, une erreur est survenue")
+            #pyBot.send_message(sender_id, channel, message)
         # By adding "X-Slack-No-Retry" : 1 to our response headers, we turn off
         # Slack's automatic retries.
-        return HttpResponse("TTTTTTT", status= 200)
+        return HttpResponse("OK", 200)
 
     # ============= Event Type Not Found! ============= #
     # If the event_type does not have a handler
@@ -154,7 +158,7 @@ def _event_handler(event_type, slack_event):
 
     #if "user" in slack_event["event"]:
     #    pyBot.send_message(channel, message)
-    return HttpResponse(message, status= 200)
+    return HttpResponse("OK", 200)
 
 
 def pre_install(request):
@@ -190,8 +194,6 @@ def hears(request):
     """
     slack_event = json.loads(request.body)
 
-    team_id = slack_event["team_id"]
-    pyBot.find_team(team_id)
 
     print "REQUEST ICI\n"
     print request.META
@@ -201,7 +203,7 @@ def hears(request):
     # sends back.
     #       For more info: https://api.slack.com/events/url_verification
     if "challenge" in slack_event:
-        return HttpResponse(slack_event["challenge"], status= 200)
+        return HttpResponse(slack_event["challenge"], 200)
         #removed  {"content_type":"application/json"} from flask response
 
     # ============ Slack Token Verification =========== #
@@ -212,7 +214,7 @@ def hears(request):
                    %s\n\n" % (slack_event["token"], pyBot.verification)
         # By adding "X-Slack-No-Retry" : 1 to our response headers, we turn off
         # Slack's automatic retries during development.
-        return HttpResponse(message, status= 403)
+        return HttpResponse(message, 403)
 
     # ====== Process Incoming Events from Slack ======= #
     # If the incoming request is an Event we've subcribed to
@@ -224,7 +226,7 @@ def hears(request):
     # If our bot hears things that are not events we've subscribed to,
     # send a quirky but helpful error response
     return HttpResponse("[NO EVENT IN SLACK REQUEST] These are not the droids\
-                         you're looking for.", status= 404)
+                         you're looking for.", 404)
 
 @csrf_exempt
 def button(request):
@@ -241,4 +243,4 @@ def button(request):
     print message
     pyBot.send_message(sender_id, channel, message)
     #Not sure about this No-Retry
-    return HttpResponse("Vous avez choisi "+answer, status= 200)
+    return HttpResponse("Vous avez choisi "+answer, 200)
