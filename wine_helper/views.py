@@ -136,14 +136,11 @@ def _event_handler(event_type, slack_event):
         sender_id = None
         print "MESSAGE ICI \n \n"        
         print slack_event["event"]
-        print "LIST ID \n"
-        print pyBot.last_messages
-        print "MESSAGE ID\n"
-        message_id = slack_event["event"]["event_ts"]
-        print message_id
-        if "user" in slack_event["event"] and message_id not in pyBot.last_messages:
+        
+        if "user" in slack_event["event"]: 
+            #and message_id not in pyBot.last_messages:
             sender_id = slack_event["event"]["user"]
-            pyBot.last_messages.append(message_id)
+            #pyBot.last_messages.append(message_id)
             adapted_message = sr.adapt_message_to_wit(sender_id, slack_event["event"]["text"].encode('utf-8'))
             message = wit.treatment(adapted_message, sender_id)
             channel = slack_event["event"]["channel"]
@@ -242,4 +239,4 @@ def button(request):
     print message
     pyBot.send_message(sender_id, channel, message)
     #Not sure about this No-Retry
-    return HttpResponse("Vous avez choisi "+answer, 200,{"X-Slack-No-Retry": 1})
+    return HttpResponse("Vous avez choisi "+answer,)
