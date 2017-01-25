@@ -23,7 +23,7 @@ def get_wines_by_criteria(criteria, limit=0):
     # setting criteria
     for criterion in criteria:
         # TODO: remove last &
-        value = cr.search_translation("dev-wine-helper/wine_helper/data/translate_file.csv",1,2,str(criterion.get_value()))
+        value = cr.search_translation("/wine_helper/data/translate_file.csv",1,2,str(criterion.get_value()))
         query += "&" + criterion.get_name() + "=" + str(criterion.get_value())
     url += query.replace(" ","%20")
     pprint("[DEBUG] API call url: " + url)
