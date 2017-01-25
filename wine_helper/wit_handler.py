@@ -222,6 +222,18 @@ def getVintage(request):
     return context
 
 
+def getDinerType(request):
+    context = request['context']
+    print request
+
+    entities = request['entities']
+    dinertype = first_entity_value(entities, 'wit_typediner')
+
+    context['criteria'] = []
+    context['criteria'].append(jc.create_criterion('degustation', dinertype))
+
+    return context
+
 def reset(request):
     print request
     context = request['context']
@@ -257,6 +269,7 @@ actions = {
     'getPrice' : getPrice,
     'getAppelation' : getAppelation,
     'getVintage' : getVintage,
+    'getDinerType' : getDinerType,
     'reset' : reset,
     'sayGoodbye' : sayGoodbye,
     'apiCall' : apiCall,
