@@ -192,6 +192,9 @@ def hears(request):
     This route listens for incoming events from Slack and uses the event
     handler helper function to route events to our Bot.
     """
+    if "HTTP_X_SLACK_RETRY_NUM" in request.META:
+        return HttpResponse("OK", 200)
+
     slack_event = json.loads(request.body)
 
 
