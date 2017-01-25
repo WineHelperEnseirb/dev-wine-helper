@@ -156,7 +156,6 @@ def _event_handler(event_type, slack_event):
     #    pyBot.send_message(channel, message)
     return HttpResponse(message, status= 200)
 
-# SLACK BOT BELOW
 
 def pre_install(request):
     #"""This route renders the installation page with 'Add to Slack' button."""
@@ -194,6 +193,8 @@ def hears(request):
     team_id = slack_event["team_id"]
     pyBot.find_team(team_id)
 
+    print "REQUEST ICI\n"
+    print request
     # ============= Slack URL Verification ============ #
     # In order to verify the url of our endpoint, Slack will send a challenge
     # token in a request and check for this token in the response our endpoint
