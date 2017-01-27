@@ -74,6 +74,7 @@ def search_translation(file_name,line_original_language,line_new_language,to_tra
                 to_translate = row[line_new_language]
                 print("IT'S GOOOOOOOOOOOOOOOOOOOD: " + row[line_new_language] + ", " + to_translate)
                 break
+    print("RETUUUUUUUUURN VALUUUUUUUUUUUUUUUUUUUUUUE: " + to_translate)
     return to_translate
 
 
