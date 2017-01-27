@@ -32,25 +32,14 @@ def get_wines_by_criteria(criteria, limit=0):
     data = response.json()
     wine_list = []
     for wine in data:
-        gws = ""
-        if 'globalScore' in wine:
-            gws = wine['globalScore']
-        elif 'gws' in wine:
-            gws = wine['gws']
         wine_object = W.Wine(
             wine['appellation'].encode('utf-8'),
             wine['name'].encode('utf-8'),
             int(wine['vintage']),
             float(wine['price']),
-            float(gws),
-            {
-                'fr': wine['color']['fr'].encode('utf-8'),
-                'en': wine['color']['en'].encode('utf-8')
-            },
-            {
-                'fr': wine['taste']['fr'].encode('utf-8'),
-                'en': wine['taste']['en'].encode('utf-8')
-            }
+            float(wine['gws']),
+            wine['color'],
+            ""
         )
         wine_list.append(wine_object)
     return wine_list
