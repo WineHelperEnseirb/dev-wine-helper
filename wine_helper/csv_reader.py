@@ -72,6 +72,7 @@ def search_translation(file_name,line_original_language,line_new_language,to_tra
         if line_original_language >= 0 and line_new_language >= 0:
             if row[line_original_language] == to_translate:
                 to_translate = row[line_new_language]
+                print("IT'S GOOOOOOOOOOOOOOOOOOOD: " + row[line_new_language] + ", " + to_translate)
                 break
     return to_translate
 
