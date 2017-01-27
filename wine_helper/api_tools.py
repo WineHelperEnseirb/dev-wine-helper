@@ -33,9 +33,9 @@ def get_wines_by_criteria(criteria, limit=0):
     wine_list = []
     for wine in data:
         gws = ""
-        if wine['globalScore']:
+        if 'globalScore' in wine:
             gws = wine['globalScore']
-        elif wine['gws']:
+        elif 'gws' in wine:
             gws = wine['gws']
         wine_object = W.Wine(
             wine['appellation'].encode('utf-8'),
