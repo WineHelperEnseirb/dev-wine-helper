@@ -185,8 +185,7 @@ def handle_api_call(fbid):
             res += wine.get_name().decode('utf-8')
             res += ", " + wine.get_appellation().decode('utf-8')
             res += " (" + str(wine.get_vintage()) + ")"
-            res += ", " + wine.get_color()['fr'].decode('utf-8')
-            res += ", " + wine.get_taste()['fr'].decode('utf-8')
+            res += ", " + wine.get_color().decode('utf-8')
             res += ", " + str(wine.get_price()) + " euros"
             res += "\n"
 
