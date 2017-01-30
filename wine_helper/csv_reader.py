@@ -66,15 +66,10 @@ def search_translation(file_name,line_original_language,line_new_language,to_tra
     nb_row = 0
     for row in rd:
         nb_row += 1
-        pprint("----------DEBUG-----------\n\n")
-        pprint("row " + str(nb_row) + ": " + row[line_original_language] + " , " + row[line_new_language])
-        pprint("\n\n-------------DEBUG--------------\n\n")
         if line_original_language >= 0 and line_new_language >= 0:
             if row[line_original_language] == to_translate:
                 to_translate = row[line_new_language]
-                print("IT'S GOOOOOOOOOOOOOOOOOOOD: " + row[line_new_language] + ", " + to_translate)
                 break
-    print("RETUUUUUUUUURN VALUUUUUUUUUUUUUUUUUUUUUUE: " + to_translate)
     return to_translate
 
 
