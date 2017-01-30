@@ -136,8 +136,8 @@ SLACK_VERIFICATION_TOKEN = "rQRhWgTRgJxNbtvJTroOSeWy"
 
 # DEFAULT SENTENCES RETURNED TO THE USER
 DONT_UNDERSTAND = 'Désolé je n\'ai pas compris...'
-INTRO_SENTENCE = 'Bonjour, souhaitez vous un vin pour ?'
-ASK_COLOR = 'Quel type de vin souhaitez-vous acheter? (rouge, rose, blanc, sucre, petillant)'
+INTRO_SENTENCE = 'Hey salut, toi ! Je suis là pour t\'aider à choisir le meilleur vin qui impressionnera tous tes amis. Dis-moi, pour quelle occasion veux-tu un vin ?'
+ASK_COLOR = 'Quel type de vin recherches-tu ? (rouge, blanc, sucré)'
 ASK_PRICE = 'Quel prix de vin? (exemple : "entre 10 et 20 euros", "moins de 100 euros"...)'
 ASK_APPELATION = 'Souhaitez-vous une appelation de vin particulière ? (Bordeaux, Haut medoc, entre deux mers,...)'
 ASK_VINTAGE = 'Avez-vous une préférence de millésime (2009, 2013,...) ?'

@@ -64,7 +64,7 @@ def askColor(request):
 
     button_table = jc.create_button_table(settings.ASK_COLOR)
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
-    button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer '))
+    button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer'))
     context['response'].append(button_table)
 
     context['last_step'] = 'color'
@@ -80,7 +80,7 @@ def askPrice(request):
         context['response'] = []
     button_table = jc.create_button_table(settings.ASK_PRICE)
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
-    button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer '))
+    button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer'))
     context['response'].append(button_table)
 
     context['last_step'] = 'price'
@@ -96,7 +96,7 @@ def askAppelation(request):
 
     button_table = jc.create_button_table(settings.ASK_APPELATION)
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
-    button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer '))
+    button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer'))
     context['response'].append(button_table)
 
     context['last_step'] = 'appelation'
@@ -111,7 +111,7 @@ def askVintage(request):
         context['response'] = []
     button_table = jc.create_button_table(settings.ASK_VINTAGE)
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe '))
-    button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer '))
+    button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer'))
     context['response'].append(button_table)
 
     context['last_step'] = 'vintage'
@@ -160,7 +160,7 @@ def askMealChoice(request):
 
     button_table = jc.create_button_table(settings.ASK_MEAL_CHOICE)
     button_table['options'].append(jc.create_button('Peu importe', 'peu importe'))
-    button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer '))
+    button_table['options'].append(jc.create_button('Nouvelle recherche', 'Recommencer'))
     context['response'].append(button_table)
 
     context['last_step'] = 'meal'
