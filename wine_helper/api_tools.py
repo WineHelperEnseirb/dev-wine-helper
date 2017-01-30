@@ -38,8 +38,7 @@ def get_wines_by_criteria(criteria, limit=0):
             int(wine['vintage']),
             float(wine['price']),
             float(wine['gws']),
-            wine['color'],
-            ""
+            wine['color']
         )
         wine_list.append(wine_object)
     return wine_list

@@ -183,10 +183,10 @@ def handle_api_call(fbid):
         for wine in wine_list:
             res += "- "
             res += wine.get_name().decode('utf-8')
-            res += ", " + wine.get_appellation().decode('utf-8')
+            res += ", " + wine.get_appellation().decode('utf-8').upper()
             res += " (" + str(wine.get_vintage()) + ")"
-            res += ", " + wine.get_color().decode('utf-8')
             res += ", " + str(wine.get_price()) + " euros"
+            res += " (score : " + str(wine.get_global_score) + ")"
             res += "\n"
 
         pprint(wine_list)
