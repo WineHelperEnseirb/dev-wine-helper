@@ -78,6 +78,8 @@ class FacebookCallbackView(generic.View):
                     pprint("[DEBUG] received message -------------------------------v")
                     pprint(received_message.encode('utf-8'))
                     pprint("[DEBUG] received message -------------------------------^")
+                    if received_message == 'Recommencer':
+                        sr.reset_search(sender_id)
                     adapted_message = sr.adapt_message_to_wit(sender_id, received_message.encode('utf-8'))
                     pprint("[DEBUG] adapted message ________________________________v")
                     pprint(adapted_message)
@@ -141,7 +143,7 @@ def _event_handler(event_type, slack_event):
 
             adapted_message = sr.adapt_message_to_wit(sender_id, slack_event["event"]["text"].encode('utf-8'))
             message = wit.treatment(adapted_message, sender_id)
-            channel = slack_event["event"]["channel"]           
+            channel = slack_event["event"]["channel"]
             print "SLACK DEBUG \n"
             print message
             pyBot.send_message(sender_id, channel, message)
