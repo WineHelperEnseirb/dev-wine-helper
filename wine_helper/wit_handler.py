@@ -283,7 +283,7 @@ def getMealChoice(request):
     meal = first_entity_value(entities, 'wit_meal')
 
     context['criteria'] = []
-    context['criteria'].append(jc.create_criterion('food_padding', meal))
+    context['criteria'].append(jc.create_criterion('food_pairing_french', meal))
 
     return context
 
