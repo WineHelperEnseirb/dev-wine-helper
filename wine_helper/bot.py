@@ -112,6 +112,8 @@ class Bot(object):
                 self.handle_api_call(s_id, channel)
             elif data["action"] == 'reset':
                 sr.reset_search(s_id)
+            elif data["action"] == 'reask':
+                sr.handle_reask(s_id)
         if 'response' in data and data["response"]:
             for item in data["response"]:
                 self.handle_response(s_id, item, channel)
@@ -160,11 +162,10 @@ class Bot(object):
             for wine in wine_list:
                 res += "- "
                 res += wine.get_name().decode('utf-8')
-                res += ", " + wine.get_appellation().decode('utf-8')
+                res += ", " + wine.get_appellation().decode('utf-8').upper()
                 res += " (" + str(wine.get_vintage()) + ")"
-                res += ", " + wine.get_color()['fr'].decode('utf-8')
-                res += ", " + wine.get_taste()['fr'].decode('utf-8')
                 res += ", " + str(wine.get_price()) + " euros"
+                res += " (score : " + str(wine.get_global_score()) + ")"
                 res += "\n"
 
             if not res:

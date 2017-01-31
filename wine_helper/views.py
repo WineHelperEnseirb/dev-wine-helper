@@ -232,6 +232,10 @@ def hears(request):
 
 @csrf_exempt
 def button(request):
+    """
+    This route listens for incoming button calls from Slack and directly
+    transmits Wit's reponse 
+    """
     response = urllib.unquote(request.body)[8:]
     json_res = json.loads(response)
 
