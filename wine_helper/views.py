@@ -136,12 +136,15 @@ def _event_handler(event_type, slack_event):
 
     if event_type == "message":
         sender_id = None
+        received_message = None
 
         if "user" in slack_event["event"]:
 
             sender_id = slack_event["event"]["user"]
-
-            adapted_message = sr.adapt_message_to_wit(sender_id, slack_event["event"]["text"].encode('utf-8'))
+            received_message = slack_event["event"]["text"].encode('utf-8')
+            if received_message == 'Recommencer':
+                sr.reset_search(sender_id)
+            adapted_message = sr.adapt_message_to_wit(sender_id, slack_event["event"]["text"].encode('utf-8'))            
             message = wit.treatment(adapted_message, sender_id)
             channel = slack_event["event"]["channel"]
             print "SLACK DEBUG \n"
